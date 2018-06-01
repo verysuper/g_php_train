@@ -1,0 +1,41 @@
+<!--ªá¦¡ª¬ºA¦C¤å¦r_¶}©l-->
+<body onload=welcometext()>
+<SCRIPT language=JavaScript>
+<!--
+<!--¦b¦¹­×§ï¶]°¨¿O¦bª¬ºA¦C¤W¥X²{ªº¤å¦r-->
+var hellotext = "¡G¡G»y ªk ¤À ¨É À]¡G¡G"
+var thetext = "";
+var started = false;
+var step = 0;
+var times = 1;
+function welcometext() {
+times--;
+if (!times) {
+if (!started) {
+started = true;
+window.status = hellotext;
+setTimeout("anim()", 1);
+}
+thetext = hellotext;
+}}
+function anim() {
+step++;
+if (step==10) step = 2;
+if (step==1) window.status = 'ùùùùùùùùùá' + thetext + 'ùáùùùùùùùù';
+if (step==2) window.status = 'ùùùùùùùáùù' + thetext + 'ùùùáùùùùùù';
+if (step==3) window.status = 'ùùùùùáùùùù' + thetext + 'ùùùùùáùùùù';
+if (step==4) window.status = 'ùùùáùùùùùù' + thetext + 'ùùùùùùùáùù';
+if (step==5) window.status = 'ùáùùùùùùùù' + thetext + 'ùùùùùùùùùá';
+if (step==6) window.status = 'ùùùáùùùùùù' + thetext + 'ùùùùùùùáùù';
+if (step==7) window.status = 'ùùùùùáùùùù' + thetext + 'ùùùùùáùùùù';
+if (step==8) window.status = 'ùùùùùùùáùù' + thetext + 'ùùùáùùùùùù';
+if (step==9) window.status = 'ùùùùùùùùùá' + thetext + 'ùáùùùùùùùù'
+setTimeout("anim()", 200);
+}
+-->
+</SCRIPT>
+<!--ªá¦¡ª¬ºA¦C¤å¦r_µ²§ô-->
+
+
+»yªk»¡©ú¡G<br>
+¦b var hellotext = "¡G¡G»y ªk ¤À ¨É À]¡G¡G" ¤¤­×§ï¶]°¨¿O¦bª¬ºA¦C¤W¥X²{ªº¤å¦r<br>

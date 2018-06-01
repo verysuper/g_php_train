@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+/* SpryStackedContainers.css */
+
+/* Copyright (c) 2007. Adobe Systems Incorporated. All rights reserved. */
+
+/* This is the selector for the main container of the Stacked Containers structure. 
+ *
+ * If you want to constrain the width of the Stacked Containers structure, set a width on
+ * the StackedContainers container. By default, our structure expands horizontally to fill
+ * up available space.
+ */
+.StackedContainers
+{
+	font: 100% Verdana, Geneva, sans-serif;
+	margin: 2px;
+}
+
+/* This is the selector for the Row Container element which houses all the column
+ * classes. 
+*/
+.StackedContainers .RowContainer
+{
+	border: 1px solid gray;
+	margin-bottom: 5px;
+	height: 160px;
+	padding: 5px;
+	background-color: #FFF7D4;
+}
+.StackedContainers .RowContainer img {
+	margin-right: 10px;
+	float: left;
+	padding: 5px;
+}
+.StackedContainers .RowContainer h1{
+	font-size: 1.2em;
+	color: #FF4F00;
+	margin-bottom: 8px;
+	border-bottom-width: 2px;
+	border-bottom-style: dotted;
+	border-bottom-color: #FBBD72;
+	margin-left: 0px;
+	padding: 5px;
+	margin-top: 0px;
+	margin-right: 0px;
+}
+
+
+/* This is the selector for a column element which holds the actual data. 
+ *
+*/
+.StackedContainers .RowColumn
+{
+	margin-bottom: 1px;
+}

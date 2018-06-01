@@ -1,0 +1,11 @@
+<STYLE>
+<!--
+BODY {
+	background-image : url(../../../Chap09/(%E5%85%B6%E4%BB%96%E8%AA%9E%E6%B3%95)/images/***.jpg);
+	background-attachment: fixed;
+	background-position: 0% 100%;
+	background-repeat: no-repeat;
+	background-color:#FFFFFF;
+}
+-->
+</STYLE>

@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>停留時間</title>
+</head>
+
+<body>
+<div align="center">
+  <CENTER>
+  <table height="128" cellspacing="1" width="86%" border="3">
+    <caption>
+      <font color="#006666" size="4">停留時間</font>
+    </caption>
+    <tbody>
+      <tr>
+        <td align="middle" width="11%" bgcolor="#99ccff" height="28"><font 
+      size="2">簡述</font></td>
+        <td width="88%" bgcolor="#9999ff" height="28"><font color="#ffff00" 
+      size="2">計算登錄網頁的時間</font></td>
+      </tr>
+      <tr>
+        <td align="middle" width="11%" bgcolor="#99ccff" height="28"><font 
+      size="2">範例展示</font></td>
+        <td width="88%" bgcolor="#9999ff" height="28"><table border="0">
+          <tbody>
+            <tr>
+              <td align="middle"><strong>你已經停留了 </strong></td>
+              <td align="middle"><form name="d" id="d">
+                <p>
+                  <input size="8" name="d2" />
+                </p>
+              </form></td>
+              <td align="middle"><strong>秒<font 
+        face="Arial">!</font></strong></td>
+            </tr>
+          </tbody>
+        </table>
+          <script>
+<!--
+
+var milisec=0
+var seconds=0
+document.d.d2.value='0'
+function display(){
+if (milisec>=9){
+milisec=0
+seconds+=1
+}
+else
+milisec+=1
+document.d.d2.value=seconds+"."+milisec
+setTimeout("display()",100)
+}
+display()
+//-->
+  </script></td>
+      </tr>
+      <tr>
+        <td align="middle" width="11%" bgcolor="#99ccff" height="28"><p align="center"><font size="2">使用方式</font></p></td>
+        <td width="88%" bgcolor="#9999ff" height="28"><font color="#ffff00" 
+      size="2">依下列步驟使用：　<br />
+          如要複製JavaScript程式碼內容，可以按下『選擇全部』按鈕，然後在被選取的文字區域按滑鼠右鍵，選擇複製即可。</font></td>
+      </tr>
+      <tr>
+        <td valign="top" align="middle" width="11%" bgcolor="#99ccff" height="22"><font 
+      size="2">原始程式碼</font>
+          <p>　</p>
+        </td>
+        <td width="88%" bgcolor="#9999ff" height="22"><form>
+          <p align="left"><font color="#ffff00" 
+      size="2">1.複製以下JavaScript程式碼,貼到&lt;BODY&gt;及&lt;/BODY&gt;之間</font> <font 
+      color="#ffff00" size="2">.<br />
+            <input onclick="javascript:this.form.n.focus();this.form.n.select();" type="button" value="選擇全部" name="B1" />
+            <textarea language="javascript" style="WIDTH: 98%" name="n" rows="8" wrap="virtual" cols="45">&lt;table border=&quot;0&quot;&gt;
+&lt;tr&gt;
+&lt;td align=&quot;center&quot;&gt;&lt;font face=&quot;Arial&quot;&gt;&lt;strong&gt;你已經停留了 &lt;/strong&gt;&lt;/font&gt;&lt;/td&gt;
+&lt;td align=&quot;center&quot;&gt;&lt;form name=&quot;d&quot;&gt;
+&lt;p&gt;&lt;input type=&quot;text&quot; size=&quot;8&quot; name=&quot;d2&quot;&gt;&lt;/p&gt;
+&lt;/form&gt;
+&lt;/td&gt;
+&lt;td align=&quot;center&quot;&gt;&lt;font face=&quot;Arial&quot;&gt;&lt;strong&gt; 秒!&lt;/strong&gt;&lt;/font&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;script&gt;
+&lt;!--
+
+var milisec=0
+var seconds=0
+document.d.d2.value='0'
+function display(){
+if (milisec&gt;=9){
+milisec=0
+seconds+=1
+}
+else
+milisec+=1
+document.d.d2.value=seconds+&quot;.&quot;+milisec
+setTimeout(&quot;display()&quot;,100)
+}
+display()
+//--&gt;
+&lt;/script&gt;
+            </textarea>
+            </font></p>
+          </form>
+          </P></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>瀏覽兄弟節點</title>
+<script language="JavaScript">
+function showNode1() {
+   var objLi = document.getElementById("myLI");
+   var objNode = objLi.previousSibling;
+   alert(objNode.firstChild.data);
+}
+function showNode2() {
+   var objLi = document.getElementById("myLI1");
+   var objNode = objLi.previousSibling;
+   alert(objNode.innerHTML);
+}
+</script>
+</head>
+
+<body>
+<h2>瀏覽兄弟節點</h2>
+<hr/>
+<ul id="myUL">
+   <li>HTML
+   <li style="color:red" id="myLI"
+       onclick="showNode1()">JavaScript
+   <li style="color:red" id="myLI1"
+       onclick="showNode2()">VBScript
+   <li>PHP
+   <li>XML
+</ul>
+</body>
+</html>

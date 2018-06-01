@@ -1,0 +1,26 @@
+<!doctype html>
+<html xmlns:spry="http://ns.adobe.com/spry">
+<head>
+<meta charset="utf-8">
+<title>無標題文件</title>
+<script src="SpryAssets/xpath.js" type="text/javascript"></script>
+<script src="SpryAssets/SpryData.js" type="text/javascript"></script>
+<link href="SpryAssets/SpryMasterDetail.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+var ds1 = new Spry.Data.XMLDataSet("xml/photo1.xml", "data/sheep");
+</script>
+</head>
+
+<body>
+<div class="MasterDetail">
+  <div spry:region="ds1" class="MasterContainer">
+    <div class="MasterColumn" spry:repeat="ds1" spry:setrow="ds1" spry:hover="MasterColumnHover" spry:select="MasterColumnSelected">{subject}</div>
+  </div>
+  <div spry:detailregion="ds1" class="DetailContainer">
+    <div class="DetailColumn">{picture}</div>
+    <div class="DetailColumn">{description}</div>
+  </div>
+  <br style="clear:both" />
+</div>
+</body>
+</html>

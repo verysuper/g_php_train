@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>新增物件的子物件</title>
+<script>
+// 物件的建構函數
+function nameCard(name,age,phone,email) {
+   this.name = name;
+   this.age = age;
+   this.phone = new phoneList(phone, "N/A");
+   this.email = email;
+}
+// 物件的建構函數
+function phoneList(homephone,cellphone) {
+   this.homephone = homephone;
+   this.cellphone = cellphone;
+}
+</script>
+</head>
+
+<body>
+<h2>新增物件的子物件</h2>
+<hr/>
+<script>
+// 建立自訂物件
+var objMyCard = new nameCard("陳艾倫", 30, "02-22222222", "alan@gjun.tw");
+// 設定手機電話號碼
+objMyCard.phone.cellphone = "0912-345678";
+var objCard = new nameCard("江大偉", 45, "03-33333333", "da-way@gjun.tw");
+// 新增另一隻手機的屬性
+objCard.cellphone = "0978-941940";
+// 顯示objMyCard物件屬性
+document.write("姓名 : " + objMyCard.name + "<br/>");
+document.write("電話 : " + objMyCard.phone.homephone + "<br/>");
+document.write("手機1 : " + objMyCard.phone.cellphone + "<br/>");
+document.write("手機2 : " + objMyCard.cellphone + "<br/><hr/>");
+// 顯示objCard物件屬性
+document.write("姓名 : " + objCard.name + "<br/>");
+document.write("電話 : " + objCard.phone.homephone + "<br/>");
+document.write("手機1 : " + objCard.phone.cellphone + "<br/>");
+document.write("手機2 : " + objCard.cellphone + "<br/>");
+</script>
+</body>
+</html>  

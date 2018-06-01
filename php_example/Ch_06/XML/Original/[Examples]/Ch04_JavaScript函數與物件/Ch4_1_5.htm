@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>測試傳值和傳址的函數呼叫</title>
+<script>
+// number和boolean參數為傳值
+function funcA(c, b){
+   c++;
+   b = false;
+   document.write("在funcA為 :"+c+"/"+b+"<br/>");
+}
+// object為傳址和字串參數為傳值
+function funcB(objA, a){
+   objA.name = "李四";
+   a = "張三";
+   document.write("在funcB為 : "+objA.name+"/"+a+"<br/>");
+}
+</script>
+</head>
+
+<body>
+<h2>測試傳值和傳址的函數呼叫</h2>
+<hr/>
+<script>
+// 宣告變數
+var c = 1;        // 數值
+var b = true;     // 布林
+var a = "王五"; // 字串
+var objA = new Object();  // 建立物件實體
+objA.name = "王五";
+document.write("呼叫funcA前 : "+c+"/"+b+"<br/>");
+funcA(c,b);  // 呼叫函數
+document.write("呼叫funcA後 : "+c+"/"+b+"<br/>");
+document.write("呼叫funcB前 : "+objA.name+"/"+a+"<br/>");
+funcB(objA, a);  // 呼叫函數
+document.write("呼叫funcB後 : "+objA.name+"/"+a+"<br/>");  
+</script>
+</body>
+</html>    

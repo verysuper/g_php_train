@@ -1,0 +1,85 @@
+﻿DATABASE:studentdb
+--------------------------------------------------------------------------------------
+SQL語法(建立studentdb資料庫):
+CREATE DATABASE `studentdb`;
+--------------------------------------------------------------------------------------
+建立student資料表：
+TABLE:student
+COLUMNS:4
+學號：studno	VARCHAR	10	not null	PK
+姓名：name	CHAR	10	not null	KEY
+電話：phone	CHAR	13	null	
+地址：address	VARCHAR	60	null
+--------------------------------------------------------------------------------------
+SQL語法(建立student資料表):
+CREATE TABLE  `student` (
+ `studno` VARCHAR( 10 ) NOT NULL COMMENT  '學號',
+ `name` CHAR( 10 ) NOT NULL DEFAULT  'noname' COMMENT  '姓名',
+ `phone` CHAR( 13 ) NULL COMMENT  '電話',
+ `address` VARCHAR( 60 ) NULL COMMENT  '地址',
+PRIMARY KEY (  `studno` )
+) ENGINE = MYISAM ;
+--------------------------------------------------------------------------------------
+SQL語法(清空student資料表):
+TRUNCATE TABLE `student`;
+--------------------------------------------------------------------------------------
+學號：
+姓名：
+電話：
+地址：
+--------------------------------------------------------------------------------------
+student 表頭語法:
+	<th>學號</th>
+	<th>姓名</th>
+	<th>電話</th>
+	<th>地址</th>
+--------------------------------------------------------------------------------------
+建立score資料表：
+TABLE:score
+COLUMNS:5
+學號：studno	INT	not null	PK
+月考代號：examno	TINYINT	not null	PK
+國文：chi	TINYINT	not null	
+英文：eng	TINYINT	not null
+數學：math	TINYINT	not null
+--------------------------------------------------------------------------------------
+SQL語法(建立score資料表):
+CREATE TABLE `score` (
+`studno` INT NOT NULL ,
+`examno` TINYINT NOT NULL ,
+`chi` TINYINT NOT NULL ,
+`eng` TINYINT NOT NULL ,
+`math` TINYINT NOT NULL ,
+PRIMARY KEY ( `studno` , `examno` ) ) ENGINE = MYISAM ;
+--------------------------------------------------------------------------------------
+學號：
+月考代號：
+國文：
+英文：
+數學：
+--------------------------------------------------------------------------------------
+score 表頭語法:
+	<th>學號</th>
+	<th>月考代號</th>
+	<th>國文</th>
+	<th>英文</th>
+	<th>數學</th>
+--------------------------------------------------------------------------------------
+ALTER TABLE `score` CHANGE `chi` `chi` SMALLINT( 4 ) NOT NULL ,
+CHANGE `eng` `eng` SMALLINT( 4 ) NOT NULL ,
+CHANGE `math` `math` SMALLINT( 4 ) NOT NULL
+--------------------------------------------------------------------------------------
+SELECT * 
+FROM `score` 
+WHERE 1 
+LIMIT 0 , 30
+--------------------------------------------------------------------------------------
+<?php echo $_SERVER["PHP_SELF"]?>
+---------------------------------------------------------------------------
+#重複區域(思考自己寫do...while程式)
+#資料集分頁/資料集導覽列
+#顯示記錄計數/資料集導覽狀態
+---------------------------------------------------------------------------
+展開 \Connections 資料夾 ，開啟 *.php 編輯，在 ?> 結尾前一列輸入：
+mysql_query("set names 'utf8'");  //解決連結資料庫時，產生中文亂碼的問題
+---------------------------------------------------------------------------

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>with程式區塊</title>
+</head>
+
+<body>
+<h2>with程式區塊</h2>
+<hr/>
+<script>
+// 建立自訂物件
+var objCard = new Object();
+with(objCard) {
+   // 新增屬性
+   name = "陳艾倫";
+   age = 30;
+   phone = "02-22222222";
+   email = "alan@gjun.tw";
+   // 顯示物件屬性
+   document.write("姓名 : " + name + "<br/>");
+   document.write("年齡 : " + age + "<br/>");
+   document.write("電話 : " + phone + "<br/>");
+   document.write("郵件 : " + email + "<br/>");
+}
+</script>
+</body>
+</html>

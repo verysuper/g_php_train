@@ -1,0 +1,6 @@
+<style type="text/css">
+<!--
+table {{filter:Alpha(Opacity=50, FinishOpacity=75, Style=1)}
+}
+-->
+</style>

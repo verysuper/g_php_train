@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>間候語</title>
+</head>
+
+<body>
+<div align="center">
+  <CENTER>
+  <table height="283" cellspacing="1" width="86%" border="3">
+    <caption>
+      <font color="#006666" size="4">間候語</font>
+    </caption>
+    <tbody>
+      <tr>
+        <td align="middle" width="11%" bgcolor="#99ccff" height="28"><font 
+      size="2">簡述</font></td>
+        <td width="88%" bgcolor="#9999ff" height="28"><font color="#ffff00" 
+      size="2">依不同的時間，顯示不同的問候語</font></td>
+      </tr>
+      <tr>
+        <td align="middle" width="11%" bgcolor="#99ccff" height="28"><font 
+      size="2">範例展示</font></td>
+        <td width="88%" bgcolor="#9999ff" height="28"><font 
+    color="#ffff00">請看狀態列</font></td>
+      </tr>
+      <tr>
+        <td align="middle" width="11%" bgcolor="#99ccff" height="28"><p align="center"><font size="2">使用方式</font></p></td>
+        <td width="88%" bgcolor="#9999ff" height="28"><font color="#ffff00" 
+      size="2">依下列步驟使用：　<br />
+          如要複製JavaScript程式碼內容，可以按下『選擇全部』按鈕，然後在被選取的文字區域按滑鼠右鍵，選擇複製即可。</font></td>
+      </tr>
+      <tr>
+        <td valign="top" align="middle" width="11%" bgcolor="#99ccff" height="88" 
+      rowspan="2"><font size="2">原始程式碼</font>
+          <p>　</p>
+        </td>
+        <td width="88%" bgcolor="#9999ff" height="88"><form>
+          <p align="left"><font color="#ffff00" 
+      size="2">1.複製以下JavaScript程式碼,貼到&lt;HEAD&gt;及&lt;/HEAD&gt;之間</font> <font 
+      color="#ffff00" size="2">.<br />
+            <input onclick="javascript:this.form.n.focus();this.form.n.select();" type="button" value="選擇全部" name="B1" />
+            
+            <textarea language="javascript" style="WIDTH: 98%" name="n" rows="8" wrap="virtual" cols="45">&lt;script language=&quot;javascript&quot;&gt;
+&lt;!--hide
+
+	txt = &quot;&quot;
+	txtt = &quot;&quot;
+	txttt = &quot;&quot;
+function Time() {
+	var now = new Date();
+	var time = now.getHours();
+
+	//顯示訊息
+	
+	//late night - very early morning
+	if (time &gt; 23 &amp;&amp; time &lt; 6) { txt = '你還沒睡嗎?';
+	txtt = '你幾點上床?';
+        txttt = '你需要睡眠吧!'}
+	//early morning
+	 else if (time &gt; 5 &amp;&amp; time &lt; 8) { txt = '哈, 又一隻早起的鳥兒?';
+	txtt = '早起的鳥兒有蟲吃.';
+	txttt = '你喜歡吃什麼....?'}
+	//end of morning
+	 else if (time &gt; 7 &amp;&amp; time &lt; 12) { txt = 'I hope you are having a good morning.';
+	txtt = 'Mine has been great!';
+	txttt = 'Sorry if yours has not been good.'}
+	//afternoon
+	 else if (time &gt; 11 &amp;&amp; time &lt; 17) { txt = '多麼美好的下午!';
+	txtt = '外面不錯吧!';
+	txttt = '你為什麼還守在電腦前呢?'}
+	//evening - night
+	 else { txt = 'This is one great evening!';
+	txtt = 'It is starting to get late.';
+	txttt = 'Have you had supper yet?'}
+}
+
+
+
+	//Leave this stuff alone.  It is required for later.
+	var worddd = 0
+	var word = 0
+	var wordd = 0
+	var msg
+	var timeI
+	var timeII
+	var timeIII
+	var timeIIII
+
+function Change() {
+	if (word &lt; txt.length+1) { word++;
+	timeI = setTimeout(&quot;Change()&quot;, 100) }
+	 else if (word &gt; txt.length) { clearTimeout(timeI);
+	Changee() } 
+}
+
+function Changee() {
+	if (wordd &lt; txtt.length+1) { wordd++;
+	timeIII = setTimeout(&quot;Changee()&quot;, 100) }
+	 else if (wordd &gt; txtt.length) { clearTimeout(timeIII);
+	Changeee() }
+}	
+
+function Changeee() {
+	if (worddd &lt; txttt.length+1) { worddd++;
+	timeIIII = setTimeout(&quot;Changeee()&quot;, 100) }
+	 else if (worddd &gt; txttt.length) { clearTimeout(timeIIII);
+	word = 0; wordd = 0; worddd = 0; Change() }
+}
+
+function Place() {
+	if (word &lt; txt.length+1) msg = txt.substring(0, word)
+	 else if (word &gt; txt.length &amp;&amp; wordd &lt; txtt.length+1) msg = txtt.substring(0, wordd)
+	 else if (wordd &gt; txtt.length &amp;&amp; worddd &lt; txttt.length+1) msg = txttt.substring(0, worddd)
+	 else if (worddd &gt; txttt.length) msg = txt.substring(0, word)
+	window.status = msg
+	timeII = setTimeout(&quot;Place()&quot;, 100)
+}
+
+
+//--&gt;
+&lt;/script&gt;</textarea>
+          </font></p>
+        </form>
+          </P></td>
+      </tr>
+      <tr>
+        <td width="88%" bgcolor="#9999ff">
+          <p align="left"><font color="#ffff00" 
+      size="2">1.複製以下紅色的JavaScript程式碼,貼到&lt;BODY&gt;之間</font> <font color="#ffff00" 
+      size="2">.<br />
+            &lt;body </font><font color="#ff0000" 
+      size="3">onLoad=&quot;Change();Place();Time()&quot;</font><font color="#ffff00" 
+      size="2">&gt;　</font></p>
+  
+          </P></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

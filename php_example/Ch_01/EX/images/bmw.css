@@ -1,0 +1,32 @@
+.h1 {
+	FONT-WEIGHT: normal; FONT-SIZE: 10pt; COLOR: #333333; LINE-HEIGHT: normal; FONT-STYLE: normal; FONT-FAMILY: "Arial", "Helvetica", "sans-serif"
+}
+.h2 {
+	FONT-WEIGHT: bold; FONT-SIZE: 14pt; COLOR: #003399; LINE-HEIGHT: 20pt; FONT-STYLE: italic; FONT-FAMILY: "標楷體", "新細明體"
+}
+.text1 {
+	FONT-SIZE: 10pt;
+	LINE-HEIGHT: 18pt;
+	FONT-FAMILY: "新細明體";
+	LETTER-SPACING: 3pt;
+	color: #000000;
+}
+.text2 {
+	font-family: "新細明體";
+	font-size: 12pt;
+	color: #336600;
+	background-color: #FFFFCC;
+}
+
+.Tbg {
+	BACKGROUND-POSITION: right bottom;
+	BACKGROUND-ATTACHMENT: fixed;
+	BACKGROUND-IMAGE: url(car.jpg);
+	WIDTH: 500px;
+	BACKGROUND-REPEAT: no-repeat;
+	HEIGHT: auto;
+	background-color: #CCCCCC;
+	font-family: "新細明體";
+	font-size: 14pt;
+	color: #0000FF;
+}

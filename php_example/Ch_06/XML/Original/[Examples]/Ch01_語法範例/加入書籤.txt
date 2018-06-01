@@ -1,0 +1,1 @@
+javascript:window.external.AddFavorite('http://tw.yahoo.com/', '°×°ä¨ä¼¯')

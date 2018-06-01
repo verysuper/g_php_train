@@ -1,0 +1,33 @@
+<HTML><HEAD><TITLE>彈出會自動關閉的視窗</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=big5">
+<META content="Microsoft FrontPage 4.0" name=GENERATOR>
+<META content=FrontPage.Editor.Document name=ProgId>
+	
+	<SCRIPT language=JavaScript>
+	config='toolbar=no,location=no,status=no,menubar=no,width=250,height=180'
+	config += 'scrollbars=no,resizable=no'
+	wel = window.open ("","welcome",config)
+	
+	wel.document.write('<script language="javascript">');
+	wel.document.write('setTimeout(');
+	wel.document.write('"self.close()');
+	wel.document.write(';",5000)');
+	wel.document.write('</');
+	wel.document.write('script>');
+	wel.document.write('<body bgcolor=green>');
+	wel.document.write('<p align="center"><b><font color="yellow" size="3" face="細明體">倒數計時</p></font></b>');
+	wel.document.write('<p align="center"><font color="white" size="2" face="細明體">距離視窗關閉還剩下</p></font>');
+	wel.document.write('<p align="center"><font color="red" size="7" face="標楷體">5秒鐘</p></font>');
+	wel.document.write('<p align="center"><font color="white" size="2" face="細明體">歡迎光臨陳文仁老師教學小站!!</p></font>');
+	wel.document.write('</body>');
+	</SCRIPT>
+	
+</HEAD>
+<BODY>
+<P>把原始檔中的</P>
+<P><FONT color=#ff0000>&lt;SCRIPT language=JavaScript&gt;</FONT></P>
+<P><FONT color=#ff0000>&lt;/SCRIPT&gt;</FONT></P>
+<P>之間全部複製過去就搞定了!!</P>
+<P>　</P>
+<P><font color="#800000" size="5">改</font><font size="5"><FONT color=#800000>wel.document.write(';",5000)')這裡面的數字愈大停留時間愈久,差不多每1000停5秒鐘</FONT></font></P>
+<P>　</P></BODY></HTML>

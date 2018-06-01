@@ -1,0 +1,90 @@
+<!--字跟游標_開始-->
+<style>
+<!--
+.spanstyle {
+FONT-SIZE: 10pt; FONT-WEIGHT: normal; POSITION: absolute; TOP: -50px; VISIBILITY: visible
+}
+-->
+</style>
+<script language=JavaScript>
+<!--
+<!--在此修改所出現的文字-->
+var message="歡 迎 光 臨  語 法 分 享 館 ~";
+var x,y;
+<!--在此修改文字間的距離，數值越大距離越遠-->
+var step=12;
+var flag=0;
+message=message.split("");
+var xpos=new Array();
+for (i=0;i<=message.length-1;i++) {
+xpos[i]=-50;
+}
+var ypos=new Array();
+for (i=0;i<=message.length-1;i++) {
+ypos[i]=-50;
+}
+function handlerMM(e) {
+x = (document.layers) ? e.pageX : document.body.scrollLeft+event.clientX+20;
+y = (document.layers) ? e.pageY : document.body.scrollTop+event.clientY;
+flag=1;
+}
+function makesnake() {
+if (flag==1 && document.all) {
+for (i=message.length-1; i>=1; i--) {
+xpos[i]=xpos[i-1]+step;
+ypos[i]=ypos[i-1];
+}
+xpos[0]=x+step;
+ypos[0]=y;
+for (i=0; i<=message.length-1; i++) {
+var thisspan = eval("span"+(i)+".style");
+thisspan.posLeft=xpos[i];
+thisspan.posTop=ypos[i];
+thisspan.color=Math.random() * 255 * 255 * 255 + Math.random() * 255 * 255 + Math.random() * 255;
+}
+}
+else if (flag==1 && document.layers) {
+for (i=message.length-1; i>=1; i--) {
+xpos[i]=xpos[i-1]+step;
+ypos[i]=ypos[i-1];
+}
+xpos[0]=x+step;
+ypos[0]=y;
+for (i=0; i<message.length-1; i++) {
+var thisspan = eval("document.span"+i);
+thisspan.left=xpos[i];
+thisspan.top=ypos[i];
+thisspan.color=Math.random() * 255 * 255 * 255 + Math.random() * 255 * 255 + Math.random() * 255;
+}
+}
+}
+-->
+</script> 
+<script language=JavaScript>
+<!--
+for (i=0;i<=message.length-1;i++) {
+document.write("<span id='span"+i+"' class='spanstyle'>");
+document.write(message[i]);
+document.write("</span>");
+}
+if (document.layers) {
+document.captureEvents(Event.MOUSEMOVE);
+}
+document.onmousemove = handlerMM;
+-->
+</script>
+<script language=JavaScript>
+<!--
+function pageonload() {
+makesnake();
+window.setTimeout("pageonload();", 2);
+}
+-->
+</script>
+<body onLoad="JavaScript:pageonload()">
+<!--字跟游標_結束-->
+
+
+語法說明：<br>在 FONT-SIZE: 10pt; 中修改文字的大小<br>
+在 歡 迎 光 臨 語 法 分 享 館 ~ 中修改要顯示的文字<br>
+在 var step=12; 中修改修改文字間的距離，數值越大距離越遠<br>

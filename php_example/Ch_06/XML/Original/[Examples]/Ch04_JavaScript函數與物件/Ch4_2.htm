@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>測試程序函數的變數範圍</title>
+<script language="JavaScript">
+// 宣告全域變數
+var a = 1;
+var b = 2;
+// 函數A
+function funcA(){
+  // 宣告區域變數
+  var a = 3;  // 設定區域變數
+  var b = 4;  // 設定區域變數
+}
+// 函數B
+function funcB(){
+  a = 3;   // 設定全域變數
+  b = 4;   // 設定全域變數
+}
+</script>
+</head>
+
+<body>
+<h2>測試程序函數的變數範圍</h2>
+<hr/>
+全域變數 a, b<br/>
+funcA宣告區域變數 a, b<br/>
+funcB沒有宣告任何的區域變數<br/><br/>
+<table border="1">
+<tr>
+<td>執行過程</td><td>全域變數a值</td><td>全域變數b值</td>
+</tr>
+<script language="JavaScript">
+document.write("<tr><td>初始值</td><td>" + a + "</td>");
+document.write("<td>" + b + "</td></tr>");
+funcA();  // 呼叫funcA
+document.write("<tr><td>呼叫funcA後</td><td>" + a + "</td>");
+document.write("<td>" + b + "</td></tr>");
+funcB();  // 呼叫funcB
+document.write("<tr><td>呼叫funcB後</td><td>" + a + "</td>");
+document.write("<td>" + b + "</td></tr>");  
+</script>
+</table>
+</body>
+</html>

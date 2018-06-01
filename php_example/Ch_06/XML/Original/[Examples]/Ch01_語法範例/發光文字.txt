@@ -1,0 +1,10 @@
+<style type="text/css">
+<!--
+.glowfont {
+	position: absolute;
+	filter: Glow(Color=#E1B4FB);
+	font-family: "Times New Roman", Times, serif;
+	font-size: 24px;
+	}
+-->
+</style>

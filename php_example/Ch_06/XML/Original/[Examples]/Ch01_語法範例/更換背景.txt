@@ -1,0 +1,29 @@
+<script language="JavaScript1.2">
+<!--
+function tile(){
+if (!document.all)
+return
+var source=event.srcElement
+if (source.tagName=="IMG") {
+ document.body.style.backgroundImage="url("+source.src+")";
+}
+}
+function restore(){
+document.body.style.backgroundImage='';
+document.body.style.color='';
+}
+document.body.onclick=restore
+-->
+</script>
+<span class="bgimages" onClick="tile();event.cancelBubble=true">
+<img src="../../../Chap09/(其他語法)/圖片網址" width="40" height="40">
+<img src="../../../Chap09/(其他語法)/圖片網址" width="40" height="40">
+<img src="../../../Chap09/(其他語法)/圖片網址" width="40" height="40">
+<img src="../../../Chap09/(其他語法)/圖片網址" width="40" height="40">
+<img src="../../../Chap09/(其他語法)/圖片網址" width="40" height="40">
+<img src="../../../Chap09/(其他語法)/圖片網址" width="40" height="40">
+<img src="../../../Chap09/(其他語法)/圖片網址" width="40" height="40">
+<img src="../../../Chap09/(其他語法)/圖片網址" width="40" height="40">
+<img src="../../../Chap09/(其他語法)/圖片網址" width="40" height="40">
+<img src="../../../Chap09/(其他語法)/圖片網址" width="40" height="40">
+</span>

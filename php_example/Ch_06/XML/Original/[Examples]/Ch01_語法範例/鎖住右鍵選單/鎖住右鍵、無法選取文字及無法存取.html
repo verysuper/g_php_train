@@ -1,0 +1,284 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>網頁(留言版)播放音樂教學</title>
+<meta http-equiv="Content-Type" content="text/html; charset=big5">
+<META HTTP-EQUIV="pragma" CONTENT="no-cache">
+<meta http-equiv="windows-Target" content="_top">
+<META HTTP-EQUIV="expires" CONTENT="Wed, 26 Feb 1997 00:00:00 GMT"> 
+<meta name="Author" content="brian6724">
+<meta name="DEscription" content="提供GJUN使用者利用網頁分享檔案的一個平台">
+<meta name="KEYWords" content="gjun,檔案分享,下載,分享">
+<meta name="copyright" content="本網頁著作權屬ALAN CHEN Copyright 2000-2999 Gjun Sharing All Rights Reserved">
+<meta name="Distribution" content="Taiwan">
+<meta name="Robots" content="all">
+
+<style type='text/css'>
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+
+a:link {text-decoration:none;}
+a:visited {text-decoration:none;color: #003399;}
+a:hover {text-decoration: underline;position:relative;top:1px;left:1px;color: #ff3399;}
+a:active {text-decoration:none;color: #ff3399;}
+.style1 {font-family: "新細明體"}
+.style2 {
+	font-size: 24px;
+	color: #FF0000;
+}
+</style>
+
+<!--防止選擇 begin-->
+<SCRIPT Language="JavaScript">
+function disableselect(e){
+return false
+}
+function reEnable(){
+return true
+}
+//if IE4+
+document.onselectstart=new Function ("return false")
+//if NS6
+if (window.sidebar){
+document.onmousedown=disableselect
+document.onclick=reEnable
+}
+</SCRIPT>
+<!--防止選擇 end-->
+
+<!-- 防止被另存網頁 begin -->
+<noscript><iframe src=../*.html></iframe></noscript> 
+<!-- 防止被另存網頁 end -->
+
+</head>
+
+<body bgcolor="#FFFFFF" vlink='#333333' oncontextmenu="window.event.returnValue=false">
+<blockquote class="style1">
+  <p align="center" style="letter-spacing: 2;line-height:150%"><font style="font-size: 14pt" color="#FF0000"><b>embed 影音播放語法介紹</b></font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2">embed是個很簡便的語法，可以用來播放影音檔，通常它是用來播放Windows 
+    Media 
+    Player支援的格式，但也可用來播放一些其他格式，只是要注意更多細節，本文最後再略微提一下這些其他格式，主要還是針對播放Media 
+    Player支援的格式來討論。(如WMA、WMV、ASF、MPG、AVI)</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2">〈embed src=檔案位址〉</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2"> 上面這便是embed最簡單、最簡潔的寫法，只要這樣寫便可播放影音檔了，以下再開始討論各注意事項及設定參數。</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2">註：本文為了讓語法呈現出來，採用全形的括弧〈 
+    〉，各位要自行寫語法時記得改回使用半形括弧 &lt; &gt;。</font></p>
+  <hr style="border: 1px dashed #000000" color="#000000" size="1">
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <b><font size="2">關於結束標籤：</font></b></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2"> 通常語法標籤都是成對的，有開始就有結束，有〈b〉就有〈/b〉，有〈font〉就有〈/font〉。可是embed語法可以不用寫〈/embed〉，完全不會有任何影響，又省事。</font></p>
+  <hr style="border: 1px dashed #000000" color="#000000" size="1">
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <b><font size="2">關於尺寸：</font></b></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2"> 如上的最簡潔寫法，尺寸可以完全不設定，這是最理想的。播放音樂檔時，會自動呈現一條完整的播放Bar，如右圖所示 (Windows 
+    Media Player版本若不同播放Bar外觀也可能不同)。播放影片時 (WMV、ASF、MPG、AVI)，除了播放Bar，還會以影片的原始尺寸播放出畫面，畫面大小會自動調整。<br>
+    <br>
+    如果因各種因素而想設定尺寸，例如想刻意拉大縮小影片的畫面，或是想改變播放Bar的大小，只要加進尺寸參數 width=寬度 
+    height=高度 即可，範例如下：</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2">〈embed src=檔案位址 width=寬度 height=高度〉</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2"> <img border="0" src="images/001.GIF" width="303" height="45"></font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2">無論設定任何尺寸，都是包含播放Bar也算在內的，試一下便可瞭解。</font></p>
+  <hr style="border: 1px dashed #000000" color="#000000" size="1">
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2"><b>關於自動播放：</b></font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2">如上的最簡潔寫法，其預設就是會自動播放。如果不想自動播放，加入參數 
+    autostart=0 即可，範例如下：</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2">〈embed src=檔案位址 autostart=0〉</font></p>
+  <hr style="border: 1px dashed #000000" color="#000000" size="1">
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2"><b>關於循環播放：</b></font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2"> 如上的最簡潔寫法，其預設就是不會循環播放的，就只播放一次。如果要循環播放，加入參數 loop=1 即可，範例如下：</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2">〈embed src=檔案位址 loop=1〉</font></p>
+  <hr style="border: 1px dashed #000000" color="#000000" size="1">
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2"><b>關於Tracker：</b></font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2">嗯，Tracker，中文要怎麼翻譯啊？反正如果加進這句參數 
+    ShowTracker=0，播放Bar就會變成像右圖那樣，應該有看出少了什麼東西吧。語法範例如下：</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2">〈embed src=檔案位址 ShowTracker=0〉</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2"> <img border="0" src="images/002.GIF" width="302" height="29"></font></p>
+  <hr style="border: 1px dashed #000000" color="#000000" size="1">
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2"><b>關於Position Controls：</b></font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2">嗯，跟上一篇一樣，不會翻譯啦，反正只要加入這句參數 
+    ShowPositionControls=0，播放Bar就會變成如右圖那樣，看出少了什麼東西了嗎？語法範例如下：</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2">〈embed src=檔案位址 ShowPositionControls=0〉</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2"> <img border="0" src="images/003.GIF" width="302" height="45"></font></p>
+  <hr style="border: 1px dashed #000000" color="#000000" size="1">
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2"><b>關於Audio Controls：</b></font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2">就是關於音量控制，只要加入這句參數 ShowAudioControls=0，控制音量的tracker跟靜音鈕都會消失。語法範例如下：</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2">〈embed src=檔案位址 ShowAudioControls=0〉</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2"> <img border="0" src="images/004.GIF" width="300" height="44"></font></p>
+  <hr style="border: 1px dashed #000000" color="#000000" size="1">
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2"><b>關於預設的音量大小：</b></font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2"> 在語法裡面如果沒有寫任何關於音量大小的設定，播放時預設的音量大小如右上圖，大約是50%的音量。</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2">如果希望一開始播放就以100%的最大音量播放，可以加入這句參數 
+    Volume=0，請注意，是等於「零」，不是英文字母的大寫 O。播放時的情況如右下圖，語法範例如下：</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2">〈embed src=檔案位址 Volume=0〉</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2"> <img border="0" src="images/005.GIF" width="301" height="97"></font></p>
+  <hr style="border: 1px dashed #000000" color="#000000" size="1">
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2"><b>關於資訊視窗 (part 1)：</b></font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2">只要加進這句參數 ShowStatusBar=1，播放Bar下方便會多出一行資訊視窗，如右圖。語法範例如下：</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2">〈embed src=檔案位址 ShowStatusBar=1〉</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2"> <img border="0" src="images/006.GIF" width="300" height="66"></font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2"> 這個參數是非常實用的，因為這行資訊視窗會秀出很多有用資訊如下載進度、播放進度、曲名、藝人名稱.......等等。秀出下載進度、播放進度尤其體貼，可以讓瀏覽者大概掌握到底要等多久才會開始播放，不用癡癡望著螢幕像個傻子一樣。我個人建議用embed語法播放影音檔時最好都加上這句參數。</font></p>
+  <hr style="border: 1px dashed #000000" color="#000000" size="1">
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2"><b>關於資訊視窗 (part 2)：</b></font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2">還有另外一種秀出資訊視窗的參數 ShowDisplay=1，會一口氣秀出四行資訊，每行各秀出一種資訊，如右圖。語法範例如下：</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2">〈embed src=檔案位址 ShowDisplay=1〉</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2"> <img border="0" src="images/007.GIF" width="300" height="119"></font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2">這個參數我認為很無謂！因為這些資訊，用上一個參數 ShowStatusBar=1 
+    便可全部呈現出來，單行資訊，但用交替出現的方式呈現所有資訊。這個 ShowDisplay=1 
+    參數占空間，一行顯示一種資訊，而最有用的下載進度、播放進度等卻不會顯示，大而不當！</font></p>
+  <hr style="border: 1px dashed #000000" color="#000000" size="1">
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2"><b>關於防右鍵：</b></font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2"> 各位可以試試在播放Bar上按右鍵看內容，便可看到檔案的真實位址！或是在播放影片時也可以在畫面上按右鍵看內容，也可看到檔案真實位址。加上這句參數 
+    EnableContextMenu=0 便可防止在播放Bar或影片畫面上按右鍵。語法範例如下：</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2">〈embed src=檔案位址 EnableContextMenu=0〉</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2"> 可是這語法有一點點無謂，因為光是在播放面版上防堵意義不大，還要搭配整個頁面的防堵才能收到效果。所以，自己看著辦吧。</font></p>
+  <hr style="border: 1px dashed #000000" color="#000000" size="1">
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2"><b>關於隱藏面版：</b></font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2">隱藏面版是件很有趣的事情，只要加上這句參數 
+    hidden=1，整個播放面版就會不見，什麼都看不到，但還是會播放歌曲 (只要你沒有取消自動播放)。語法範例如下：</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2">〈embed src=檔案位址 hidden〉</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2"> 什麼東西都沒有，卻又會播放歌曲，想到什麼了嗎？沒錯，就是最傳統的背景音樂語法〈bgsound src=檔案位址〉！embed加上 
+    hidden 後，看不到播放面版，也不會影響版面 (完全不佔位置就對了)，表面上的確和bgsound語法一模一樣，兩者可以互相取代。但在功能上，兩者還是有差別的！</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2">用bgsound語法播放歌曲沒有串流功能，即使播WMA也沒有，一定要檔案完全下載完畢才會開始播放。embed加 
+    hidden 
+    就有串流功能。有串流就比較好嗎？不見得！是會比較快開始播放歌曲沒錯，但如果網路繁忙或連線速度慢，播放就會斷斷續續的。bgsound語法要整首下載完才播放，等比較久才聽的到，但開始播後就保證不會斷斷續續的。</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2">所以，現在頁面要播背景音樂有兩種選擇了，就看你要不要串流功能。</font></p>
+  <hr style="border: 1px dashed #000000" color="#000000" size="1">
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <b><font size="2">播放清單檔：</font></b></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2"> embed並非只能直接播放影音檔，它也可以播放清單檔如M3U、ASX、WPL等，這樣就可以用一句embed語法播放多首歌曲。語法範例如下：</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2">〈embed src=檔名.m3u〉</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2"> 當然，想這樣運用自己就得多費心製作清單檔，影音檔跟清單檔上傳時也要注意其相對位置都要擺正確。</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2">並非所有電腦環境都支援播放各式清單檔，如果Windows Media 
+    Player版本不夠新，可能就無法播放一些清單檔。還有如果你電腦預設使用其他軟體來播放清單檔 (非Media 
+    Player)，也可能無法支援用embed播放清單檔，得將檔案格式連結回Media Player才行。</font></p>
+  <p align="justify" style="letter-spacing: 2;line-height:150%"> <font size="2"> 播放清單檔功能如果搭配上述的隱藏面版功能就很有趣了，什麼都沒看到，卻會自動播放多首背景音樂。不過這無法讓瀏覽者做任何控制，強迫接受多首歌曲，很霸道！^^</font></p>
+  <hr style="border: 1px dashed #000000" color="#000000" size="1">
+  <p align="justify" style="letter-spacing: 2; line-height: 150%"><b> 程式碼應用：</b></p>
+  <p align="justify" style="letter-spacing: 2; line-height: 150%"> <font size="2"> 由於上面ember的應用只限於WMA、WMV、ASF、MPG、AVI、MP3...等副檔名結尾確知的檔案才適用，但其他網站的檔案卻不然，所產生的網址連結是一大串，直接將網址連結套用到src這個參數上面，這樣就可以用一句embed語法播放多首歌曲。以網站音樂檔連結為例，說明如下：</font></p>
+  <p align="justify" style="letter-spacing: 2; line-height: 150%"> <b> <font size="2">步驟一：首先新增一個純文字文件(別問我怎麼新增)。</font></b></p>
+  <p align="justify" style="letter-spacing: 2; line-height: 150%"> <b> <font size="2">步驟二：複製歌曲網址</font></b></p>
+  <p align="justify" style="letter-spacing: 2; line-height: 150%"> <img border="0" src="images/008.GIF" width="754" height="557"></p>
+  <p align="justify" style="letter-spacing: 2; line-height: 150%"> <b> <font size="2">步驟三：將網址依序貼到剪貼簿上</font></b></p>
+  <p align="justify" style="letter-spacing: 2; line-height: 150%"> <img border="0" src="images/009.GIF" width="696" height="247"></p>
+  <p align="justify" style="letter-spacing: 2; line-height: 150%"> <b> <font size="2">步驟四：開啟原先播放音樂的網頁，將剛貼好的網址填寫或複製上去取代src後面的網址</font></b></p>
+  <p align="justify" style="letter-spacing: 2; line-height: 150%"><img src="images/010.GIF" width="757" height="265"></p>
+  <p align="justify" style="letter-spacing: 2; line-height: 150%"><font size="2"><b><font size="2">步驟五：<b><font size="2">上傳檔案</font></b></font></b></font></p>
+  <p align="justify" style="letter-spacing: 2; line-height: 150%"> <font size="2">之後的上傳步驟，我就不多說了，因為下堂課會教，所以，讓我保留一下唄。</font></p>
+  <p align="justify" style="letter-spacing: 2; line-height: 150%"> <b> <font size="2">步驟七：然後就可以開始在網頁(留言版)上放歌啦，影片也可以喔!!</font></b></p>
+  <hr>
+  <p align="center" class="style2">Media Player 面 版 參 數 設 定</p>
+  <div align="center">
+    <table width="85%" border="1">
+      <tr>
+        <td colspan="3"><div align="center"><strong>Media Player 參 數</strong></div></td>
+      </tr>
+      <tr>
+        <td width="36%"><div align="center"><strong>參數</strong></div></td>
+        <td width="23%"><div align="center"><strong>參數值</strong></div></td>
+        <td width="41%"><div align="center"><strong>效果說明</strong></div></td>
+      </tr>
+      <tr>
+        <td rowspan="2"><div align="center"><font color="#FF0000"><strong>autostart</strong></font></div></td>
+        <td height="27"><div align="center">
+            <p><font color="#FF0000"><strong>true</strong></font></p>
+        </div></td>
+        <td rowspan="2"><div align="center">
+            <p><font color="#FF0000"><strong>設定true會立即播放</strong></font></p>
+          <p><font color="#FF0000"><strong>(true為預設選項)</strong></font></p>
+        </div></td>
+      </tr>
+      <tr>
+        <td height="22"><div align="center"><font color="#FF0000"><strong>false</strong></font></div></td>
+      </tr>
+      <tr>
+        <td rowspan="2"><div align="center"><strong>showcontrols</strong></div></td>
+        <td><div align="center">
+            <p><strong>true</strong></p>
+        </div></td>
+        <td rowspan="2"><div align="center"><strong>設定true會顯示控制面版</strong></div></td>
+      </tr>
+      <tr>
+        <td><div align="center"><strong>false</strong></div></td>
+      </tr>
+      <tr>
+        <td><div align="center"><strong>showdisplay</strong></div></td>
+        <td><div align="center"><strong>true</strong></div></td>
+        <td><div align="center"><strong>設定true會顯示資料面版</strong></div></td>
+      </tr>
+      <tr>
+        <td><div align="center"><strong>volume</strong></div></td>
+        <td><div align="center"><strong>- 10,000 ~ - 0</strong></div></td>
+        <td><div align="center">
+            <p><strong>設定音量大小的數值 </strong></p>
+          <p><strong>最小音量為- 10,000 </strong></p>
+          <p><strong>最大音量是- 0</strong></p>
+        </div></td>
+      </tr>
+    </table>
+  </div>
+  <div align="center">
+    <table width="85%" height="308" border="1">
+      <tr>
+        <td colspan="3"><div align="center"><strong>LiveAudio 參 數</strong></div></td>
+      </tr>
+      <tr>
+        <td width="36%"><div align="center"><strong>參數</strong></div></td>
+        <td width="23%"><div align="center"><strong>參數值</strong></div></td>
+        <td width="41%"><div align="center"><strong>效果說明</strong></div></td>
+      </tr>
+      <tr>
+        <td rowspan="2"><div align="center"><font color="#FF0000"><strong>autostart</strong></font></div></td>
+        <td height="27"><div align="center">
+            <p><font color="#FF0000"><strong>true</strong></font></p>
+        </div></td>
+        <td rowspan="2"><div align="center">
+            <p><font color="#FF0000"><strong>設定true會立即播放</strong></font></p>
+          <p><font color="#FF0000"><strong>(true為預設選項)</strong></font></p>
+        </div></td>
+      </tr>
+      <tr>
+        <td><div align="center"><font color="#FF0000"><strong>false</strong></font></div></td>
+      </tr>
+      <tr>
+        <td rowspan="2"><div align="center"><font color="#FF0000"><strong>loop</strong></font></div></td>
+        <td><div align="center">
+            <p><font color="#FF0000"><strong>true</strong></font></p>
+        </div></td>
+        <td rowspan="2"><div align="center"><font color="#FF0000"><strong>設定true會不斷連續播放</strong></font></div></td>
+      </tr>
+      <tr>
+        <td><div align="center"><font color="#FF0000"><strong>false</strong></font></div></td>
+      </tr>
+      <tr>
+        <td><div align="center"><font color="#FF0000"><strong>hidden</strong></font></div></td>
+        <td><div align="center"><font color="#FF0000"><strong>true</strong></font></div></td>
+        <td><div align="center"><font color="#FF0000"><strong>設定true會隱藏播放面版</strong></font></div></td>
+      </tr>
+      <tr>
+        <td rowspan="5"><div align="center"><strong>controls</strong></div></td>
+        <td><div align="center"><strong>console</strong></div></td>
+        <td><div align="center"><strong>顯示完整控制面版</strong></div></td>
+      </tr>
+      <tr>
+        <td><div align="center"><strong>smallconsole</strong></div></td>
+        <td><div align="center"><strong>顯示小型控制面版</strong></div></td>
+      </tr>
+      <tr>
+        <td><div align="center"><strong>playbutton</strong></div></td>
+        <td><div align="center"><strong>顯示播放鈕</strong></div></td>
+      </tr>
+      <tr>
+        <td><div align="center"><strong>stopbutton</strong></div></td>
+        <td><div align="center"><strong>顯示停止鈕</strong></div></td>
+      </tr>
+      <tr>
+        <td><div align="center"><strong>volumelever</strong></div></td>
+        <td><div align="center"><strong>顯示音量控制鈕</strong></div></td>
+      </tr>
+    </table>
+  </div>
+  <div align="center"></div>
+  <p align="justify" style="letter-spacing: 2; line-height: 150%">&nbsp;</p>
+</blockquote>

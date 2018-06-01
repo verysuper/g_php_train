@@ -1,0 +1,5 @@
+左右鍵皆不能用防止複製
+
+<!--不預警防止複製_開始-->
+<body ONDRAGSTART="window.event.returnValue=false" ONCONTEXTMENU="window.event.returnValue=false" onSelectStart="event.returnValue=false">
+<!--不預警防止複製_結束-->

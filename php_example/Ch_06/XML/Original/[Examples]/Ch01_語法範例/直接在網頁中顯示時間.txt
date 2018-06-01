@@ -1,0 +1,55 @@
+<script language="Javascript1.2"> 
+<!--
+
+var tags_before_clock = "<center><big><font color='#000000'>現在時間是 "
+var tags_after_clock  = "</font></big></center>"
+
+if(navigator.appName == "Netscape") {
+document.write('<layer id="clock"></layer><br>');
+}
+
+if (navigator.appVersion.indexOf("MSIE") != -1){
+document.write('<span id="clock"></span><br>');
+}
+
+function showclock()
+{ 
+  var date = new Date();
+  var hour = date.getHours();
+  var min = date.getMinutes(); 
+  var sec = date.getSeconds();
+  var col = ":";
+  var spc = " ";
+  var apm;
+
+  if ( hour >12 ) 
+  { 
+    apm="P.M.";
+    hour=hour-12;
+  }
+  else 
+  {
+    apm="A.M.";
+  }
+
+  if (hour == 0) hour=12;
+  if (min<=9) min="0"+min;
+  if (sec<=9) sec="0"+sec;
+
+  if(navigator.appName == "Netscape") 
+  {
+    document.clock.document.write(tags_before_clock
+    +hour+col+min+col+sec+spc+apm+tags_after_clock);
+    document.clock.document.close();
+  }
+
+  if (navigator.appVersion.indexOf("MSIE") != -1)
+  {
+    clock.innerHTML = tags_before_clock+hour
+    +col+min+col+sec+spc+apm+tags_after_clock;
+  }
+} 
+
+setInterval("showclock()",1000);
+//-->
+</script>

@@ -1,0 +1,1 @@
+style.behavior='url(#default#homepage)'; setHomePage('http://tw.yahoo.com/');

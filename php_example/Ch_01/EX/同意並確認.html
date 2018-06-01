@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>表單範例_同意並確認</title>
+<script language="javascript"> 
+function enableNext()
+{
+document.forms[0].elements[3].disabled=false;
+document.forms[0].elements[3].focus();
+document.forms[0].elements[2].blur();
+}
+ 
+function disableNext()
+{
+var confirmDecline = "你幹嘛不同意啦!!!";
+document.forms[0].elements[3].disabled=true;
+alert(confirmDecline);
+}
+ 
+function validateCancel()
+{
+document.forms[0].eula[1].checked=true;
+document.forms[0].submit();
+}
+</script>
+</head>
+
+<body>
+<form id="form" action="http://tw.yahoo.com" method="POST">
+    <input type="radio" name="eula" value="accept" onclick="enableNext()">我同意
+    <input type="radio" name="eula" value="decline" onclick="disableNext()">我不同意
+    <button id=btnCancel type=submit onclick="validateCancel()" style="cursor: hand">取消</button>
+    <button id=btnNext type=submit disabled style="cursor: hand">下一步</button>
+</form>
+</body>
+</html>

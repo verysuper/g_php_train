@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-TW" lang="zh-TW" xmlns:spry="http://ns.adobe.com/spry"><!-- InstanceBegin template="/Templates/hometemp.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>想想走透透-想飛Sky-享受旅行-想食Eat-享受美食-追求平安快樂的人生-旅遊花絮</title>
+<!-- InstanceEndEditable -->
+<meta name="Keywords" content="想想走透透,想飛Sky,享受旅行,想食Eat,享受美食,追求平安快樂的人生,享受一個人的快樂" />
+<meta name="Description" content="想想走透透是生活在地球上的某個人所遭遇到的追求享樂與平衡的故事點滴。" />
+<meta name="author" content="學習電腦的WU" />
+<!-- InstanceBeginEditable name="head" -->
+<link href="css/homeX.css" rel="stylesheet" type="text/css" media="screen" />
+<script src="SpryAssets/xpath.js" type="text/javascript"></script>
+<script src="SpryAssets/SpryData.js" type="text/javascript"></script>
+<link href="SpryAssets/SpryMasterDetail.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+var photo2 = new Spry.Data.XMLDataSet("xml/photo2.xml", "data/foreign");
+</script>
+<!-- InstanceEndEditable -->
+</head>
+
+<body>
+<!--layout wrapper-->
+<div id="wrapper">
+  <!--header-->
+  <div id="header"> <a href="index.html"><img src="images/logo.gif" width="187" height="45" alt="想飛Sky_logo"  title="想想走透透-想飛Sky-享受旅行首頁"/></a>
+    <h1>想想走透透-想飛Sky-享受旅行</h1>
+  </div>
+  <!--end header-->
+  <!--nav--><!--end nav-->
+  <!--leftbtn-->
+  <div id="sidebar">
+    <div id="menubtn">
+      <ul>
+        <li class="home"><a href="index.html"></a></li>
+        <li class="photo"><a href="photo.html"></a></li>
+      </ul>
+    </div>
+    <div id="menu">
+    <div id="menutop"></div>
+    <div id="menumin">
+      <ul class="menumyul">
+        <li><a href="about.html">About</a></li>
+        <li><a href="notice.html">Notice</a></li>
+        <li><a href="theme.html">Theme</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Fackbook</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      </div>
+    <div id="menubon"></div>
+    </div>
+  </div>
+  <!--end leftbtn-->
+  <!--rightcontent-->
+  <!--photoalbum-->
+  <!-- InstanceBeginEditable name="photoalbum" --><strong></strong>
+  <div id="photoalbum">photo</div>
+  <!-- InstanceEndEditable -->
+  <!--end photoalbum-->
+  <!-- InstanceBeginEditable name="homecontent" -->
+  <div id="homecontent">
+    <div class="MasterDetail">
+      <div spry:region="photo2" class="MasterContainer">
+        <div class="MasterColumn" spry:repeat="photo2" spry:setrow="photo2" spry:hover="MasterColumnHover" spry:select="MasterColumnSelected">{subject}</div>
+      </div>
+      <div spry:detailregion="photo2" class="DetailContainer">
+        <div class="DetailColumn"><img name="" src="images_photo/foreign/{picture}" width="200" height="150" alt="旅遊花絮照片" /></div>
+        <div class="DetailColumn">{description}</div>
+      </div>
+      <br style="clear:both" />
+    </div>
+  </div>
+  <!-- InstanceEndEditable --><!--end rightcontent-->
+  <!--footer-->
+  <div id="footer"><!-- #BeginLibraryItem "/Library/footer.lbi" -->
+    <p>想想走透透-想飛Sky-享受旅行-想食Eat-享受美食版權所有 &copy; Copyright All Rights Reserved. </p>
+  <p> 台北市幸福之路 | TEL：(02)0520-1314　| E-mail:gsmartwu@gmail.com</p><!-- #EndLibraryItem --></div>
+  <!--end footer-->
+</div>
+<!--end layout wrapper-->
+</body>
+<!-- InstanceEnd --></html>

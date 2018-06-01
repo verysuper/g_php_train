@@ -1,0 +1,66 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 100%;
+	color: #000;
+	background-color: #8FE3EE;
+	margin: 0px;
+}
+#wrapper {
+	width: 100%;
+}
+#header {
+	width: 100%;
+	padding: 0.5em;
+}
+#header img {
+	margin: 0.5em;
+	height: 40px;
+	width: 160px;
+}
+#header h1 {
+	font-size: 1em;
+}
+#nav {
+	font-size: 1em;
+}
+#nav ul {
+	margin: 0em;
+	padding-top: 0em;
+	padding-right: 0em;
+	padding-bottom: 0em;
+	padding-left: 2em;
+	list-style-type: circle;
+}
+#nav ul li {
+	margin-top: 5px;
+}
+#sidebar {
+	display: none;
+}
+#content {
+	width: 100%;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+#content h1 {
+	font-size: 1.2em;
+}
+#content p {
+	margin: 0.5em;
+}
+#footer {
+	font-size: 0.8em;
+	width: 100%;
+	padding-top: 0.5em;
+}
+#footer p {
+	padding-right: 0.5em;
+	padding-left: 0.5em;
+	margin-top: 0em;
+	margin-right: 0em;
+	margin-bottom: 0.2em;
+	margin-left: 0em;
+}

@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><META http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<TITLE>HTML表單傳遞</TITLE>
+<STYLE type="text/css">
+<!--
+.style1 {color: #0000FF}
+.style2 {color: #FF0000}
+body,td,th {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 100%;
+}
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	background-color: #FF9;
+}
+-->
+</STYLE>
+</HEAD><BODY>
+<TABLE width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
+  </TABLE>
+<TABLE width="770" align="center" cellpadding="0" cellspacing="0">
+  <TBODY><TR>
+    <TD width="771" bgcolor="#e5e5e5">HTML表單傳遞說明：</TD>
+  </TR>
+  <TR>
+    <TD height="581"><P>表單語法<BR>
+      &lt;Form name = "Form Name"
+       <SPAN class="style1">action</SPAN> = "資料處理程式的URL"
+       <SPAN class="style1">method</SPAN> = "GET｜POST"
+     &nbsp; target = "顯示資料處理程式的視窗名稱"<SPAN class="style1"> enctype</SPAN> = "application/x-www-form-urlencoded｜multipart/form-data"      &gt;<BR>
+     ........<BR>
+     &lt;/Form&gt;</P>
+      <P>表單元素語法</P>
+      <TABLE width="770" border="1" cellpadding="0" cellspacing="0">
+        <TBODY><TR bgcolor="#DFDFFF">
+          <TD width="300" align="center" valign="middle">語法</TD>
+          <TD width="100" align="center" valign="middle">展現</TD>
+          <TD align="center" valign="middle">送出值（以post為例）</TD>
+        </TR>
+        <TR bgcolor="#f8f8f8">
+          <TD>&lt;<SPAN class="style2">input </SPAN>name="frm_name" type="<SPAN class="style2">text</SPAN>" id="frm_name"&gt; &nbsp;&nbsp; </TD>
+          <TD><INPUT type="text" name="textfield"></TD>
+          <TD>$_POST['frm_name']</TD>
+        </TR>
+        <TR bgcolor="#f8f8f8">
+          <TD>&lt;<SPAN class="style2">input</SPAN> name="frm_passwd" type="<SPAN class="style2">password</SPAN>" id="frm_passwd"&gt; </TD>
+          <TD><INPUT type="password" name="textfield"></TD>
+          <TD>$_POST['frm_passwd']</TD>
+        </TR>
+        <TR bgcolor="#f8f8f8">
+          <TD>&lt;<SPAN class="style2">input</SPAN> name="frm_account" type="<SPAN class="style2">hidden</SPAN>" id="frm_account"&gt;</TD>
+          <TD><INPUT type="hidden" name="hiddenField">　
+          </TD>
+          <TD>$_POST['frm_account']</TD>
+        </TR>
+        <TR bgcolor="#f8f8f8">
+          <TD>&lt;<SPAN class="style2">input</SPAN> name="frm_sex" type="<SPAN class="style2">radio</SPAN>" value="1" checked&gt;男<BR>
+&lt;<SPAN class="style2">input</SPAN> name="frm_sex" type="<SPAN class="style2">radio</SPAN>" value="0"&gt;女</TD>
+          <TD><INPUT name="radiobutton" type="radio" value="radiobutton" checked="">
+            男
+            <INPUT name="radiobutton" type="radio" value="radiobutton">
+            女</TD>
+          <TD>$_POST['frm_sex']</TD>
+        </TR>
+        <TR bgcolor="#f8f8f8">
+          <TD>&lt;<SPAN class="style2">input</SPAN> name="frm_hobby[]" type="<SPAN class="style2">checkbox</SPAN>" id="frm_hobby[]" value="看電影"&gt; 看電影 <BR>
+&lt;<SPAN class="style2">input</SPAN> name="frm_hobby[]" type="<SPAN class="style2">checkbox</SPAN>" id="frm_hobby[]" value="玩電玩"&gt; 玩電玩 <BR>
+&lt;<SPAN class="style2">input</SPAN> name="frm_hobby[]" type="<SPAN class="style2">checkbox</SPAN>" id="frm_hobby[]" value="看書"&gt; 看書</TD>
+          <TD>
+          <INPUT type="checkbox" name="checkbox" value="checkbox">  看電影<br>
+          <INPUT type="checkbox" name="checkbox" value="checkbox">  玩電玩<br>
+          <INPUT type="checkbox" name="checkbox" value="checkbox">  看書</TD>
+          <TD>$_POST['frm_hobby']陣列<BR>
+            $_POST['frm_hobby'][0]<BR>
+            $_POST['frm_hobby'][1]<BR>
+            $_POST['frm_hobby'][2]</TD>
+        </TR>
+        <TR bgcolor="#f8f8f8">
+          <TD>&lt;<SPAN class="style2">select</SPAN> name="frm_color" id="frm_color"&gt;<BR>
+&lt;<SPAN class="style2">option</SPAN> value="red" &gt;紅色&lt;/option&gt;<BR>
+&lt;<SPAN class="style2">option</SPAN> selected&gt;黑色&lt;/option&gt;<BR>
+&lt;<SPAN class="style2">option</SPAN>&gt;白色&lt;/option&gt;<BR>
+&lt;<SPAN class="style2">option</SPAN>&gt;藍色&lt;/option&gt;<BR>
+&lt;<SPAN class="style2">option</SPAN>&gt;橘色&lt;/option&gt;<BR>
+&lt;<SPAN class="style2">/select</SPAN>&gt;</TD>
+          <TD><SELECT name="select">
+            <OPTION>紅色</OPTION>
+            <OPTION selected="">黑色</OPTION>
+            <OPTION>白色</OPTION>
+            <OPTION>藍色</OPTION>
+            <OPTION>橘色</OPTION>
+          </SELECT></TD>
+          <TD>$_POST['frm_color']</TD>
+        </TR>
+        <TR bgcolor="#f8f8f8">
+          <TD>&lt;<SPAN class="style2">textarea</SPAN> name="frm_memo" cols="20" rows="5" id="frm_memo"&gt;&lt;<SPAN class="style2">/textarea</SPAN>&gt;</TD>
+          <TD><TEXTAREA name="textfield" cols="20" rows="5"></TEXTAREA></TD>
+          <TD>$_POST['frm_memo']</TD>
+        </TR>
+        <TR bgcolor="#f8f8f8">
+          <TD bgcolor="#f8f8f8">&lt;<SPAN class="style2">input</SPAN> type="<SPAN class="style2">file</SPAN>" name="frm_name"&gt;</TD>
+          <TD><INPUT name="file" type="file" size="20"></TD>
+          <TD><P>上傳暫存檔案的名稱<BR>
+            $_FILES['frm_name']['tmp_name']<BR>
+            上傳檔案的名稱<BR>
+$_FILES['frm_name']['name']<BR>
+上傳檔案的大小$_FILES['frm_name']['size']<BR>
+
+上傳檔案的MIME類型$_FILES['frm_name']['type']</P>
+            <P>php.ini設定<BR>
+              (1)upload_tmp_dir<BR>
+              (2)upload_max_filesize              <BR>
+            </P></TD>
+        </TR>
+        <TR bgcolor="#f8f8f8">
+          <TD>&lt;input type="<SPAN class="style2">submit</SPAN>" name="Submit" value="送出"&gt;</TD>
+          <TD><INPUT type="submit" name="Submit" value="送出"></TD>
+          <TD>&nbsp;</TD>
+        </TR>
+        <TR bgcolor="#f8f8f8">
+          <TD>&lt;input type="<SPAN class="style2">reset</SPAN>" name="Submit" value="重設"&gt;</TD>
+          <TD><INPUT type="reset" name="Submit" value="重設"></TD>
+          <TD>&nbsp;</TD>
+        </TR>
+      </TBODY></TABLE>
+    
+      <P>(一)URL</P>
+      <P>url : http://localhost/test.php? user=hs1600</P>
+      <P> test.php</P>
+      <P>&lt;html&gt;<BR>
+      &lt;head&gt;<BR>
+      &lt;title&gt;接收URL變數&lt;/title&gt;<BR>
+      &lt;/head&gt;<BR>
+      &lt;body&gt;<BR>
+      &lt;?php echo <SPAN class="style2">$_GET['user']</SPAN>; &gt;<BR>
+      &lt;/body&gt;<BR>
+      &lt;/html&gt;</P>
+      <P>(二)表單</P>
+      <P>&lt;html&gt;<BR>
+      &lt;head&gt;<BR>
+      &lt;title&gt;傳送表單變數&lt;/title&gt;<BR>
+      &lt;/head&gt;<BR>
+      &lt;body&gt;<BR>
+      &lt;form action="test.php" method="post"&gt;<BR>
+      &lt;input type="text" name="frm_name"&gt;<BR>
+      &lt;input type="submit" value="送出"&gt; <BR>
+      &lt;/form&gt;<BR>
+      &lt;/body&gt;<BR>
+      &lt;/html&gt;</P>
+      <P>test.php</P>
+      <P>&lt;html&gt;<BR>
+      &lt;head&gt;<BR>
+      &lt;title&gt;接收表單變數&lt;/title&gt;<BR>
+      &lt;/head&gt;<BR>
+      &lt;body&gt;<BR>
+      &lt;?php echo <SPAN class="style2">$_POST['frm_name']</SPAN>; &gt;<BR>
+      &lt;/body&gt;<BR>
+      &lt;/html&gt;</P>
+      <P><BR>
+    </P></TD>
+  </TR>
+</TBODY></TABLE>
+</BODY></HTML>

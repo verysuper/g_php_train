@@ -1,0 +1,24 @@
+現在時間
+
+
+<!--現在時間_開始-->
+<script language="JavaScript">
+<!-- 
+document.write("<span id='clock'></span>");
+var now,hours,minutes,seconds,timeValue;
+function showtime(){
+now = new Date();
+hours = now.getHours();
+minutes = now.getMinutes();
+seconds = now.getSeconds();
+timeValue = (hours >= 12) ? "下午 " : "上午 ";
+timeValue += ((hours > 12) ? hours - 12 : hours) + " 點";
+timeValue += ((minutes < 10) ? " 0" : " ") + minutes + " 分";
+timeValue += ((seconds < 10) ? " 0" : " ") + seconds + " 秒";
+clock.innerHTML = timeValue;
+setTimeout("showtime()",100);
+}
+showtime();
+-->
+</script>
+<!--現在時間_結束-->

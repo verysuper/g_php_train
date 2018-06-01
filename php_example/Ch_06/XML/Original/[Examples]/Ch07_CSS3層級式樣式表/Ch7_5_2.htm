@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>移動標題文字</title>
+<script language="JavaScript">
+function moveleft(){
+  var h = document.getElementById("myH2");
+  h.style.position = "absolute";
+  h.style.left = 0;
+}
+function moveback(){
+  var h = document.getElementById("myH2");
+  h.style.position = "relative";
+}
+</script>
+</head>
+
+<body>
+<h2 id="myH2" 
+onmouseover="moveleft()"
+onmouseout="moveback()">移動標題文字</h2>
+</body>
+</html>

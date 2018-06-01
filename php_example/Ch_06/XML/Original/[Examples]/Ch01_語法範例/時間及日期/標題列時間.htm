@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>標題列時間</title>
+</head>
+
+<body>
+<div align="center">
+  <CENTER>
+  <table height="123" cellspacing="1" width="86%" border="3">
+    <caption>
+      <font color="#006666" size="4">標題列時間</font>
+    </caption>
+    <tbody>
+      <tr>
+        <td align="middle" width="11%" bgcolor="#99ccff" height="28"><font 
+      size="2">簡述</font></td>
+        <td width="88%" bgcolor="#9999ff" height="28"><font color="#ffff00" 
+      size="2">在標題列上顯示時間</font></td>
+      </tr>
+      <tr>
+        <td align="middle" width="11%" bgcolor="#99ccff" height="28"><font 
+      size="2">範例展示</font></td>
+        <td width="88%" bgcolor="#9999ff" height="28"><font color="#ffff00" 
+      size="2">請看標題列</font></td>
+      </tr>
+      <tr>
+        <td align="middle" width="11%" bgcolor="#99ccff" height="28"><p align="center"><font size="2">使用方式</font></p></td>
+        <td width="88%" bgcolor="#9999ff" height="28"><font color="#ffff00" 
+      size="2">依下列步驟使用：　<br />
+          如要複製JavaScript程式碼內容，可以按下『選擇全部』按鈕，然後在被選取的文字區域按滑鼠右鍵，選擇複製即可。</font></td>
+      </tr>
+      <tr>
+        <td valign="top" align="middle" width="11%" bgcolor="#99ccff" height="22"><font 
+      size="2">原始程式碼</font>
+          <p>　</p>
+        </td>
+        <td width="88%" bgcolor="#9999ff" height="1"><p align="left"><font color="#ffff00" 
+      size="2">1.複製以下JavaScript程式碼,貼到&lt;BODY&gt;及&lt;/BODY&gt;之間</font> <font 
+      color="#ffff00" size="2">.<br />
+          <input onclick="javascript:this.form.n.focus();this.form.n.select();" type="button" value="選擇全部" name="B1" />
+          <textarea language="javascript" style="WIDTH: 98%" name="n" rows="8" wrap="virtual" cols="45">&lt;SCRIPT LANGUAGE=&quot;JavaScript&quot;&gt;
+&lt;!-- Begin
+var clocktext, timeday;
+var pagetitle = document.title;
+function scroll() {
+today = new Date();
+sec = today.getSeconds();
+hr = today.getHours();
+min = today.getMinutes();
+if (hr &lt; 12) { timeday = &quot; AM&quot;; }
+else { timeday = &quot; PM&quot;; }
+if (hr &gt; 12) hr = hr - 12;
+if (hr &lt;= 9) hr = &quot;0&quot; + hr;
+if (min &lt;= 9) min = &quot;0&quot; + min;
+if (sec &lt;= 9) sec = &quot;0&quot; + sec;
+var clocktext = &quot; - &quot; + hr + &quot;:&quot; + min + &quot;:&quot; + sec + timeday;
+clocktimer = setTimeout(&quot;scroll()&quot;, 1000);
+document.title = pagetitle + clocktext;
+}
+if (document.all) scroll();
+//  End --&gt;
+&lt;/script&gt;</textarea>
+        </font> </p></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

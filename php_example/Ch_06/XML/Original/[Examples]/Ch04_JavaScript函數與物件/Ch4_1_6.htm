@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>函數的參數陣列</title>
+<script>
+// 使用參數陣列取得傳遞的參數
+function sumInt() {
+   var sum = 0;
+   // 取得傳遞的所有參數
+   for(var i=0; i<sumInt.arguments.length; i++) {
+       sum += sumInt.arguments[i];
+   }
+   return sum;
+}
+</script>
+</head>
+
+<body>
+<h2>函數的參數陣列</h2>
+<hr/>
+<script>
+// 宣告變數
+var sum = 0;
+sum = sumInt(100,45,567,234);
+document.write("函數sumInt(100,45,567,234): "+sum+"<br/>");  
+</script>
+</body>
+</html>

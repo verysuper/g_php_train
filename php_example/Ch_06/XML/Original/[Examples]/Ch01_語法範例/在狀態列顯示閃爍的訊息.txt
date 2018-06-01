@@ -1,0 +1,20 @@
+<script language="JavaScript">
+<!--
+var speed = 300
+var text = "Åwªï¨Ó¨ì ALAN HOME¡I¡I"
+
+function Blink1() {
+window.status = text
+setTimeout("Blink2()", speed)
+}
+
+function Blink2() {
+window.status = " "
+setTimeout("Blink1()", speed)
+}
+Blink1()
+//-->
+</script>
+
+
+

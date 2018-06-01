@@ -1,0 +1,25 @@
+@charset "utf-8";
+body {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 100%;
+	color: #333;
+	background-color: #3399ff;
+}
+a {
+	font-color:#FFF;
+}
+a:link {
+	font-color:#FFF;
+	text-decoration: none
+}
+a:visited {
+	text-decoration: none
+}
+a:hover{
+	color: #003399;
+	text-decoration: underline
+}
+a:active{
+	color: #003399;
+	text-decoration: underline
+}

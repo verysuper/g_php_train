@@ -1,0 +1,27 @@
+<script LANGUAGE="JavaScript">
+<!-- 
+now = new Date()
+
+if (now.getDay() == 1)
+document.write("今天是星期一，又是新的禮拜的開始！")
+
+if (now.getDay() == 2)
+document.write("今天是星期二，打起精神努力工作吧！")
+
+if (now.getDay() == 3)
+document.write("今天是星期三，小周末要上哪裡玩ㄚ?")
+
+if (now.getDay() == 4)
+document.write("今天是星期四，一切都還順利嗎？")
+
+if (now.getDay() == 5)
+document.write("今天是星期五，開始計畫假日去哪裡玩了嗎？")
+
+if (now.getDay() == 6)
+document.write("今天是星期六，可別玩過頭了喔！")
+
+if (now.getDay() == 0)
+document.write("今天是星期日，祝你能享受個美好的一天！")
+
+//-->
+</script>

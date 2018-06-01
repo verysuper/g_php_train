@@ -1,0 +1,15 @@
+﻿前台表單 search.php：
+<form id="form1" name="form1" method="post" action="searchProc.php">
+  <p>
+    <input type="text" name="searchtxt" id="searchtxt" />
+    <label for="button"></label>
+    <input type="submit" name="button" id="button" value="搜尋" />
+  </p>
+</form>
+
+後端程式 search_output.php：
+<?php
+	$txt=$_POST['searchtxt'];
+	echo "您想要搜尋的內容是： ".$txt." 嗎?<br>";
+	echo "[<a href=http://www.google.com/search?q=".$txt.">前往Google</a>]<br>";
+?>

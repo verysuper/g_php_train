@@ -1,0 +1,48 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	font-family: Verdana, Geneva, sans-serif;
+	color: #000;
+	margin: 0mm;
+}
+#wrapper {
+	text-align: center;
+	width: 100%;
+}
+#header {
+	width: 100%;
+}
+#header img {
+	display: none;
+}
+#header h1 {
+	font-size: 16pt;
+}
+#nav {
+	font-size: 12pt;
+}
+#nav ul {
+	margin: 0mm;
+	padding: 0mm;
+	list-style-type: none;
+}
+#nav ul li {
+	display: inline;
+	margin-right: 12pt;
+}
+#sidebar {
+	display: none;
+}
+#content {
+	display: none;
+}
+#footer {
+	font-size: 9pt;
+	width: 100%;
+	padding-top: 5pt;
+}
+#footer p {
+	margin-top: 2mm;
+	margin-bottom: 2mm;
+}

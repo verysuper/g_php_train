@@ -1,0 +1,22 @@
+<!--預警式防止複製_開始-->
+<script language="JavaScript">
+<!--
+function right(e) {
+if (navigator.appName =='Netscape'&&
+(e.which ==3|| e.which ==2))
+return false;
+else if (navigator.appName == 'Microsoft Internet Explorer' &&
+(event.button == 2|| event.button ==3)) {
+alert("看不到~看不到~\n\n裡面沒什麼好看的啦!");
+return false;
+}
+return true;
+}
+document.onmousedown=right;
+if (document.layers) window.captureEvents(Event.MOUSEDOWN);
+window.onmousedown=right;
+-->
+</script>
+<!--預警式防止複製_結束-->
+
+語法說明：<br>請自行修改對話內容；可加入\n斷行<br>

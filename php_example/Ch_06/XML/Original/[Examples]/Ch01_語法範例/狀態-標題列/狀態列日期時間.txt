@@ -1,0 +1,16 @@
+狀態列日期時間
+
+<!--狀態列日期時間_開始-->
+<script language="JavaScript">
+<!--
+function runClock() {
+theTime = window.setTimeout("runClock()", 1000);
+var today = new Date();
+var display= today.toLocaleString();
+status=display;
+}
+-->
+</script>
+<body onLoad="runClock()">
+<!--狀態列日期時間_結束-->
+

@@ -1,0 +1,47 @@
+倒影時間 
+
+
+
+<!--倒影時間_開始-->
+<style type="text/css">
+<!--
+.time{font-family : Comic Sans Ms;
+font-size : 14pt;font-weight : bold;color: #00008D;}
+-->
+</style>
+<script Language="JavaScript">
+<!-- Hiding
+var ctimer;
+function init(){
+if (document.all){
+tim2.style.left=tim1.style.posLeft;
+tim2.style.top=tim1.style.posTop+tim1.offsetHeight-6;
+settimes();
+}}
+function settimes(){
+var time= new Date();
+hours= time.getHours();
+mins= time.getMinutes();
+secs= time.getSeconds();
+if (hours<10)
+hours="0"+hours;
+if(mins<10)
+mins="0"+mins;
+if (secs<10)
+secs="0"+secs;
+tim1.innerHTML=hours+":"+mins+":"+secs
+tim2.innerHTML=hours+":"+mins+":"+secs
+ctimer=setTimeout('settimes()',960);
+}
+// -->
+</script> 
+<body onload="init()" >
+<DIV class=time id=tim1 style="HEIGHT: 20px; LEFT: 350px; POSITION: absolute; TOP: 80px; WIDTH: 10px"></DIV>
+<DIV class=time id=tim2 style="FILTER: flipv() alpha(opacity=20); FONT-STYLE: italic; POSITION: absolute"></DIV>
+<!--倒影時間_結束-->
+
+語法說明：<br>
+在 font-size : 14pt 中修改倒影時間的文字大小<br>
+在 color: #00008D 中修改倒影時間的字色<br>
+在 color: #00008D 中修改時間距離視窗左邊的距離<br>
+在 TOP: 80px 中修改時間距離視窗上面的距離<br>

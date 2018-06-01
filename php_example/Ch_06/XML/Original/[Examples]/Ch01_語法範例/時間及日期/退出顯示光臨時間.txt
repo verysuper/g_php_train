@@ -1,0 +1,21 @@
+<!--退出顯示光臨時間_開始-->
+<body onUnload="bye()">
+<script language="Javascript">
+<!--
+pageOpen = new Date();
+function bye() {
+pageClose = new Date();
+minutes = (pageClose.getMinutes() - pageOpen.getMinutes());
+seconds = (pageClose.getSeconds() - pageOpen.getSeconds());
+time = (seconds + (minutes * 60));
+if (time == 1) {
+time = (time + " 秒");
+}
+else {
+time = (time + " 秒");
+   }
+alert('您在本頁停留了' + time + '...歡迎再來!');
+} 
+-->
+</script>
+<!--退出顯示光臨時間_結束-->

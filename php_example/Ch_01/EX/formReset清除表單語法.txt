@@ -1,0 +1,6 @@
+<script language="JavaScript">
+function formReset(){
+   var objForm = document.myForm;
+   objForm.reset()
+}
+</script>

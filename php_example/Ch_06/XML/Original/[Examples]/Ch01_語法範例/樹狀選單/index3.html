@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>文字樹狀選單</title>
+<style>
+a:visited{ color:red; text-decoration:none; }
+a:link { color:blue; text-decoration:none; }
+a:active { color:red }
+a:hover { color:blue }
+.mainItem {
+font-family: 標楷體;
+font-size: 20px;
+color: darkblue;
+text-decoration: none;
+}
+</style>
+</head>
+
+<body bgcolor="ivory">
+<script type="text/javascript">
+<!--
+function showhide(what){
+var subs = document.getElementById(what).style;
+if(subs.display=='none') // 若物件為隱藏則設回預設值
+subs.display=''; // 預設值為'inline'
+else
+subs.display='none'; // 若物件不為隱藏則隱藏
+}
+//-->
+</script>
+<p align="center"><font size="6" color="blue">文字樹狀選單</font></p>
+<table><tr><td>
+
+<span id="m1" onClick="showhide('m1sub')">
+<img src="images/folderopen.gif"><a href="#" class="mainItem">陳老師網路學院</a></span><br>
+<span id="m1sub" style="display:none;">
+<ul>
+<li><a href="http://css.gjun.tw">CSS語法教學</a><br>
+<li><a href="http://php.gjun.tw">PHP網站範例</a><br>
+<li><a href="http://wordpress2.gjun.tw/">WORDPRESS網站範例</a><br>
+</ul>
+</span>
+
+<span id="m2" onClick="showhide('m2sub')">
+<img src="images/folderopen.gif"><a href="#" class="mainItem">入口網站</a></span><br>
+<span id="m2sub" style="display:none;">
+<ul>
+<li><a href="http://tw.yahoo.com/">奇摩站</a><br>
+<li><a href="http://www.pchome.com.tw/">PC home</a><br>
+<li><a href="http://www.google.com.tw/">Google</a><br>
+</ul>
+</span>
+
+<span id="m3" onClick="showhide('m3sub')">
+<img src="images/folderopen.gif"><a href="#" class="mainItem">教學內容</a></span><br>
+<span id="m3sub" style="display:none;">
+<ul>
+<li><a href="#">HTML教學</a><br>
+<li><a href="#">JAVA SCRIPT教學</a><br>
+</ul>
+</span>
+
+</td></tr></table>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<html>
+<head>
+<title>佈告式捲動</title>
+
+<style type="text/css">  
+#divUpControl{position:absolute; width:320; left:10; top:10; z-index:1; text-align: right} 
+#divDownControl{position:absolute; width:320; left:10; top:270; z-index:1; text-align: right} 
+#divContainer{position:absolute; width:320; height:240; overflow:hidden; top:30; left:10; clip:rect(0,320,240,0); visibility:hidden} 
+#divContent{position:absolute; top:0; left:0} 
+</style>
+
+<script language="javascript" type="text/javascript">
+function verifyCompatibleBrowser(){ 
+    this.ver=navigator.appVersion 
+    this.dom=document.getElementById?1:0 
+    this.ie5=(this.ver.indexOf("MSIE 5")>-1 && this.dom)?1:0; 
+    this.ie4=(document.all && !this.dom)?1:0; 
+    this.ns5=(this.dom && parseInt(this.ver) >= 5) ?1:0; 
+ 
+    this.ns4=(document.layers && !this.dom)?1:0; 
+    this.bw=(this.ie5 || this.ie4 || this.ns4 || this.ns5) 
+    return this 
+} 
+bw=new verifyCompatibleBrowser() 
+ 
+ 
+var speed=100  //捲動速度(千分之一秒) 
+ 
+var loop, timer 
+ 
+function ConstructObject(obj,nest){ 
+    nest=(!nest) ? '':'document.'+nest+'.' 
+    this.el=bw.dom?document.getElementById(obj):bw.ie4?document.all[obj]:bw.ns4?eval(nest+'document.'+obj):0; 
+    this.css=bw.dom?document.getElementById(obj).style:bw.ie4?document.all[obj].style:bw.ns4?eval(nest+'document.'+obj):0; 
+    this.scrollHeight=bw.ns4?this.css.document.height:this.el.offsetHeight 
+    this.clipHeight=bw.ns4?this.css.clip.height:this.el.offsetHeight 
+    this.up=MoveAreaUp;this.down=MoveAreaDown; 
+    this.MoveArea=MoveArea; this.x; this.y; 
+    this.obj = obj + "Object" 
+    eval(this.obj + "=this") 
+    return this 
+} 
+function MoveArea(x,y){ 
+    this.x=x;this.y=y 
+    this.css.left=this.x 
+    this.css.top=this.y 
+} 
+ 
+function MoveAreaDown(move){ 
+	if(this.y>-this.scrollHeight+objContainer.clipHeight){ 
+    this.MoveArea(0,this.y-move) 
+    if(loop) setTimeout(this.obj+".down("+move+")",speed) 
+	} 
+} 
+function MoveAreaUp(move){ 
+	if(this.y<0){ 
+    this.MoveArea(0,this.y-move) 
+    if(loop) setTimeout(this.obj+".up("+move+")",speed) 
+	} 
+} 
+ 
+function PerformScroll(speed){ 
+	if(initialised){ 
+		loop=true; 
+		if(speed>0) objScroller.down(speed) 
+		else objScroller.up(speed) 
+	} 
+} 
+ 
+function CeaseScroll(){ 
+    loop=false 
+    if(timer) clearTimeout(timer) 
+} 
+var initialised; 
+function InitialiseScrollableArea(){ 
+    objContainer=new ConstructObject('divContainer') 
+    objScroller=new ConstructObject('divContent','divContainer') 
+    objScroller.MoveArea(0,0) 
+    objContainer.css.visibility='visible' 
+    initialised=true; 
+} 
+// end absolutely positioned scrollable area object scripts 
+
+</script>
+<script language="javascript" type="text/javascript">
+<!--
+function MM_reloadPage(init) {  //reloads the window if Nav4 resized
+  if (init==true) with (navigator) {if ((appName=="Netscape")&&(parseInt(appVersion)==4)) {
+    document.MM_pgW=innerWidth; document.MM_pgH=innerHeight; onresize=MM_reloadPage; }}
+  else if (innerWidth!=document.MM_pgW || innerHeight!=document.MM_pgH) location.reload();
+}
+MM_reloadPage(true);
+// -->
+</script>
+</head>
+
+<body bgcolor="#0b54b6" onLoad="InitialiseScrollableArea()" scroll="no" link="#FFFFFF">
+<!-- begin absolutely positioned scrollable area object--> <!-- end absolutely positioned scrollable area object --> 
+<script language="javascript" type="text/javascript">
+<!--
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v3.0
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+
+function MM_timelinePlay(tmLnName, myID) { //v1.2
+  //Copyright 1997 Macromedia, Inc. All rights reserved.
+  var i,j,tmLn,props,keyFrm,sprite,numKeyFr,firstKeyFr,propNum,theObj,firstTime=false;
+  if (document.MM_Time == null) MM_initTimelines(); //if *very* 1st time
+  tmLn = document.MM_Time[tmLnName];
+  if (myID == null) { myID = ++tmLn.ID; firstTime=true;}//if new call, incr ID
+  if (myID == tmLn.ID) { //if Im newest
+    setTimeout('MM_timelinePlay("'+tmLnName+'",'+myID+')',tmLn.delay);
+    fNew = ++tmLn.curFrame;
+    for (i=0; i<tmLn.length; i++) {
+      sprite = tmLn[i];
+      if (sprite.charAt(0) == 's') {
+        if (sprite.obj) {
+          numKeyFr = sprite.keyFrames.length; firstKeyFr = sprite.keyFrames[0];
+          if (fNew >= firstKeyFr && fNew <= sprite.keyFrames[numKeyFr-1]) {//in range
+            keyFrm=1;
+            for (j=0; j<sprite.values.length; j++) {
+              props = sprite.values[j]; 
+              if (numKeyFr != props.length) {
+                if (props.prop2 == null) sprite.obj[props.prop] = props[fNew-firstKeyFr];
+                else        sprite.obj[props.prop2][props.prop] = props[fNew-firstKeyFr];
+              } else {
+                while (keyFrm<numKeyFr && fNew>=sprite.keyFrames[keyFrm]) keyFrm++;
+                if (firstTime || fNew==sprite.keyFrames[keyFrm-1]) {
+                  if (props.prop2 == null) sprite.obj[props.prop] = props[keyFrm-1];
+                  else        sprite.obj[props.prop2][props.prop] = props[keyFrm-1];
+        } } } } }
+      } else if (sprite.charAt(0)=='b' && fNew == sprite.frame) eval(sprite.value);
+      if (fNew > tmLn.lastFrame) tmLn.ID = 0;
+  } }
+}
+
+function MM_initTimelines() { //v4.0
+    //MM_initTimelines() Copyright 1997 Macromedia, Inc. All rights reserved.
+    var ns = navigator.appName == "Netscape";
+    var ns4 = (ns && parseInt(navigator.appVersion) == 4);
+    var ns5 = (ns && parseInt(navigator.appVersion) > 4);
+    var macIE5 = (navigator.platform ? (navigator.platform == "MacPPC") : false) && (navigator.appName == "Microsoft Internet Explorer") && (parseInt(navigator.appVersion) >= 4);
+    document.MM_Time = new Array(3);
+    document.MM_Time[0] = new Array(0);
+    document.MM_Time["Timeline1"] = document.MM_Time[0];
+    document.MM_Time[0].MM_Name = "Timeline1";
+    document.MM_Time[0].fps = 15;
+    document.MM_Time[0].lastFrame = 0;
+    document.MM_Time[1] = new Array(0);
+    document.MM_Time["Timeline2"] = document.MM_Time[1];
+    document.MM_Time[1].MM_Name = "Timeline2";
+    document.MM_Time[1].fps = 15;
+    document.MM_Time[1].lastFrame = 0;
+    document.MM_Time[2] = new Array(1);
+    document.MM_Time["Timeline3"] = document.MM_Time[2];
+    document.MM_Time[2].MM_Name = "Timeline3";
+    document.MM_Time[2].fps = 15;
+    document.MM_Time[2][0] = new String("sprite");
+    document.MM_Time[2][0].slot = 1;
+    if (ns4)
+        document.MM_Time[2][0].obj = document["Layer3"];
+    else if (ns5)
+        document.MM_Time[2][0].obj = document.getElementById("Layer3");
+    else
+        document.MM_Time[2][0].obj = document.all ? document.all["Layer3"] : null;
+    document.MM_Time[2][0].keyFrames = new Array(1, 6);
+    document.MM_Time[2][0].values = new Array(3);
+    if (ns5 || macIE5)
+        document.MM_Time[2][0].values[0] = new Array("-59px", "-29px", "1px", "31px", "61px", "91px");
+    else
+        document.MM_Time[2][0].values[0] = new Array(-59,-29,1,31,61,91);
+    document.MM_Time[2][0].values[0].prop = "left";
+    if (ns5 || macIE5)
+        document.MM_Time[2][0].values[1] = new Array("105px", "106px", "107px", "107px", "108px", "109px");
+    else
+        document.MM_Time[2][0].values[1] = new Array(105,106,107,107,108,109);
+    document.MM_Time[2][0].values[1].prop = "top";
+    if (!ns4) {
+        document.MM_Time[2][0].values[0].prop2 = "style";
+        document.MM_Time[2][0].values[1].prop2 = "style";
+    }
+    if (ns5 || macIE5)
+        document.MM_Time[2][0].values[2] = new Array("290px", "290px", "290px", "290px", "290px", "290px");
+    else
+        document.MM_Time[2][0].values[2] = new Array(290,290,290,290,290,290);
+    document.MM_Time[2][0].values[2].prop = "width";
+    if (!ns4)
+        document.MM_Time[2][0].values[2].prop2 = "style";
+    document.MM_Time[2].lastFrame = 6;
+    for (i=0; i<document.MM_Time.length; i++) {
+        document.MM_Time[i].ID = null;
+        document.MM_Time[i].curFrame = 0;
+        document.MM_Time[i].delay = 1000/document.MM_Time[i].fps;
+    }
+}
+//-->
+</script>
+<table border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align="right"><div id="Layer2"
+    style="position:absolute; width:343px; height:251px; z-index:4; left: 167px; top: 61px">
+      <table
+    width="100%" border="0" cellspacing="0" cellpadding="0" height="245">
+      <tr>
+        <td><div id="divUpControl"><a href="javascript:;" onMouseOver="PerformScroll(-7)"
+        onmouseout="CeaseScroll()">
+        <dd><img border="0" src="up.gif" alt="往上捲動" width="96" height="25"></dd></a> 
+        </div><div id="divDownControl"><a href="javascript:;" onMouseOver="PerformScroll(7)"
+        onmouseout="CeaseScroll()">
+        <dd><img border="0" src="down.gif" alt="往下捲動" width="96" height="25"></dd></a> 
+        </div><div id="divContainer"><div id="divContent" style="width: 935; height: 396">
+        <dd><br>
+          <table bgcolor="ccffcc" cellpadding="3" cellspacing="1" border="0" width="380">
+            <tr>
+              <td bgcolor="ff6666" width="368" align="center" ><font color="#FFFFFF" size="5"><b>學習</b></font></td>
+            </tr>
+            <tr>
+              <td bgcolor="#ffff99" width="368">
+                在這個十倍速的時代，<br>
+                資訊學問時刻推陳出新，<br>
+                任何一位想成功的現代人<br>
+                都無法忽視學習的重要。<p>
+                多學會一種語言可以<br>
+                來更優質的工作，<br>
+                少會一種軟體也可能<br>
+                害你被掃地出門，無論<br>
+                是生存的戰爭或是成就的追尋，<br>
+                學問與技藝<br>
+                都是一項換取更優質空間的利器。<p>				
+                學習的過程充滿愉悅，<br>
+                就學習內容而言，<br>
+                你更加了解事物的奧妙，<br>
+                就學習本身，你的智慧<br>
+                因學習的過程而更光亮。<p>
+                從心理層面看，<br>
+                今天的你比昨天懂得更多，<br>
+                心是滿滿的充實，<br>
+                而且從一成不變的環境<br>
+                進入虛擬時空的新鮮與變換，<br>
+                隨時補充工作帶來的疲乏<br>
+                與供獻出的心力。<br>
+			  </td>
+            </tr>
+          </table>
+          <table bgcolor="#ccff99" cellpadding="3" cellspacing="1" border="0" width="380">
+            <tr>
+              <td bgcolor="6699ff" width="368"></td>
+            </tr>
+          </table>
+         
+        </dd>
+        </div></div></td>
+      </tr>
+    </table>
+    </div>
+      <div id="Layer3"
+    style="position: absolute; width: 112px; height: 160; z-index: 3; left: 54; top: 151"> 
+        <table border="0" width="100%" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="50%"><font color="#FFFFFF">佈告式捲動</font></td>
+          </tr>
+        </table>
+    </div>
+    </td>
+  </tr>
+</table>
+
+<p></p>
+<!--webbot bot="HTMLMarkup" startspan TAG="XBOT" --><!--webbot bot="HTMLMarkup" endspan
+-->
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>文字樹狀選單</title>
+<style type="text/css">
+a{
+	font-size: 12px;
+	color: #003399;
+	text-decoration: none;
+}
+.item,.t1 {
+	border-top-style: dashed;
+}
+</style>
+<script language="JavaScript" type="text/javascript">
+	function $(_0){
+		return document.getElementById(_0);
+	}
+	function popmenu(tableName,obj){
+	    if ($(tableName).style.display=="none"){		
+			$(tableName).style.display="block";
+			$(obj).getElementsByTagName("img")[0].src = "img/open.gif";
+
+		}else{
+			$(tableName).style.display="none";	
+			$(obj).getElementsByTagName("img")[0].src = "img/close.gif";
+		}
+	}	
+</script>
+</head>
+<body>
+<p align="center"><font size="6" color="blue">文字樹狀選單</font></p>
+<div class="item">
+<a href="javascript:popmenu('DetailItem1','item1');" id="item1">
+<img src="img/close.gif" border="0"> Item</a>
+</div>
+<div class="detailItem" id="DetailItem1" style="display:none;">
+‧<a href="#">DetailItem01</a><br>
+‧<a href="#">DetailItem02</a><br>
+‧<a href="#">DetailItem03</a><br>
+</div>
+<p class="t1">樹狀選單是最常被使用到，目前除了支援二大瀏覽器外，還完全符合網頁的標準化，同時此樹狀選單的作法相當容易且好懂，只須短短的12行程式碼即可完成。</p>
+<p style="font-size: 18px; color: #0034FF;">放在＜head＞…＜/head＞之間：</p>
+<p style="font-size: 18px; color: #FF0004;">&lt;script language=&quot;JavaScript&quot; type=&quot;text/javascript&quot;&gt;function $(_0){<br>
+return document.getElementById(_0);<br>
+}<br>
+function popmenu(tableName,obj){<br>
+if ($(tableName).style.display==&quot;none&quot;){ <br>
+$(tableName).style.display=&quot;block&quot;;<br>
+$(obj).getElementsByTagName(&quot;img&quot;)[0].src = 「img/open.gif」;<br>
+}else{<br>
+$(tableName).style.display=」none」; <br>
+$(obj).getElementsByTagName(」img」)[0].src = 「img/close.gif」;<br>
+}<br>
+} <br>
+&lt;/script&gt;</p>
+<p style="font-size: 18px; color: #0034FF;">放在＜body＞…＜/body＞之間：(item)</p>
+<p style="font-size: 18px; color: #FF0004;">&lt;div class=&quot;item&quot;&gt; <br>
+  　&lt;a href=&quot;javascript:popmenu('DetailItem1','item1');&quot; id=&quot;item1&quot;&gt;<br>
+&lt;img src=&quot;img/close.gif&quot; border=&quot;0&quot;&gt; Item&lt;/a&gt;<br>
+&lt;/div&gt;</p>
+<p style="font-size: 18px; color: #0034FF;">放在＜body＞…＜/body＞之間：(detailItem)</p>
+<p style="font-size: 18px; color: #FF0004;">&lt;div class=&quot;detailItem&quot;  id=&quot;DetailItem1&quot; style=&quot;display:none;&quot;&gt; <br>
+  　　‧&lt;a href=&quot;#&quot;&gt;DetailItem01&lt;/a&gt; <br>
+  　　‧&lt;a href=&quot;#&quot;&gt;DetailItem02&lt;/a&gt; <br>
+  　　‧&lt;a href=&quot;#&quot;&gt;DetailItem03&lt;/a&gt;<br>
+　&lt;/div&gt;</p>
+<p style="font-size: 18px; color: #0034FF;">範例中只作了一層，若要多層，只要更改&lt;a href="javascript:popmenu(<strong>『<span style="color: #1AFF00; font-size: 24px;">DetailItem2</span>′,』<span style="color: #1AFF00; font-size: 24px;">item2</span>′</strong>);" id="<strong><span style="color: #1AFF00; font-size: 24px;">item2</span></strong>"&gt;&lt;div class="detailItem" id="<strong><span style="color: #1AFF00; font-size: 24px;">DetailItem2</span></strong>" style="display<strong>:</strong>none<strong>;</strong>"&gt;即可，依此類推，但勿必注意到item2的id="item2"，DetailItem2的 id="DetailItem2"兩兩一組，名稱要一樣。</p>
+</body>
+</html>

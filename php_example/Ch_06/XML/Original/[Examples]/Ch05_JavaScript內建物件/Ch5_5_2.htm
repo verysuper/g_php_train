@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Math物件的亂數、最大和最小</title>
+</head>
+
+<body>
+<h2>Math物件的亂數、最大和最小</h2>
+<hr/>
+<script language="JavaScript">
+document.write("最大值max(34, 78): " + Math.max(34,78) + "<br/>");
+document.write("最小值min(34, 78): " + Math.min(34,78) + "<br/>");
+document.write("四捨五入round(34.567):" + Math.round(34.567) + "<br/>");
+document.write("四捨五入round(34.567):" + Math.round(34.467) + "<br/>");
+document.write("亂數random(): " + Math.random() + "<br/>");
+// 0-10的亂數
+var no = Math.round(Math.random()*10);
+document.write("0-10亂數: " + no + "<br/>");
+// 0-100的亂數
+no = Math.round(Math.random()*100);
+document.write("0-100亂數: " + no + "<br/>");
+</script>
+</body>
+</html>
