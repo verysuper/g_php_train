@@ -75,6 +75,13 @@ $totalPages_rs = ceil($totalRows_rs/$maxRows_rs)-1;
     <td><?php echo $row_rs['address']; ?></td>
   </tr>
   <?php } while ($row_rs = mysql_fetch_assoc($rs)); ?>
+  <tr>
+  	<td colspan="2">[<a href="<?php printf("%s?pageNum_rs=%d%s", $currentPage, 0, $queryString_rs); ?>">第一頁</a>]
+[<a href="<?php printf("%s?pageNum_rs=%d%s", $currentPage, max(0, $pageNum_rs - 1), $queryString_rs); ?>">上一頁</a>]
+[<a href="<?php printf("%s?pageNum_rs=%d%s", $currentPage, min($totalPages_rs, $pageNum_rs + 1), $queryString_rs); ?>">下一頁</a>]
+[<a href="<?php printf("%s?pageNum_rs=%d%s", $currentPage, $totalPages_rs, $queryString_rs); ?>">最後一頁</a>]</td>
+  	<td colspan="2">第 <?php echo ($startRow_rs + 1) ?> 筆至第 <?php echo min($startRow_rs + $maxRows_rs, $totalRows_rs) ?> 筆/共 <?php echo $totalRows_rs ?>  筆</td>
+  </tr>
 </table>
 </body>
 </html>
