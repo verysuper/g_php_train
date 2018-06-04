@@ -39,7 +39,7 @@ if (isset($_GET['pageNum_rs'])) {
 $startRow_rs = $pageNum_rs * $maxRows_rs;
 
 mysql_select_db($database_studentdb, $studentdb);
-$query_rs = "SELECT * FROM student ORDER BY studno DESC";
+$query_rs = "SELECT * FROM student ORDER BY studno ASC";
 $query_limit_rs = sprintf("%s LIMIT %d, %d", $query_rs, $startRow_rs, $maxRows_rs);
 $rs = mysql_query($query_limit_rs, $studentdb) or die(mysql_error());
 $row_rs = mysql_fetch_assoc($rs);
