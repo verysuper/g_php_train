@@ -32,10 +32,10 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 
 mysql_select_db($database_studentdb, $studentdb);
-$query_rs = "SELECT * FROM student ORDER BY studno DESC";
-$rs = mysql_query($query_rs, $studentdb) or die(mysql_error());
-$row_rs = mysql_fetch_assoc($rs);
-$totalRows_rs = mysql_num_rows($rs);
+$query_Recordset1 = "SELECT * FROM score";
+$Recordset1 = mysql_query($query_Recordset1, $studentdb) or die(mysql_error());
+$row_Recordset1 = mysql_fetch_assoc($Recordset1);
+$totalRows_Recordset1 = mysql_num_rows($Recordset1);
 ?>
 <!doctype html>
 <html>
@@ -47,22 +47,24 @@ $totalRows_rs = mysql_num_rows($rs);
 <body>
 <table border="1">
   <tr>
-	<td>學號</td>
-        <td>姓名</td>
-        <td>電話</td>
-    <td>地址</td>
-	</tr>
+	<th>學號</th>
+	<th>月考代號</th>
+	<th>國文</th>
+	<th>英文</th>
+	<th>數學</th>
+  </tr>
   <?php do { ?>
   <tr>
-    <td><?php echo $row_rs['studno']; ?></td>
-    <td><?php echo $row_rs['name']; ?></td>
-    <td><?php echo $row_rs['phone']; ?></td>
-    <td><?php echo $row_rs['address']; ?></td>
+    <td><?php echo $row_Recordset1['studno']; ?></td>
+    <td><?php echo $row_Recordset1['examno']; ?></td>
+    <td><?php echo $row_Recordset1['chi']; ?></td>
+    <td><?php echo $row_Recordset1['eng']; ?></td>
+    <td><?php echo $row_Recordset1['math']; ?></td>
   </tr>
-  <?php } while ($row_rs = mysql_fetch_assoc($rs)); ?>
+  <?php } while ($row_Recordset1 = mysql_fetch_assoc($Recordset1)); ?>
 </table>
 </body>
 </html>
 <?php
-mysql_free_result($rs);
+mysql_free_result($Recordset1);
 ?>
