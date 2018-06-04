@@ -31,11 +31,26 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
+$maxRows_rs = 5;
+$pageNum_rs = 0;
+if (isset($_GET['pageNum_rs'])) {
+  $pageNum_rs = $_GET['pageNum_rs'];
+}
+$startRow_rs = $pageNum_rs * $maxRows_rs;
+
 mysql_select_db($database_studentdb, $studentdb);
 $query_rs = "SELECT * FROM student ORDER BY studno DESC";
-$rs = mysql_query($query_rs, $studentdb) or die(mysql_error());
+$query_limit_rs = sprintf("%s LIMIT %d, %d", $query_rs, $startRow_rs, $maxRows_rs);
+$rs = mysql_query($query_limit_rs, $studentdb) or die(mysql_error());
 $row_rs = mysql_fetch_assoc($rs);
-$totalRows_rs = mysql_num_rows($rs);
+
+if (isset($_GET['totalRows_rs'])) {
+  $totalRows_rs = $_GET['totalRows_rs'];
+} else {
+  $all_rs = mysql_query($query_rs);
+  $totalRows_rs = mysql_num_rows($all_rs);
+}
+$totalPages_rs = ceil($totalRows_rs/$maxRows_rs)-1;
 ?>
 <!doctype html>
 <html>
