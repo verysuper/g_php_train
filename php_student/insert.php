@@ -65,7 +65,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1") && ($_POST[
 <form action="<?php echo $editFormAction; ?>" id="form1" name="form1" method="POST">
         <p>
         <label for="studno">學號:</label>
-        <input type="text" name="studno" id="studno">
+        <input type="text" name="studno" id="studno" required><!--卡必填1-->
         </p>
         <p>
         <label for="name">姓名:</label>
@@ -82,6 +82,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1") && ($_POST[
         <input type="submit" value="新增學生資料" onClick="checkvalue()">
         <input type="hidden" name="MM_insert" value="form1">
     </form>
+    <button onClick="history.go(-1)">Back</button>
     <script>
     	function checkvalue(){
 				if(form1.studno.value == ''){

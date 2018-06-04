@@ -82,6 +82,9 @@ $totalPages_rs = ceil($totalRows_rs/$maxRows_rs)-1;
 [<a href="<?php printf("%s?pageNum_rs=%d%s", $currentPage, $totalPages_rs, $queryString_rs); ?>">最後一頁</a>]</td>
   	<td colspan="2">第 <?php echo ($startRow_rs + 1) ?> 筆至第 <?php echo min($startRow_rs + $maxRows_rs, $totalRows_rs) ?> 筆/共 <?php echo $totalRows_rs ?>  筆</td>
   </tr>
+  <tr>
+  	<td colspan="4"><a href="insert.php">新增</a></td>
+  </tr>
 </table>
 </body>
 </html>
