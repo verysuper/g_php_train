@@ -69,7 +69,7 @@ $totalPages_rs = ceil($totalRows_rs/$maxRows_rs)-1;
 	</tr>
   <?php do { ?>
   <tr>
-    <td><?php echo $row_rs['studno']; ?></td>
+    <td><a href="update.php?studno=<?php echo $row_rs['studno']; ?>"><?php echo $row_rs['studno']; ?></a></td>
     <td><?php echo $row_rs['name']; ?></td>
     <td><?php echo $row_rs['phone']; ?></td>
     <td><?php echo $row_rs['address']; ?></td>
