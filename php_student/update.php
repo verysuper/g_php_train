@@ -52,7 +52,7 @@ if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "form1") && ($_POST[
     $updateGoTo .= $_SERVER['QUERY_STRING'];
   }
   header(sprintf("Location: %s", $updateGoTo));
-}
+}else{echo 'name do not empty';}//____________________________________________
 
 $colname_Recordset1 = "-1";
 if (isset($_GET['studno'])) {
