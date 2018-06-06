@@ -1,0 +1,76 @@
+﻿PHP6的二、三事
+去年在巴黎舉行的PHP開發者大會中，PHP6開發的消息開始流傳出來,
+於PHP大會討論的PHP6，將有很大幅度的變更，但這只是草案階段，
+並不代表所有會議的記錄都會隨著PHP6的發布而包含記錄中所有的變更
+有就是說，在發布PHP6之前，還是會有異動的情形，但是可以確定的事
+劣者下面所列的數項改變，將會隨著PHP6一同面世(當然不是百分百^^")
+趕快來看看會有那些的差異
+
+1.支援Unicode
+支援Unicode是有其必然，雖然Unicode佔用較多的空間，但Unicode帶來
+的便利性，遠超過佔用空間的缺點，尤其在國際化的今天，硬體設備愈來
+愈強大，網速也大幅度的提昇這麼一點小小的缺點是可以忽略。另外一點
+，PHP也可以在.ini檔案中設定是否開啟支持Unicode決定權在你自己，
+這是一個不錯的點子，關掉Unicode的支持，PHP的性能並不會有大幅度的
+提昇主要的影響在於需要引用字串的Function(這可以理解)。
+
+2.Register Globals 將被移除
+這是一個重要的決定，許多新進的PHP開發者會覺得Register Globals滿
+方便的，但是確忽略了Register Globals會帶來程式上安全性的隱憂，大
+多數的主機上此項功能是關閉的，印像中從PHP4.3.X版開始時，此項原始
+預設值即是關閉狀態，PHP6正式移除Register Globals也代表者如果程式
+是由PHP3時代的產物，將完全無法使用，除了改寫一途外，別無他法。相
+信現在的PHP世界中，仍使用PHP3時代所生產的程式應該是少之又少。
+
+3.Magic Quotes 將消失
+Magic Quotes主要是自動脫逸需要脫逸的字元，此項功能移除也符合大多
+數PHP開發者的心聲。
+
+4.Safe Mode Out
+老實說，這個模式劣者也不知是怎樣一回事，移除就移除吧，反正也用不到^^"
+
+5'var' to alias 'public'
+在類別內的Var宣告變成public的別名，相信是為了相容PHP5而作的決定，
+PHP6現在也可以稱作是oo語言了，
+
+6 Return by Reference will error
+現在透過參考回傳將會是編譯器將報錯 例如 $a =& new b()、function &c()，
+現在將報錯，oo語言預設就是參考所以不需要再使用&參考子。
+
+7.zend.ze1 compatbility mode 將被除去
+Zend.ze1相容模式將被除去，PHP5時為相容舊有PHP4，所以在.ini中可選擇是否
+開啟相容模式，原因在於PHP5使用的是第二代解析引擎，但是相容模式並不是百
+分之百能解析PHP4語法，所以舊時代的產物，Out。
+
+8 Freetype 1 and GD 1 support 將不見
+這二個是很舊的Libs，所以不再支援，Freetype 1應該是某種字型，不過不太確定
+，GD1已經被現今的GD2取代了
+
+9.dl() moves to SAPI
+dl()主要是讓設計師加載extension Libs現在被移到 SAPI中
+
+10.Register Long Array 去除
+從php5起預設是關閉，在php6中正式移除
+
+11.一些Extension的變更
+例如 XMLReader 和 XMLWriter 將不在是以Extension的方式出現，它們將被移入
+到PHP的核心之中，並且預設是開啟，ereg extension將被放入PECL，代表者它將
+被移出PHP核心，這也是為了讓路給new regular expression extension，
+此外，Fileinfo exntesion 也將被導入PHP的核心之中
+
+12.APC將被導入核心
+這是一個加入PHP性能的功能，現在它將被放入PHP核心中，並且可以選擇是否啟
+用APC
+
+13.告別ASP風格的啟始標籤
+為了取悅ASP開發者轉向使用PHP，現今已經不再需要這種作法了....XD
+
+最後，別期望PHP6的性能可以全面超過PHP5，有可能的是PHP6的執行效能會比
+PHP5還要來的慢的，但是可以預期的，PHP開發小組將會努力的完善PHP6，超
+越PHP5。
+
+PHP & MySQL 入門研習
+http://apt.nc.hcc.edu.tw/pub/FreeSoftware/php_doc/20031214%B4%BF%B5Y%B4I%A6%D1%AEvPHP%C1%BF%B8q/
+
+PHP的歷史簡介
+http://tw.myblog.yahoo.com/jw!kxx6KkSRHBafye.zd2adBHVd/article?mid=28

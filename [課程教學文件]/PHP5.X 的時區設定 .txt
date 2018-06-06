@@ -1,0 +1,22 @@
+在PHP5.X的版本中，其時區是內定在美國，因此要額外調整才會正確的執行出來。
+
+php.ini
+
+原本設定如下：
+
+[Date]
+; Defines the default timezone used by the date functions
+;date.timezone =
+
+要設成台灣的時區請改為：
+
+[Date]
+; Defines the default timezone used by the date functions
+date.timezone = Asia/Taipei
+
+
+另外有一個 php function (signature 如下):
+
+bool date_default_timezone_set ( string timezone_identifier )
+
+只要輸入 date_default_timezone_set( “Asia/Taipei” ) 即可。

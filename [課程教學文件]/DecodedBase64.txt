@@ -1,0 +1,40 @@
+中文檔名之所以會亂碼是因為你沒有進行編碼
+只要是英文以外的語言
+都必須使用特殊的格式來設定檔名
+舉例來說有個檔名叫做 "測試.doc"
+實際上在郵件裡是這樣表示的 "=?big5?Q?=B4=FA=B8=D5.doc?="
+為什麼要這麼做呢?
+因為這樣做可以讓應用軟體知道你的內容是哪一種語言
+所以會將你的檔名字串先加以編碼再處理
+
+重點:
+研究一下什麼叫做 RFC822 和 RFC2047
+研究的方法很簡單
+用Outlook製作ㄧ封有附加檔案的電子郵件
+檔名要中文的喔
+然後拉出來變成一個檔案
+再用記事本打開這個檔案
+你就會知道ㄧ切問題的發生原因了
+
+http://www.faqs.org/rfcs/rfc2047.html
+http://www.faqs.org/rfcs/rfc2045.html
+
+基本上，上面的 message 的格式是：
+=?[ Char-Set ] ? [ Encoding Type ] ? [ Encoded Data ] ?=
+所以是 Big5 CharSet，用 Base64 (B) 編碼的字串…
+你可以把 "s8y3c674rqcuaHRtLS2wsaT0s3Gqvg==" 貼到下面的 form，就可以知道你的文字是什麼：http://www.opinionatedgeek.com/dotnet/tools/Base64Decode/
+(答案是：最新消息.htm--停水通知)
+Encode 規則：
+來源的每 3 個 byte Encode 成 4 個字元…
+本源有 8*3 = 24 bits, 每 6 個 bits 分成一個字元，就可以分成 4 個字元了… 分出來的字元，數值可能是 0-63… 每一個數值再對應到可印出的字元 (看RFC2045裡的 Table 1)… 再輸出這些字串就好… (題外話，HTTP Simple Authantication 裡面的 password 也是用 base64 Encode 的，而且會出現在你的 HTTP Header 裡，所以非常不安全) 
+字數不是3的倍數就用 0 當 padding， '=' 在輸出的字元裡就是 padding 字元
+你上面的格式是 Quoted-Printable 的格式，要是也是用
+=?[ Char-Set ] ? [ Encoding Type ] ? [ Encoded Data ] ?=
+格式的話，他 Encoding-Type 的位置會用 'Q' 不是 'B'
+=B3=CC=B7s=AE=F8=AE=A7 就是0xB3,0xCC,0xB7,0x73(s),0xAE,0xF8,0xAE,0xA7...
+
+另外， JavaMail 也有提供這樣的轉碼工具給你使用喔
+1. 去 J2EE 的 API 網頁
+(http://java.sun.com/j2ee/1.4/docs/api/index.html)
+2. 看看這個類別的用途
+(javax.mail.internet.MimeUtility)

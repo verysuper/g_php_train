@@ -1,0 +1,55 @@
+﻿PHP - 陣列排序sort()、asort()、ksort()、rsort()、arsort()、krsort() 分類：
+陣列的排序函式有sort()、asort()、ksort()，此三種函式階為升冪排序（由小到大）：
+
+sort()－是以升冪的方式排序，且所有的大寫字母都排在小寫字母的前面，對一維陣列，其sort()函式使用方式如下。
+
+例子Ａ：
+
+$price = array(100,300,200);
+sort($price);
+
+結果：
+
+100,200,300
+
+例子Ｂ：
+
+$string = array('A','Z','a','z');
+sort($string);
+
+結果：
+
+A,Z,a,z
+
+asort()－此函式會針對陣列中元素的值排序。
+
+例如：
+
+$price = array('carＡ'=>100,'carB'=>300,'carC'=>200);
+asort($price);
+
+結果：
+
+100,200,300
+
+
+ksort()－此函式是使用陣列中的key來排序。
+
+例如：
+
+$price = array('carＡ'=>100,'carB'=>300,'carC'=>200);
+asort($price);
+
+結果：
+
+100,300,200　//以key值排序，即carA,carB,carC
+
+
+陣列的排序函式有rsort()、arsort()、krsort()，此三種函式階為降冪排序（由大到小）,其使用方式和以上升幕的函式，使用方式一樣。
+
+rsort()－可以將一維數值索引陣列以降冪的順序排序。
+
+arsort()－在一維的陣列中，依每個元素的值由大到小排序。
+
+krsort()－依陣列中每個元素的key來由大到小排序。
+

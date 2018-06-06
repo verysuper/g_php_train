@@ -1,0 +1,9 @@
+[DEFAULT]
+BASEURL=https://zh.wikipedia.org/wiki/MD5
+[{000214A0-0000-0000-C000-000000000046}]
+Prop3=19,11
+[InternetShortcut]
+IDList=
+URL=https://zh.wikipedia.org/wiki/MD5
+IconFile=https://zh.wikipedia.org/static/favicon/wikipedia.ico
+IconIndex=1

@@ -1,0 +1,21 @@
+﻿利用CSS的特性來蓋掉它
+
+a{
+	outline: none; /* for Firefox */
+	hlbr:expression(this.onFocus=this.blur()); /* for IE */
+} 
+
+若CSS行不通那直接去源頭找，會出現 outline 的原因如同前文提到當滑鼠 focus 的時候就會出現，那就直接讓它不要 focus 應該就行得通。
+
+<a href="#" target="_blank" onfocus="this.blur();">測試連結</a>
+當加上了 onfocus='this.blur()' 後因為一 focus 就馬上取消 focus 因此虛框也就成功的不會出現了，但是不可能去每個都套用阿，所以來利用 jQuery 幫 每個 a 都加上 onfocus 的事件。
+
+<script type="text/javascript">
+    $(function ()
+    {
+        $("a").focus(function ()
+        {
+            this.blur();
+        });
+    });
+</script>

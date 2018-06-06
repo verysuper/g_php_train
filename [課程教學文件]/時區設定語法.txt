@@ -1,0 +1,175 @@
+﻿從php5.1版本開始，php多了一個「時區設定」裝置，預設值定在[UTC] ；UTC就是GMT "格林威治時間", 也就是全球標準時間。
+
+**假如不去改這個時區設定的話，PHP的系統時間會比台北慢了整整八個鐘頭 
+
+時區不對，有什麼問題勒？？ 
+
+當然有問題： 
+
+1.凡是由php寫下的檔案，他的檔案建立時間通通會比台北慢八個鐘頭 
+
+2. date('Y-m-d H:i:s'); 取得的時間也通通慢八個鐘頭 
+
+好啦～江湖一點訣............懂得設定就沒問題了 
+
+自己的主機 
+請你打開c:\windows\php.ini, 
+大概在612行附近，找到這堆東西 
+代碼:
+;;;;;;;;;;;;;;;;;;; 
+; Module Settings ; 
+;;;;;;;;;;;;;;;;;;; 
+
+[Date] 
+; Defines the default timezone used by the date functions 
+;date.timezone =  
+
+把前面的分號拿掉，改成這樣就行啦 
+代碼: 
+date.timezone = Asia/Taipei 
+
+在其他時區的人，請不要照抄. 必須填入你自己的時區 
+
+虛擬空間用戶 
+
+摸不到主機的人，可以在自己的「設定程序」裡頭，例如config.php，加上一行宣告就行了 
+
+像這樣： 
+代碼: 
+
+date_default_timezone_set('Asia/Taipei'); 
+
+當然，這裡也請注意一下；一定要填入自己的時區，不要低著頭猛抄猛貼
+
+---------------------------------------------------------------------------------------------
+PHP5的php.ini時區設置問題
+從php5.1.0開始，php.ini里加入了date.timezone這個選項，默認情況下是關閉的，也就是顯示的時間（無論用什麼php命令）都是格林威治標準時間，和我們的時間（北京時間）差了正好8個小時，有以下3中方法可以恢復正常的時間。
+1、最簡單的方法就是不要用php5.1以上的版本；
+2、如果要用5.1以上版本，而且不修改php.ini，則需要在關於時間的初始化的語句的上面加上date_default_timezone_set (XXX)，或者使用date('Y-m-d G:i:T', strtotime('+8HOUR') )來獲取日期時間；
+3，一勞永逸，僅限能修改php.ini。打開php.ini把date.timezone前面的分號去掉，在=後面加XXX，重啟http服務（如apache2或iis等）即可。
+關於XXX，大陸內地可用的值是：Asia/Chongqing ，Asia/Shanghai ，Asia/Urumqi（依次為重慶，上海，烏魯木齊），港臺地區可用：Asia/Maca* ，Asia/Hong_Kong ，Asia/Taipei（依次為澳門，香港，臺北），還有新加坡：Asia/Singapore，以上沒有北京，不過接著往下看，其他可用的值是：Etc/GMT-8，Singapore ，Hongkong，PRC。PRC是什麼？PRC是中華人民共和國啊！（這個就是北京時間吧）以上都是php官方說明檔里整理出來的GMT-8下面的地區，可能會有遺漏，如有需要再上官方文檔里查看一下比較好：）
+
+今天在PHP5下用date("H:i:s")時，發現參數"H"取出的時間與window下的時間不對。查了一下資料，發現是PHP5的php.ini里面默認設置為：
+[Date]
+; Defines the default timezone used by the date functions
+;date.timezone =
+如此一來，按照默認的時間便為GMT時間。而我們一般是使用北京時間，可以設置為：date.timezone = PRC或date.timezone = Asia/Shanghai。即：
+[Date]
+; Defines the default timezone used by the date functions
+date.timezone = Asia/Shanghai
+記得不要設置為"Asia/Beijing"，老外好象對上海感興趣點，呵呵。
+如果沒有權限改php.ini，可以用函數date_default_timezone_set('PRC');或date_default_timezone_set('Asia/Shanghai');
+這個函數用於設定所有日期時間函數的默認時區。手冊上如此說明：“自 PHP 5.1.0 起（此版本日期時間函數被重寫了），如果時區不合法則每個對日期時間函數的調用都會產生一條 E_NOTICE 級別的錯誤信息”。但是“本函數永遠返回 TRUE（即使 timezone_identifier 參數不合法）。”
+在此再學習一下函數：string date_default_timezone_get ( void )。這個函數的目的是取得一個腳本中所有日期時間函數所使用的默認時區。
+這個函數的返回值遵循以下順序：1：用 date_default_timezone_set() 函數設定的時區（如果設定了的話）。2：TZ 環境變量（如果非空）。3：date.timezone 配置選項（如果設定了的話）。4：自己推測（如果操作系統支持）。5：如果以上選擇都不成功，則返回 UTC
+再深入學習一下什麼是UTC：
+協調世界時(UTC)： 
+一種稱為協調世界時的折衷時標於1972年面世。為了確保協調世界時與世界時(UT1)相差不會超過0.9秒，有需要時便會在協調世界時內加上正或負閏秒。因此協調世界時與國際原子時(TAI)之間會出現若幹整數秒的差別。位於巴黎的國際地球自轉事務中央局(IERS)負責決定何時加入閏秒。
+UTC = Coordinated Universal Time. 中文名稱為協調世界時. 
+GMT = Greenwich Mean Time. 中文名稱為格林尼治（平）時（這里的"w"是不發音的，而且"Green"要讀成"Gren"） 
+UTC = GMT +/- 0.9 s 
+因此 UTC 間中需要進行 "閏秒" 以控制兩者相差。
+
+
+
+php5.1x的時區問題導致相差八個小時！收藏
+從php5.10開始，php中加入了時區的設置，在php中顯示的時間都是格林威治標準時間，這就造成了我們中國的用戶會差八個小時的問題！
+相關設置是修改php.ini中的 date.timezone 參數：
+[Date]
+; Defines the default timezone used by the date functions
+;date.timezone =
+默認是關閉的，只需把註釋去掉，改為即可
+[Date]
+; Defines the default timezone used by the date functions
+date.timezone = PRC
+其中PRC是“中華人民共和國”！
+其他選項可以參考php手冊。
+不過這上面的亞洲地區漏掉了我們的首都北京，不知道老外是不是故意的！
+如果沒有修改php.ini的權限，只需要在調用時間日期函數的時候，調用 date_default_timezone_set(’PRC’) 即可！
+也可以調用date_default_timezone_get()來查看當前的時區設置！
+
+關於XXX，大陸內地可用的值是：
+Asia/Chongqing ，Asia/Shanghai ，Asia/Urumqi （依次為重慶，上海，烏魯木齊)
+港臺地區可用：Asia/Macao ，Asia/Hong_Kong ，Asia/Taipei （依次為澳門，香港，臺北）
+臺灣地區可設為：date.timezone = "Asia//Taipei"
+還有新加坡：Asia/Singapore
+
+本文來自CSDN博客，轉載請標明出處：http://blog.csdn.net/keenx/archive/2006/03/21/631432.aspx
+
+
+摘自dedecms :php5 時區設置
+if(PHP_VERSION > '5.1') {
+$time51 = 'Etc/GMT'.($cfg_cli_time > 0 ? '-' : '+').abs($cfg_cli_time);
+function_exists('date_default_timezone_set') ? @date_default_timezone_set($time51) : '';
+}
+如果php版本大於5.1執行
+$cfg_cli_time = -8;意思就是少8個小時!格式化後用data_default_timezone_set("Etc/GMT+8")設置!!
+北京時區應該是Etc/GMT+8
+時區設置 一般都設置成+8個小時!
+是格林威治標準時（GMT）
+$date = gmdate("Y-m-d H:i:s",time()+8*3600)
+只要滿足加8個小時就可以！寫成函數或者什麼..就隨便了
+---------------------------------------------------------------------------------------------
+
+PHP date 函式
+
+PHP date 函式可以取得伺服器的日期與時間加以格式化（Format a local time/date），PHP date 函式的功能相當強大，除了能格式化日、週、月、年 ... 格式之外，還可以顯示早上 AM、午後 PM、12 小時制、24 小時制 ... 等，只要學會如何控制 Format 參數，就能夠隨心所欲的顯示你想要顯示的時間，且 PHP date 函式是內建函式，不需額外安裝套件就可以直接使用，是學習 PHP 程式設計的基礎入門工夫。
+
+PHP date 函式基本語法
+string date ( string $format [, int $timestamp ] );
+
+
+看起來一整串的語法要怎麼使用呢？其實很簡單的，重點在於那個 date 以及小括號內的兩個參數，後面會介紹幾個範例清楚介紹，先來看看這兩個參數所代表的意思，第一個參數 $format 代表的就是取得的主機時間要格式化為哪種模式，例如日、月、年、時、分、秒 ... 之類的，必須根據 date 函式內建的格式表填寫，第二個參數 $timestamp 是時間戳記，也常稱為 Unix 時間戳（Unix timestamp），從 1970 年 1 月 1 日（00:00:00 GMT）開始到現在的時間，以秒為計算單位，非必填項目。
+
+PHP date 函式常用 $format 參數
+與日相關的 $format 參數
+d	格式化成為以月份統計的日期，寫法：date("d");，例如本月五日則為 05。
+D	格式化為當天星期幾的簡寫，寫法：date("D");，例如星期三則為 Wed。
+j
+格式化為以天統計的數字日，寫法：date("j");，不補零，例如本月五日則為 5。
+l	格式化為當天星期幾的完整單字，參數為小寫 L，寫法：date("l");，例如 Wednesday。
+與週相關的 $format 參數
+W	以數字表示今年的第幾週，例如第 20 週，直輸出 20，寫法：date("W")。PHP 4.1.0 新增。
+與月相關的 $format 參數
+F	輸出當月的月份英文單字，寫法為 date("F")，例如六月就輸出 June、十月就輸出 October。
+m
+以數字表示當月的月份，寫法為 date("m")，個位數前方會補零，例如六月是 06。
+M
+以月份英文單字縮寫表示當月，寫法 date("M")，例如六月是 Jun。
+n
+以數字表示當月的月份，寫法為 date("n")，個位數前方不會補零，例如六月是 6。
+t
+直接輸出當月天數，寫法為 date("t")，例如六月是小月，會輸出 30，代表共有 30 天。
+與年相關的 $format 參數
+y	以兩位數縮寫年份表示，寫法為 date("y")，例如 2013 年則為 13。
+Y
+以完整四位數年份表示，寫法為 date("Y")，例如 2013 年則輸出 2013。
+Time 的顯示格式
+a
+小寫，早上 am 或午後 pm 的判斷，以中午 12 點為分野，寫法為 date("a")。
+A
+大寫，早上 AM 或午後 PM 的判斷，以中午 12 點為分野，寫法為 date("A")。
+g
+時，顯示 12 小時制的時間格式，寫法為 date("g")，個位數前方不補零，例如 13 點為 1。
+G
+時，顯示 24 小時制的時間格式，寫法為 date("G")，個位數前方不補零，例如 13 點為 13。
+h
+時，顯示 12 小時制的時間格式，寫法為 date("h")，個位數前方補零，例如 13 點為 01。
+H
+時，顯示 24 小時制的時間格式，寫法為 date("H")，個位數前方補零，例如 13 點為 13。
+i
+分，顯示 00~59 分鐘，寫法為 date("i")，個位數前方補零，例如 6 分則顯示 06。
+s
+秒，顯示 00~59 秒，寫法為 date("s")，個位數前方補零，例如 6 秒則顯示 06。
+
+PHP date 函式範例
+
+有了以上的 PHP date 函式 $format 參數表，我們就可以來製作許多種時間格式範例。
+<?php
+echo date("Y-m-d H:i:s");　// 常用的完整表示法，分別為年、月、日、時、分、秒，輸出結果類似 2013-06-05 05:12:50。
+echo date("m.d.y");　// 將時間做成以點區分，分別為月、日、年，輸出結果類似 06.05.13。
+echo date("m.d.Y");　// 將時間做成以點區分，分別為月、日、年，差別在於年的顯示，輸出結果類似 06.05.2013。
+echo date('Y 年 m 月 d 日');  // 更進一步將中文帶入顯示結果，輸出類似：2013 年 06 月 05 日。
+echo date('Y 年 n 月 j 日');　// 將月與日的零消去，輸出結果類似：2013 年 6 月 5 日。
+?>
+PHP date 函式用起來就是這麼簡單容易，不過比較需要注意的是範例中有輸出繁體中文的部分，PHP 程式碼的檔案本身編碼必須可以支援繁體中文才不會出錯，否則很可能會輸出亂碼，建議採用萬國碼 UTF-8 為主要編碼原則。

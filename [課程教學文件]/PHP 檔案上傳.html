@@ -1,0 +1,336 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>PHP 檔案上傳</title>
+</head>
+
+<body>
+<p align="center"><strong>PHP 檔案上傳</strong></p>
+<hr size="1" />
+<p>利用 PHP       設計檔案上傳的程式屬於基本功，很多場合都會用到。要設計檔案上傳的程式是非常簡單的，只要輕輕點一下，大家都學得會！</p>
+<table width="" align="center" cellpadding="6" cellspacing="0">
+  <tbody>
+    <tr>
+      <td><h2>1-1 準備工作</h2>
+        <p>　　在檔案上傳這個章節中，顧名思義就是介紹如何利用瀏覽器的介面搭配PHP函示上傳檔案，在這之前於php.ini中有幾點必須注意到的是：</p>
+        <ol>
+          <li> <strong>file_uploads</strong> 項目是否設定為On（預設）。</li>
+          <li> <strong>upload_max_filesize</strong> 為上傳檔案的最大限制，預設為2MB（2M）。<br />
+          </li>
+        </ol>
+        <p>　　如果想要使上傳的檔案大小上限增加時，除了將上述的upload_max_filesize加大以外，另外還需要考慮到：</p>
+        <ol>
+          <li> <strong>max_execution_time</strong> 最大執行時間，預設為30秒。 </li>
+          <li> <strong>memory_limit</strong> 記憶體限制，預設為8M。 </li>
+          <li><strong>post_max_size</strong> POST的資料量限制，預設為8M。 <br />
+          </li>
+        </ol>
+        <p>&nbsp;</p>
+        <h2>1-2 檔案上傳</h2>
+        <p> 　　首先我們便來看看檔案上傳，PHP中一個典型的檔案上傳流程是：</p>
+        <ol>
+          <li>提供上傳檔案</li>
+          <li>判斷錯誤</li>
+          <li>複製暫存檔案至指定目錄下（copy()函示）。</li>
+        </ol>
+        <p>【範例檔案】    --  開啟範例檔案upload.php</p>
+        <p><br />
+          Step1.  開啟頁面後，請在表格中加上一個隱藏欄位、一個檔案欄位、一個按鈕，必須注意的是隱藏欄位必須是表單中的第一個元件。</p>
+        <p><img src="http://cttlee.cc/images/books/dw8.files/12-2-01.png" alt="" width="401" height="207" /><br />
+          圖3-2-01<br />
+        </p>
+        <p>　Step2.  接著將隱藏欄位命名為MAX_FILE_SIZE、值為1000000，這是預設用來限制上傳檔案大小的欄位，它應該被放在表單中所有元件中的第一個位置，限制的上傳值即為該欄位值，單位為Byte。</p>
+        <p>　　檔案欄位命名為myfile，最後表單的『動作』目標設至add.php，編碼則是multipart/form-data。</p>
+        <p><img src="http://cttlee.cc/images/books/dw8.files/12-2-02.png" alt="" width="448" height="69" /><br />
+          圖3-2-02<br />
+          <img src="http://cttlee.cc/images/books/dw8.files/12-2-03.png" alt="" width="448" height="69" /><br />
+          圖3-2-03<br />
+          <img src="http://cttlee.cc/images/books/dw8.files/12-2-04.png" alt="" width="595" height="69" /><br />
+          圖3-2-04<br />
+        </p>
+        <p>　　接著看到的是index.php表單中動作目標的add.php，我們先來瞭解該如何取得上傳檔案的資訊。</p>
+        <p>【範例檔案】  --  開啟範例檔案add.php</p>
+        <p>　　開啟檔案後我們在頁面上方加上如下程式碼。<br />
+          <img src="http://cttlee.cc/images/books/dw8.files/12-2-05.png" alt="" width="553" height="188" /><br />
+          圖3-2-05</p>
+        <p>　　在這裡我們可以看到有五個資訊輸出，包括了檔案名稱、大小、格式、暫存名稱、錯誤代碼，這些都是預設就可以使用的變數與資訊，其中的 <strong>myfile </strong>即為index.php中的<strong>檔案欄位</strong>名稱，也就是說若你將檔案欄位名稱命名為ourfile，這裡的各個資訊便需使用$_FILES['ourfile']['xxx']。</p>
+        <p>其中的：</p>
+        <ul>
+          <li>$_FILES['myfile'][<strong>'name'</strong>] 這是使用者上傳的原始檔案名稱。</li>
+          <li>$_FILES['myfile'][<strong>'size'</strong>] 為檔案大小，單位為Byte。</li>
+          <li>$_FILES['myfile'][<strong>'tmp_name'</strong>] 為檔案上傳完畢後於伺服器中暫存的位置。</li>
+          <li>$_FILES['myfile'][<strong>'type'</strong>]   為檔案的MIME格式。</li>
+          <li>$_FILES['myfile'][<strong>'error'</strong>]  檔案上傳的錯誤代碼，在後面我們會針對這個變數的值做處理（PHP   4.2.0以上版本才支援）。</li>
+        </ul>
+        <p>　　其實我們在index.php所做的幾個簡單步驟便已經做到將檔案上傳的功能，只不過這時候檔案會是位於$_FILES['myfile']  ['tmp_name']的位置（伺服器中的暫存位置），其中的MAX_FILE_SIZE隱藏欄位若沒有加上這個欄位也沒有關係，自然有  upload_max_filesize等項目來限制上傳的大小，這時候先來試試前面所做的是否都能運作。</p>
+        <p><img src="http://cttlee.cc/images/books/dw8.files/12-2-06.png" alt="" width="447" height="294" /><br />
+          圖3-2-06      選擇一個小於1MB的檔案上傳<br />
+          ↓<br />
+          <img src="http://cttlee.cc/images/books/dw8.files/12-2-07.png" alt="" width="447" height="294" /><br />
+          圖3-2-07     顯示該上傳檔案的相關資訊</p>
+        <strong><br clear="all" />
+        </strong>
+        <h3>[錯誤判斷]</h3>
+        <p><br />
+          如果我們在add.php中可以看到相關的資訊，那麼代表前面的步驟沒有問題，接著下來便針對上傳的錯誤做相關的提示訊息，錯誤訊息前面提過會記錄在$_FILES['myfile']['error']。</p>
+        <p><br />
+          Step1.  同樣是在add.php中，我們在剛剛的程式碼下加上下列程式。<br />
+          <img src="http://cttlee.cc/images/books/dw8.files/12-2-08.png" alt="" width="600" height="216" /><br />
+          圖3-2-08<br />
+        </p>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+          <tbody>
+            <tr>
+              <td bgcolor="#dddddd"><p>08      　if($_FILES['myfile']['error']  &gt; 0){<br />
+                09              　　switch($_FILES['myfile']['error']){<br />
+                10                    　　　case  1 : die(&quot;檔案大小超出  php.ini:upload_max_filesize 限制&quot;);<br />
+                11                    　　　case  2 : die(&quot;檔案大小超出 MAX_FILE_SIZE  限制&quot;);<br />
+                12                    　　　case  3 : die(&quot;檔案僅被部分上傳&quot;);<br />
+                13                    　　　case  4 : die(&quot;檔案未被上傳&quot;);<br />
+                14            　　}<br />
+                15    　} </p></td>
+            </tr>
+          </tbody>
+        </table>
+        <p><br />
+          其中$_FILES['myfile']['error']若等於0則代表上傳的過程中沒有錯誤，當$_FILES['myfile']  ['error']大於0時，程式會依據$_FILES['myfile']['error']的值輸出相關的提示訊息並終止程式的執行。</p>
+        <p>　　這時候我們可以找一個大於1MB的檔案上傳，可以看到的是只有檔案名稱是正常顯示的，錯誤代碼為2因為上傳的檔案大小超過index.php中MAX_FILE_SIZE隱藏欄位的值。<br />
+          <img src="http://cttlee.cc/images/books/dw8.files/12-2-09.png" alt="" width="447" height="294" /><br />
+          圖3-2-09</p>
+        <h3>[複製檔案]</h3>
+        <p> 　　在瞭解MAX_FILE_SIZE隱藏欄位與如何利用$_FILES['myfile']['error']所提供的資訊來除錯後，接著要做的便是將檔案由伺服器的暫存位置複製至我們所需要的位置，在前面的程式碼下方輸入下列程式。</p>
+        <p><img src="http://cttlee.cc/images/books/dw8.files/12-2-10.png" alt="" width="600" height="258" /><br />
+          圖3-2-10</p>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+          <tbody>
+            <tr>
+              <td bgcolor="#dddddd"><p>17    　if(is_uploaded_file($_FILES['myfile']['tmp_name'])){<br />
+                18            　　$DestDIR  = &quot;files&quot;;<br />
+                19            　　if(!is_dir($DestDIR)  || !is_writeable($DestDIR))<br />
+                20                    　　　die(&quot;目錄不存在或無法寫入&quot;);<br />
+                21<br />
+                22            　　$File_Extension  = explode(&quot;.&quot;, $_FILES['myfile']['name']); <br />
+                23            　　$File_Extension  = $File_Extension[count($File_Extension)-1]; <br />
+                24            　　$ServerFilename  =date(&quot;YmdHis&quot;) . &quot;.&quot; . $File_Extension;<br />
+                25            　　copy($_FILES['myfile']['tmp_name']  , $DestDIR . &quot;/&quot; . $ServerFilename );<br />
+                26    　}</p></td>
+            </tr>
+          </tbody>
+        </table>
+        <p><br />
+          一般我們先會用is_uploaded_files()來確認檔案是否是真正被上傳與存在於伺服器上（也是為了安全性），因為表單送出之後檔案的位置  與名稱會在伺服器的暫存目錄中，因此用is_uploaded_file($_FILES['myfile']['tmp_name'])來判斷，若是才  執行下面的動作，接著的程式主要是定義檔名、判斷目錄、複製檔案三個步驟。</p>
+        <p>　　18列中我們定義了目的的資料夾files，我們可以用is_dir與is_writeable來判斷目錄是否存在與目錄是否可以寫入，19列  中兩個函示前面都被加了驚嘆號（!），這會將回傳的TRUE、FALSE給反相，也就是TRUE變為FALSE、FALSE變為TRUE，因此19、20  列我們可以看做是『若目錄不存在 或（||） 目錄無法寫入，則輸出<strong>目錄不存在或無法寫入</strong>，然後終止程式執行』。</p>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+          <tbody>
+            <tr>
+              <td bgcolor="#dddddd"><p>22            　$File_Extension  = explode(&quot;.&quot;, $_FILES['myfile']['name']); </p></td>
+            </tr>
+          </tbody>
+        </table>
+        <p><br />
+          22與23列都在處理取得檔案副檔名，22列中的explode(&quot;.&quot;,  $_FILES['myfile']['name'])可以看成，將$_FILES['myfile']['name']的值，以逗點（.）作為分隔，傳  回陣列的形式，假設$_FILES['myfile']['name']等於DSC012345.JPG，那麼以逗號分隔後即為DSC012345與  JPG，而這兩個值會被丟到左邊的$File_Extension變數，結果即  為$File_Extension[0]=DSC012345、$File_Extension[1]=JPG。</p>
+        <p>　　在22列執行的結果我們可以看到$File_Extension[1]的值為副檔名，但是有的檔案可能會有好幾個逗點例如DSC.012345.JPG，那麼這個時候副檔名的位置應該就是$File_Extension[2]，23列的程式主要在處理這個狀況。</p>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+          <tbody>
+            <tr>
+              <td bgcolor="#dddddd"><p>23            　$File_Extension  = $File_Extension[count($File_Extension)-1]; </p></td>
+            </tr>
+          </tbody>
+        </table>
+        <p><br />
+          我們可以注意到副檔名一定會是在最後的位置，這時候可以利用count()來統計陣列的元素個數，這個值會與副檔名的陣列索引值差1，因此$File_Extension[<strong>count($File_Extension)-1</strong>]可以用來確保索引（把整個粗體部分看成1個索引）一定在副檔名的位置，最後我們將這個值重新丟回$File_Extension，這時候$File_Extension便不再是陣列而是儲存副檔名了。</p>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+          <tbody>
+            <tr>
+              <td bgcolor="#dddddd"><p>24            　$ServerFilename  =date(&quot;YmdHis&quot;) . &quot;.&quot; . $File_Extension;</p></td>
+            </tr>
+          </tbody>
+        </table>
+        <p><br />
+          為了避免檔案名稱重複而使伺服器上的檔案被覆蓋，因此這個檔案上傳系統的規劃是，伺服器上的檔名是使用上傳的<strong> 年月日時分秒.副檔名 </strong>作為檔名，我們在24列定義這個變數叫做$ServerFilename，主檔名的部分使用date()函示產生年月日時分秒，接著連接一個逗點與副檔名變數$File_Extension，在使用者下載檔案的時候我們會用一點技巧使其能夠直接儲存為原始檔名。。</p>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+          <tbody>
+            <tr>
+              <td bgcolor="#dddddd"><p>25   　 copy($_FILES['myfile']['tmp_name']  , $DestDIR . &quot;/&quot; . $ServerFilename );</p></td>
+            </tr>
+          </tbody>
+        </table>
+        <p><br />
+          前面我們僅是將檔案上傳至伺服器的暫存目錄中，這時候必須使用copy()函示來將檔案複製到我們所要的目錄中，copy()函示的語法為 <strong>copy( 來源路徑檔名 , 目的路徑檔名 )</strong> ，來源的路徑檔名已經在$_FILES['myfile']['tmp_name']中了，而目的位置則是用 <strong>$DestDIR . &quot;/&quot;  . $ServerFilename</strong> 連接成一個相對路徑。</p>
+        <p>　　講了這麼多後直接使用瀏覽器開啟網頁來真正上傳一次檔案吧，上傳完畢後這次就可以在files目錄下真正看到所上傳的檔案，檔名便為上傳的時間。<br />
+          <img src="http://cttlee.cc/images/books/dw8.files/12-2-11.png" alt="" width="209" height="303" /><br />
+          圖3-2-11<br clear="all" />
+          <br />
+        </p>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+          <tbody>
+            <tr>
+              <td bgcolor="#dddddd"><p><strong>Tips</strong></p>
+                <p> files目錄於Windows系統中必須【沒有】唯讀屬性，若於Unix-Like系統中則必須有寫入權限，一般會設為667。</p></td>
+            </tr>
+          </tbody>
+      </table></td>
+    </tr>
+  </tbody>
+</table>
+<h2><strong>1-3 設計上傳表單</strong></h2>
+<p>　　首先，我們要設計一個上傳的表單，內容如下：</p>
+<blockquote> </blockquote>
+<div align="center">
+  <center>
+    <table bordercolordark="#ffffff" bordercolorlight="#008080" width="80%" bgcolor="#c7e2e2" border="1" bordercolor="#008080" cellpadding="3" cellspacing="0">
+      <tbody>
+        <tr>
+          <td width="100%" align="left">&lt;html&gt;<br />
+            &lt;head&gt;<br />
+            &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html;           charset=big5&quot;&gt;<br />
+            &lt;title&gt;檔案上傳&lt;/title&gt;<br />
+            &lt;/head&gt;<br />
+            &lt;body&gt;<br />
+            &lt;form action=&quot;getfile.php&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;<br />
+            上傳檔案: &lt;input type=&quot;file&quot;           name=&quot;userfile&quot; size=16&gt;<br />
+            &lt;input type=&quot;submit&quot; value=&quot;上傳&quot;&gt;<br />
+            &lt;input type=&quot;hidden&quot; name=&quot;MAX_FILE_SIZE&quot;           value=&quot;40960&quot;&gt;<br />
+            &lt;/form&gt;<br />
+            &lt;/body&gt;<br />
+            &lt;/html&gt;</td>
+        </tr>
+      </tbody>
+    </table>
+  </center>
+</div>
+<p>　　紅色的部份是重點。enctype=&quot;multipart/form-data&quot;       不能少，input type = file       會出現供選擇上傳檔案的欄位與按鈕。像這樣：</p>
+<form>
+  <div align="center">
+    <center>
+      <table bordercolordark="#ffffff" bordercolorlight="#008080" width="80%" bgcolor="#c7e2e2" border="1" bordercolor="#008080" cellpadding="3" cellspacing="0">
+        <tbody>
+          <tr>
+            <td width="100%" align="left">上傳檔案:
+              <input name="userfile" size="16" type="file" /></td>
+          </tr>
+        </tbody>
+      </table>
+    </center>
+  </div>
+</form>
+<p><strong>接收檔案</strong></p>
+<p>　　這是接收檔案的程式：</p>
+<div align="center">
+  <center>
+    <table bordercolordark="#ffffff" bordercolorlight="#008080" width="80%" bgcolor="#c7e2e2" border="1" bordercolor="#008080" cellpadding="3" cellspacing="0">
+      <tbody>
+        <tr>
+          <td width="100%" align="left">01: &lt;?<br />
+            02: If ($userfile != &quot;none&quot;) {<br />
+            03:    echo &quot;userfile: $userfile&lt;br&gt;&quot;;<br />
+            04:    echo &quot;userfile_name: $userfile_name (Size:           $userfile_size)&lt;br&gt;&quot;;<br />
+            05:    copy($userfile,&quot;/home/jollen/upload/$userfile_name&quot;);<br />
+            06:    unlink($userfile);<br />
+            07:    echo &quot;上傳完成&quot;;<br />
+            08: } else {<br />
+            09:    echo &quot;沒有檔案&quot;;<br />
+            10: }<br />
+            11: ?&gt;</td>
+        </tr>
+      </tbody>
+    </table>
+  </center>
+</div>
+<p><strong>程式說明</strong></p>
+<p>　　加上行號是為了說明方便，使用時請去除行號。</p>
+<p>　　userfile 是之前 form 的欄位 (input type = file)       名稱。程式要先判斷有沒有檔案上傳：</p>
+<blockquote>
+  <p><em>If ($userfile != &quot;none&quot;) </em></p>
+</blockquote>
+<p>　　如果沒有任何檔案被上傳，$userfile 就會是 &quot;none&quot;。當檔案被上傳後，PHP       會將檔案放到暫時的目錄下，並亂數取檔名，所以 $userfile       存放的就是上傳「後」的檔案路徑與檔名。</p>
+<p>　　而檔案的「真實檔名」，也就是在使用者端原來的檔名 (上傳「前」檔名) 則是放在       $userfile_name 變數裡，檔案大小放在 $userfile_size       裡。這兩個變數名稱是相對於 $userfile 的，也就是，如果 form 的 input       type = file 欄位名稱是 myfile，則上傳後的檔案路徑與檔名存放於 $myfile，真實檔名與檔案大小存放於       $myfile_name、$myfile_size。</p>
+<p><strong>複製上傳檔案</strong></p>
+<p>　　接下來我們要將上傳後的檔案搬到適當的位置：</p>
+<blockquote>
+  <p><em>copy($userfile,&quot;/home/jollen/upload/$userfile_name&quot;);</em></p>
+</blockquote>
+<p>　　我們將 $userfile 複製到 /home/jollen/upload/，並用真實檔名儲存。要注意       $userfile 是包含路徑的，而 $userfile_name 只有檔名而已！</p>
+<p>　　然後將上傳暫存的檔案刪除：</p>
+<blockquote>
+  <p><em>unlink($userfile);</em></p>
+</blockquote>
+<p><strong>執行結果</strong></p>
+<p>　　將檔案成功上傳後可以得到下面的訊息以茲鼓勵：</p>
+<div align="center">
+  <center>
+    <table bordercolordark="#ffffff" bordercolorlight="#008080" width="80%" bgcolor="#c7e2e2" border="1" bordercolor="#008080" cellpadding="3" cellspacing="0">
+      <tbody>
+        <tr>
+          <td width="100%" align="left">userfile: /tmp/phpvA6ALB<br />
+            userfile_name: license.htm (Size: 1943)<br />
+            上傳完成 </td>
+        </tr>
+      </tbody>
+    </table>
+  </center>
+</div>
+<p><strong>錯誤訊息</strong></p>
+<p>　　如果看到底下的錯誤訊息：</p>
+<div align="center">
+  <center>
+    <table bordercolordark="#ffffff" bordercolorlight="#008080" width="80%" bgcolor="#c7e2e2" border="1" bordercolor="#008080" cellpadding="3" cellspacing="0">
+      <tbody>
+        <tr>
+          <td width="100%" align="left">Warning: Unable to create '/home/jollen/upload/license.htm': Permission           denied in /home/httpd/html/phpgroup.php.version/getfile.php on line 5</td>
+        </tr>
+      </tbody>
+    </table>
+  </center>
+</div>
+<p>　　表示 /home/jollen/upload       目錄不存在或是權限問題，只要建立 /home/jollen/upload       目錄，並將目錄權限設成所有人都可以寫入 (chmod a+x /home/jollen/upload)       就可以了。</p>
+<p>　　要注意，利用 copy() 複製檔案時，「會」覆蓋掉原來的舊檔案。</p>
+<p>細心的讀者可能發現了，我們在表單裡還多了一欄 MAX_FILE_SIZE       的欄位，這個欄位有什麼用途呢？</p>
+<p><strong>限制檔案長度</strong></p>
+<p>　　MAX_FILE_SIZE 這個欄位的目的是在限制檔案的長度，在 HTML       裡可以看到這一行：</p>
+<blockquote> </blockquote>
+<div align="center">
+  <center>
+    <table bordercolordark="#ffffff" bordercolorlight="#008080" width="80%" bgcolor="#c7e2e2" border="1" bordercolor="#008080" cellpadding="3" cellspacing="0">
+      <tbody>
+        <tr>
+          <td width="100%" align="left">&lt;input type=&quot;hidden&quot; name=&quot;MAX_FILE_SIZE&quot;           value=&quot;40960&quot;&gt;</td>
+        </tr>
+      </tbody>
+    </table>
+  </center>
+</div>
+<p>　　我們限制使用者上傳的檔案最大可以有 40k (40960 bytes)。</p>
+<p><strong>漏洞？！</strong></p>
+<p>　　再 smart 一點的讀者又發現了，只要我們自己修改 MAX_FILE_SIZE       的值，再用自己修改過的網頁做檔案上傳，那不是就可以「破解」這個檔案長度的限制了嗎？</p>
+<p>　　還好，聰明的 PHP 也可以從 php.ini 修改這個設定。編輯 php.ini，找到底下這一行：</p>
+<div align="center">
+  <center>
+    <table bordercolordark="#ffffff" bordercolorlight="#008080" width="80%" bgcolor="#c7e2e2" border="1" bordercolor="#008080" cellpadding="3" cellspacing="0">
+      <tbody>
+        <tr>
+          <td width="100%" align="left">upload_max_filesize = 2097152</td>
+        </tr>
+      </tbody>
+    </table>
+  </center>
+</div>
+<p>　　預設值是 2MB (2097152 bytes)，我們只要修改這個設定，然後再重新啟動       Apache 就可以啦！</p>
+<p><strong>預設上傳目錄</strong></p>
+<p>　　PHP 也提供了 upload_tmp_dir 的設定項目：</p>
+<div align="center">
+  <center>
+    <table bordercolordark="#ffffff" bordercolorlight="#008080" width="80%" bgcolor="#c7e2e2" border="1" bordercolor="#008080" cellpadding="3" cellspacing="0">
+      <tbody>
+        <tr>
+          <td width="100%" align="left">;upload_tmp_dir =</td>
+        </tr>
+      </tbody>
+    </table>
+  </center>
+</div>
+<p>　　PHP 預設會把使用者上傳的檔案放到 /tmp，不過我們可以自行修改       upload_tmp_dir 的設定，就可以指定其它上傳的暫存目錄了。</p>
+<p>　　不過要注意一下，這個目錄的權限必須設成所有人都可以讀寫       (chmod 777 xxx) 才可以喔 :)</p>
+</body>
+</html>

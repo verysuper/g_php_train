@@ -1,0 +1,6 @@
+打開php.ini檔案，找到底下這一行，將內定1440（秒）延長就行了，
+
+　　session.gc_maxlifetime = 1440
+
+設定完成後，記得重新啟動Apache喔!!!
+

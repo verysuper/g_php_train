@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>解決80port被佔用問題</title>
+<link href="css/alan.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+解決的80 port被佔用問題<br />
+<br />
+80 port 被佔用導致無法正常開啟localhost(127.0.0.1)，或用到80 port的服務，如:Apache Server等等...。<br />
+<br />
+查看埠佔用情況命令：<br />
+<br />
+1. WIN符號+R，輸入&quot;cmd&quot;。<br />
+<br />
+2. netstat -aon<br />
+<br />
+發現佔用 0.0.0.0:80 的是 PID 為 4 的程序<br />
+<br />
+查看 PID 為 4 的程序命令：<br />
+<br />
+tasklist /FI &quot;PID eq 4&quot;<br />
+<br />
+檢查發現PID 為 4 的是 SYSTEM 這個程序。<br />
+<img src="images/80port-1.png" alt="" /><br />
+<br />
+解決方法：修改註冊表 <br />
+<br />
+1. WIN符號+R，輸入&quot;regedit&quot;。<br />
+<br />
+2. 位置 &quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\HTTP&quot;<br />
+<img src="images/80port-2.png" alt="" /><br />
+<br />
+3. 把 REG_DWORD 類型的項 Start 的值改為 0，重啟電腦。<br />
+<br />
+補充:<br />
+<br />
+如果有安裝skype ，也可能佔用到80 port。<br />
+<br />
+解決辦法:<br />
+<br />
+到skype設定，將預設的port號改掉即可。
+</body>
+</html>

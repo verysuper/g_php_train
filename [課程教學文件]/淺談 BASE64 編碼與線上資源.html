@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>淺談 BASE64 編碼與線上資源</title>
+</head>
+
+<body>
+<div>
+  <div>
+    <h1>淺談 BASE64 編碼與線上資源</h1>
+  </div>
+</div>
+<div>
+  <p dragover="true">Base64 編碼的使用在網頁設計與資料庫處理中是一項很基本卻很實用的技術，在不考慮安全性的情況下，也可以當做是最基礎的「文字編碼」處理。Base64 只用到可列印的 62+2   個字元來傳輸資料，因此可以將「中文字」或「二元檔(Binary   File)」轉換之後以純文字的方式進行傳輸。</p>
+  <p dragover="true">Base64 編碼的原理、介紹、官方文件及其他相關資源，請參考<U><a href="http://zh.wikipedia.org/" rel="nofollow" target="_blank">維基百科</a></U>的說明：</p>
+  <ul>
+    <li><a href="http://zh.wikipedia.org/w/index.php?title=Base64&amp;variant=zh-tw" target="_blank">Base64 -   維基百科<br />
+      http://zh.wikipedia.org/w/index.php?title=Base64&amp;variant=zh-tw</a></li>
+  </ul>
+  <p dragover="true"><span id="more-166"></span>在 PHP 程式裡已經有提供了現在的函數可供文字處理，不需要再另行撰寫   Base64 的函數，如：</p>
+  <ul>
+    <li>編碼：<strong><strong>base64_encode()<br />
+      </strong></strong><a href="http://tw.php.net/manual/en/function.base64-encode.php" target="_blank">http://tw.php.net/manual/en/function.base64-encode.php</a><br />
+      <a href="http://stock.ettoday.com/book/function.php-base64_encode.htm" target="_blank">http://stock.ettoday.com/book/function.php-base64_encode.htm</a><strong><strong><br />
+      </strong></strong></li>
+    <li>解碼：<strong><strong>base64_decode()</strong></strong><br />
+      <a href="http://tw.php.net/manual/en/function.base64-decode.php" target="_blank">http://tw.php.net/manual/en/function.base64-decode.php</a><br />
+      <a href="http://stock.ettoday.com/book/function.php-base64_decode.htm" target="_blank">http://stock.ettoday.com/book/function.php-base64_decode.htm</a></li>
+  </ul>
+  <p>直角在這邊要介紹的是底下這個網站，線上的 Base64 編/解碼程式：</p>
+  <ul>
+    <li><a href="http://www.motobit.com/util/base64-decoder-encoder.asp" target="_blank">Base64 Online - base64 decode and   encode<br />
+      http://www.motobit.com/util/base64-decoder-encoder.asp</a></li>
+  </ul>
+  <p>這個網站除了可以自行輸入文字轉換之外，還可以直接輸入一個檔案喔！不但如此，連二元檔都可以上傳轉換成 Base64   的編碼。當然，最神奇的是，你可以輸入已經編碼過二元檔的編碼字串，它會幫你還原成為二元檔喔！</p>
+  <ul>
+    <li><strong>What to do with the source data:</strong><br />
+      指的是你要工作的項目，encode 代表編碼、decode 代表解碼。</li>
+    <li><strong>Output data:</strong><br />
+      output to a <U>t</U>extbox (as a string) → 轉換為文字格式。<br />
+      export to   a binary <U>f</U>ile, file<U>n</U>ame: → 轉換為二進位檔案，需輸入檔名。</li>
+    <li><strong>文字區</strong><br />
+      Base64 representation of the   source data: → 已經編碼過的 Base64 文字。<br />
+      Type (or   copy-paste) some text to a textbox bellow. → 代表未編碼的原始文字。</li>
+  </ul>
+  <p dragover="true">如果各位要測試你的 Base64 函數是否正確時，可以利用上述網站來試試看喔！</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,284 @@
+php.ini 或 php3.ini 是 PHP 在啟動時會讀取的配置文件。該文件的存放路徑為 /usr/local/lib/。在 PHP 3.x 版的配置文件為 php3.ini；而在 PHP 4.x 版改為 php.ini。若 PHP 安裝成服務器的模塊，則在 Web 服務器啟動執行時會讀取，之後就不再讀取，因此改動配置的話要重新啟動 Web 服務器。若使用獨立 PHP CGI 方式，則每次都讀一次。 
+要看目前的系統配置，可以用 phpinfo() 看到。以下為選項配置 
+
+
+php_value name value 
+配置變量名稱和值。本選項需 PHP 4.x 版之後才能使用。 
+
+php_flag name on|off 
+配置標誌布爾變量選項。本選項需 PHP 4.x 版之後才能使用。 
+
+php_admin_value name value 
+配置 Apache 的配置文件變量。原來在 .htaccess 的配置改到這個選項配置。本選項需 PHP 4.x 版之後才能使用。 
+
+php_admin_flag name on|off 
+配置布爾變量當標誌。本選項需 PHP 4.x 版之後才能使用。 
+
+asp_tags boolean 
+配置 PHP 程序是否解析以 ASP Script 語法 <% %> 的標記 (tag)。本選項在 PHP 3.0.4 之後才可使用。更多的細節可以參考 嵌入方法 的部份。 
+
+auto_append_file string 
+配置本選項可以讓指定的文件附加在原 PHP 程序後面自動執行。若 PHP 程序中有用到 exit() 函數，則指定的文件不會執行。參數 string 即為指定自動執行的文件。 
+
+auto_prepend_file string 
+配置本選項可以讓指定的文件在原 PHP 程序之前自動執行。參數 string 即為指定自動執行的文件。 
+
+cgi_ext string 
+本選項配置 CGI 程序的擴展名。 
+
+display_errors boolean 
+本選項配置是否要將執行的錯誤資料顯示在用戶的瀏覽器上。 
+
+doc_root string 
+配置服務器的文件及 PHP 文件放置的根目錄。 
+
+engine boolean 
+本選項需要使用apache的模塊方式使用 PHP。可配置是否要使用 PHP 引擎。在 httpd.conf 中加入 php3_engine on/off 亦可配置某目錄或某虛擬網站是否要用 PHP 解析器。 
+
+error_log string 
+本選項用來配置錯誤記錄文件。在 UNIX 系統上參數 string 即為文件名。Windows NT 會將記錄記在事件檢視器的日誌之中。Windows 95/98 則不支持系統記錄。 
+
+error_reporting integer 
+本選項用來配置系統記錄的等級。參數 integer 即為等級的級數標誌，可以加在一起，默認值為 7，見下表 
+級數 說明 
+1 一般的錯誤 
+2 一般的警告 
+4 解析錯誤 
+8 非關鍵的警告 
+
+
+open_basedir string 
+本選項用來配置提供 PHP 存取的最底層目錄。從該指定目錄之下的文件或目錄，PHP 程序才能存取。使用本選項主要是為了系統安全性的考慮。參數 string 即為要限制的最底層目錄節點。值得注意的是在 UNIX 系統中，若該節點之下的文件或目錄有符號鏈結 (symbolic link)，則可能會讓使用本選項的目的打折，因此在目錄的設計上考慮，也是 Webmaster 的重要任務。默認值是所有文件均可存取。在 PHP 3.0.7 版之後，可以配置多個底層目錄。 
+
+gpc_order string 
+配置 GET/POST/COOKIE 三種模塊的順序及規則。參數 string 即為要配置的規則，例如：配置成 "GP" 表示忽視 cookie，並在存取方法 (method) 相同時，以 POST 取代 GET。 
+
+ignore_user_abort string 
+默認值為 Off。用來配置當傳輸未完成時，用戶端斷線是要繼續處理。 
+
+include_path string 
+為 PHP 程序中 require、include 及 fopen_with_path 等函數的文件搜尋路徑。在 UNIX 或 Windows 中的斜線方向不同。 
+
+log_errors boolean 
+指定程序錯誤時是否要記錄在 log 文件中。 
+
+magic_quotes_gpc boolean 
+配置 GET/POST/COOKIE 三種模塊的特殊字符，包含單引號、雙引號、反斜線、及空字符 (NUL) 是否要自動加入反斜線當溢出字符。 
+
+magic_quotes_runtime boolean 
+配置返回資料是否自動加入反斜線當溢出字符。 
+
+magic_quotes_sybase boolean 
+配置 sybase 資料中單引號要自動加上反斜線當溢出字符。 
+
+max_execution_time integer 
+配置程序最久執行時間。單位是秒。 
+
+memory_limit integer 
+配置程序最多使用多少內存。 
+
+short_open_tag boolean 
+配置是否使用短的 PHP 標記 (<? ?>)。若不使用，則必須要用 <?php 作為程序的開頭，若要使程序合乎 XML 的標準則要關閉本功\能。 
+
+track_errors boolean 
+打開本選項可使最後的錯誤資料跟著全局變量 $php_errormsg。 
+
+track_vars boolean 
+打開本選項可讓用戶輸入的字符串自動解析到變量之中，而不用自己處理。 
+
+upload_tmp_dir string 
+指定上傳文件臨時路徑。 
+
+user_dir string 
+指定用戶根目錄的路徑。 
+
+warn_plus_overloading boolean 
+若打開本選項，字符串間就只能用英文的句號 (.) 鏈接，而不能用加號 (+) 鏈接字符串。 
+
+SMTP string 
+在 Windows 系列操作系統中，用來指定 SMTP 服務器，供 mail 函數使用。參數 string 為 SMTP 服務器名字。 
+
+sendmail_from string 
+配置 "From: " 字符串供 Windows 系列操作系統使用 mail 函數。 
+
+sendmail_path string 
+配置 sendmail 程序的放置路徑。例如 /usr/sbin/sendmail。 
+
+safe_mode boolean 
+配置 PHP 在安全模式下執行。 
+
+safe_mode_exec_dir string 
+配置安全模式程序執行的路徑。 
+
+debugger.host string 
+指定遠端調試的服務器名稱，可以是 IP 或 Domain Name。 
+
+debugger.port string 
+配置遠端調試服務器的端口 (port)。 
+
+debugger.enabled boolean 
+配置是否可以為調試模式。 
+
+enable_dl boolean 
+本選項要使用apache模塊 (Apache module) 的方式才有效。用來配置 PHP 的 dl() 函數可否作用。當系統處於安全模式 (safe-mode) 時，本選項 enable 也無法使用 dl() 函數。 
+
+extension_dir string 
+配置動態函數的路徑。 
+
+extension string 
+PHP 啟動時所要載入的動態擴充功\能。 
+
+mysql.allow_persistent boolean 
+配置是否允許\ MySQL 數據庫持續連接 (persistent connections)，會影響 mysql_pconnect() 函數。 
+
+mysql.max_persistent integer 
+配置每個處理程序最多保持幾個 MySQL 持續連接。 
+
+mysql.max_links integer 
+配置每個處理程序最多開幾個 MySQL 連接，包括持續連接。 
+
+msql.allow_persistent boolean 
+配置是否允許\ mSQL 數據庫持續連接 (persistent connections)，會影響 msql_pconnect() 函數。 
+
+msql.max_persistent integer 
+配置每個處理程序最多保持幾個 mSQL 持續連接。 
+
+msql.max_links integer 
+配置每個處理程序最多開幾個 mSQL 連接，包括持續連接。 
+
+pgsql.allow_persistent boolean 
+配置是否允許\ Postgres 數據庫持續連接 (persistent connections)，會影響 pg_pConnect() 函數。 
+
+pgsql.max_persistent integer 
+配置每個處理程序最多保持幾個 Postgres 持續連接。 
+
+pgsql.max_links integer 
+配置每個處理程序最多開幾個 Postgres 連接，包括持續連接。 
+
+sybase.allow_persistent boolean 
+配置是否允許\ Sybase 數據庫持續連接 (persistent connections)，會影響 sybase_pconnect() 函數。 
+
+sybase.max_persistent integer 
+配置每個處理程序最多保持幾個 Sybase 持續連接。 
+
+sybase.max_links integer 
+配置每個處理程序最多開幾個 Sybase 連接，包括持續連接。 
+
+sybct.allow_persistent boolean 
+配置是否允許\ Sybase-CT 數據庫持續連接 (persistent connections)，默認值是打開的。 
+
+sybct.max_persistent integer 
+配置每個處理程序最多保持幾個 Sybase-CT 持續連接。默認值為 -1 表示無限制。 
+
+sybct.max_links integer 
+配置每個處理程序最多開幾個 Sybase-CT 連接，包括持續連接。默認值為 -1，表示沒有限制。 
+
+sybct.min_server_severity integer 
+配置 Sybase-CT 服務器錯誤報告的最少筆數。默認值為 10。 
+
+sybct.min_client_severity integer 
+配置 Sybase-CT 客戶端錯誤報告的最少筆數。默認值為 10。 
+
+sybct.login_timeout integer 
+配置 Sybase-CT 最久可以使用的登入時間。默認值為 1 分鐘。 
+
+sybct.timeout integer 
+配置 Sybase-CT 的 query 操作時間限制。默認值為無限制。 
+
+sybct.hostname string 
+配置 Sybase-CT 可連接機器名稱。默認值不設限 
+
+ifx.allow_persistent boolean 
+配置是否允許\ Informix 數據庫持續連接 (persistent connections)，會影響 ifx_pconnect() 函數。 
+
+ifx.max_persistent integer 
+配置每個處理程序最多保持幾個 Informix 持續連接。 
+
+ifx.max_links integer 
+配置每個處理程序最多開幾個 Informix 連接，包括持續連接。 
+
+ifx.default_host string 
+配置 Informix 默認連接的服務器名稱，供 ifx_connect() 或 ifx_pconnect() 函數使用。 
+
+ifx.default_user string 
+配置 Informix 默認連接的用戶帳號，供 ifx_connect() 或 ifx_pconnect() 函數使用。 
+
+ifx.default_password string 
+配置 Informix 默認連接的用戶密碼，供 ifx_connect() 或 ifx_pconnect() 函數使用。 
+
+ifx.blobinfile boolean 
+配置 Informix 長位類模式，0 表在內存；1 表在文件中。亦可以在 PHP 程序中使用 ifx_blobinfile_mode() 函數來修改。 
+
+ifx.textasvarchar boolean 
+配置 Informix 文字模式默認值，0 表返回 blob 的代碼；1 表返回 varchar 字符串。亦可在 PHP 程序中使用 ifx_textasvarchar() 函數來修改配置。 
+
+ifx.byteasvarchar boolean 
+配置 Informix 位組模式默認值，0 表返回 blob 的代碼；1 表返回 varchar 字符串。亦可在 PHP 程序中使用 ifx_byteasvarchar() 來修改配置。 
+
+ifx.charasvarchar boolean 
+配置 Informix 返回字符串的字尾空格是否要自動去除。 
+
+ifx.nullformat boolean 
+配置 NULL 字段的返回方式，true 表示返回字符串 NULL，false 表格返回字符串 ""。亦可在 PHP 程序中以 ifx_nullformat() 修改。 
+
+bcmath.scale integer 
+配置 BC 高精確度函數庫的小數點位數。 
+
+browscap string 
+配置瀏覽器的開文件能力名。 
+
+uodbc.default_db string 
+配置 ODBC 默認連接的數據庫名稱，供 odbc_connect() 或 odbc_pconnect() 函數使用。 
+
+uodbc.default_user string 
+配置 ODBC 默認連接的用戶帳號，供 odbc_connect() 或 odbc_pconnect() 函數使用。 
+
+uodbc.default_pw string 
+配置 ODBC 默認連接的用戶密碼，供 odbc_connect() 或 odbc_pconnect() 函數使用。 
+
+uodbc.allow_persistent boolean 
+配置是否允許\ ODBC 數據庫持續連接 (persistent connections)，會影響 odbc_pconnect() 函數。 
+
+uodbc.max_persistent integer 
+配置每個處理程序最多保持幾個 ODBC 持續連接。 
+
+uodbc.max_links integer 
+配置每個處理程序最多開幾個 ODBC 連接，包括持續連接。 
+以下和 session 有關的配置值，都在 PHP 4.x 以上的版本方支持。在 php.ini 的配置文件中。 
+
+
+session.save_handler 
+定義 session 儲存資料的文件名稱。默認值為 files。 
+
+session.save_path 
+定義 session 儲存資料的文件路徑。默認值為 /tmp。 
+
+session.name 
+配置 session 所使用的 cookie 名稱。默認值為 PHPSESSID。 
+
+session.auto_start 
+配置 session 是否自動打開。默認值為 0 (否)。 
+
+session.lifetime 
+配置 cookie 送到瀏覽器後的保存時間，單位為秒。默認值為 0，表示直到瀏覽器關閉。 
+
+session.serialize_handler 
+定義連續/解連續資料的標頭，本功\能只有 WDDX 模塊或 PHP 內部使用。默認值為 php。 
+
+session.gc_probability 
+配置每筆要求回應時的廢物蒐集 (gc, garbage collection) 處理機率。默認值為 1。 
+
+session.gc_maxlifetime 
+配置廢物被清除前的存活秒數。 
+
+session.extern_referer_check 
+決定參照到客戶端的 Session 代碼是否要刪除。有時在安全或其它考慮時，會配置不刪除。默認值為 0。 
+
+session.entropy_file 
+配置 session 代碼建立時，使用外部高熵值資源或文件來建立，例如 UNIX 系統上的 /dev/random 或 /dev/urandom。 
+
+session.entropy_length 
+配置 session 從高熵值資源讀取的位組數。默認值為 0。 
+
+session.use_cookies 
+配置是否要將 session 變成 cookie 存在用戶端。默認值為 1，表是打開本功\能。 

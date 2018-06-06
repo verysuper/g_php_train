@@ -1,0 +1,30 @@
+﻿php日期格式化 date
+
+日期格式化輸出成2009/05/05，下面我們就來看看我用php date函數現格式輸出我想要的數據吧。
+
+<?php   
+      $date1="2006-05-25   17:50:38";   
+      echo   date("Y/m/d",strtotime($date1));   
+  ?>
+
+date("Y-m-d H:i:s", $t)
+
+舉例：
+
+date("Y-m-d H:i:s",strtotime($row["validTime"]) //2007-01-18 15:27:31
+
+date("Y/m/d H:i:s",strtotime($row["validTime"]) //2007/01/18 15:27:31
+
+date("m-d H:i:s",strtotime($row["validTime"]) //01-18 15:27:31
+
+date("Y-m-d",strtotime($row["validTime"]) //2007-01-18
+
+
+下面我們來看看把$date中保存的日期時間格式化的輸出
+比如$date保存的是2006-04-23
+我要求輸出的是04-03
+
+print(date("m-d",strtotime($fdate)));
+
+OK就出來了，
+

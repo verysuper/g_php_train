@@ -1,0 +1,364 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>MySQL資料型態介紹</title>
+</head>
+
+<body>
+<div>
+  <h2>MySQL資料型態介紹 </h2>
+</div>
+<div>
+  <p>1、MySQL介紹</p>
+  <table border="0" align="center">
+    <tbody>
+      <tr>
+        <td><p>MySQL官方站台：<a href="http://www.mysql.com/" target="_blank">http://www.mysql.com/</a></p>
+          <p>MySQL資料庫是免費的程式，屬於關聯式資料庫，使用SQL(結構化查詢語言)，是由MySQL   AB公司所開發的資料庫伺服器，使用SQL可以連結C、C++、Java、Perl、PHP語言，而且也可在許多平台上運作，如：Linux、Windows、Sun   Solaris ... 等，且支援微軟的ODBC規格的資料庫整合。</p></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>2、關聯式資料庫</p>
+  <table border="0" align="center">
+    <tbody>
+      <tr>
+        <td><p>是將資料以資料表的方式處理資料，資料表有欄位與記錄</p>
+          <p>而在命名上可以使用英文及數字，且資料庫及資料表的名稱英文字母是有分大小寫的</p>
+          <table border="0" cellspacing="1" bgcolor="#999966">
+            <tbody>
+              <tr align="middle">
+                <td><strong>資料表</strong></td>
+                <td>欄位一</td>
+                <td>欄位二</td>
+                <td>欄位三</td>
+                <td>欄位三</td>
+                <td>欄位三</td>
+              </tr>
+              <tr>
+                <td align="middle">記錄一</td>
+                <td bgcolor="#ffffff"> </td>
+                <td bgcolor="#ffffff"> </td>
+                <td bgcolor="#ffffff"> </td>
+                <td bgcolor="#ffffff"> </td>
+                <td bgcolor="#ffffff"> </td>
+              </tr>
+              <tr>
+                <td align="middle">記錄二</td>
+                <td bgcolor="#ffffff"> </td>
+                <td bgcolor="#ffffff"> </td>
+                <td bgcolor="#ffffff"> </td>
+                <td bgcolor="#ffffff"> </td>
+                <td bgcolor="#ffffff"> </td>
+              </tr>
+              <tr>
+                <td align="middle">記錄三</td>
+                <td bgcolor="#ffffff"> </td>
+                <td bgcolor="#ffffff"> </td>
+                <td bgcolor="#ffffff"> </td>
+                <td bgcolor="#ffffff"> </td>
+                <td bgcolor="#ffffff"> </td>
+              </tr>
+              <tr>
+                <td align="middle">記錄四</td>
+                <td bgcolor="#ffffff"> </td>
+                <td bgcolor="#ffffff"> </td>
+                <td bgcolor="#ffffff"> </td>
+                <td bgcolor="#ffffff"> </td>
+                <td bgcolor="#ffffff"> </td>
+              </tr>
+              <tr>
+                <td align="middle">記錄五</td>
+                <td bgcolor="#ffffff"> </td>
+                <td bgcolor="#ffffff"> </td>
+                <td bgcolor="#ffffff"> </td>
+                <td bgcolor="#ffffff"> </td>
+                <td bgcolor="#ffffff"> </td>
+              </tr>
+            </tbody>
+          </table></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>3、SQL(結構化查詢語言)</p>
+  <table border="0" align="center">
+    <tbody>
+      <tr>
+        <td><p>它是專門為資料庫所設計出的語言，是使用指令存取查詢資料庫</p>
+          <p>主要分為二類：</p>
+          <p>(1)、資料定義指令群(DDL)：建立資料庫、資料表及欄位等指令</p>
+          <p>(2)、資料存取資令群(DML)：記錄的新增、更新、刪除及查詢等指令</p></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>MySQL數值型態:</p>
+  <p>1、建立資料庫名稱</p>
+  <table border="0" align="center">
+    <tbody>
+      <tr>
+        <td><p>記得資料庫及資料表名是有分大小寫的，而命名上可以使用英文字及數字，特殊符號不可使用，也不可使用「\」、「.」，建議大家使用加底線「_」的方式命名，如：my_data，如此命名方式也可以避開保留字，且易讀性高。</p>
+          <table border="0" cellspacing="1" bgcolor="#999966">
+            <tbody>
+              <tr align="middle">
+                <td>名稱</td>
+                <td>最大長度</td>
+                <td>大小寫</td>
+              </tr>
+              <tr align="middle" bgcolor="#ffffff">
+                <td>資料庫</td>
+                <td>64</td>
+                <td>視系統有分</td>
+              </tr>
+              <tr align="middle" bgcolor="#ffffff">
+                <td>資料表</td>
+                <td>64</td>
+                <td>視系統有分</td>
+              </tr>
+              <tr align="middle" bgcolor="#ffffff">
+                <td>欄位</td>
+                <td>64</td>
+                <td>沒有分</td>
+              </tr>
+              <tr align="middle" bgcolor="#ffffff">
+                <td>別名</td>
+                <td>255</td>
+                <td>沒有分</td>
+              </tr>
+            </tbody>
+          </table></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>2、整數數值型態</p>
+  <table border="0" align="center">
+    <tbody>
+      <tr>
+        <td><table border="0" cellspacing="1" bgcolor="#999966">
+          <tbody>
+            <tr align="middle">
+              <td>類型</td>
+              <td>說明</td>
+              <td>儲存容量(位元)</td>
+              <td>範圍</td>
+            </tr>
+            <tr align="middle" bgcolor="#ffffff">
+              <td>TINYINT</td>
+              <td>很小整數</td>
+              <td>1</td>
+              <td>-128~127</td>
+            </tr>
+            <tr align="middle" bgcolor="#ffffff">
+              <td>SMALLINT</td>
+              <td>小整數</td>
+              <td>2</td>
+              <td>-32768~32767</td>
+            </tr>
+            <tr align="middle" bgcolor="#ffffff">
+              <td>MEDIUMINT</td>
+              <td>中等整數</td>
+              <td>3</td>
+              <td>-8388608~8388607</td>
+            </tr>
+            <tr align="middle" bgcolor="#ffffff">
+              <td>INT</td>
+              <td>正常整數</td>
+              <td>4</td>
+              <td>負2的31次方~正31次方減一</td>
+            </tr>
+            <tr align="middle" bgcolor="#ffffff">
+              <td>BIGINT</td>
+              <td> </td>
+              <td>8</td>
+              <td>負2的64次方~正64次方減一</td>
+            </tr>
+          </tbody>
+        </table></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>3、浮點數數值型態</p>
+  <table border="0" align="center">
+    <tbody>
+      <tr>
+        <td><table border="0" cellspacing="1" bgcolor="#999966">
+          <tbody>
+            <tr align="middle">
+              <td>類型</td>
+              <td>說明</td>
+              <td>儲存容量(位元)</td>
+              <td>範圍</td>
+            </tr>
+            <tr align="middle" bgcolor="#ffffff">
+              <td>FLOAT</td>
+              <td>單精確浮點數(小數點)</td>
+              <td>4</td>
+              <td>正負1.175494351E-38</td>
+            </tr>
+            <tr align="middle" bgcolor="#ffffff">
+              <td>DOUBLE</td>
+              <td>雙精確浮點數</td>
+              <td>8</td>
+              <td>正負1.7976931348623157E</td>
+            </tr>
+            <tr align="middle" bgcolor="#ffffff">
+              <td>DECIMAL(M,D)</td>
+              <td><p>依M和D值取範圍</p></td>
+              <td>變動</td>
+              <td> </td>
+            </tr>
+          </tbody>
+        </table>
+          <p>資料型態(三)字串、日期時間、特殊型態</p>
+          <p>1、字串型態</p>
+          <table border="0" align="center">
+            <tbody>
+              <tr>
+                <td><table border="0" cellspacing="1" bgcolor="#999966">
+                  <tbody>
+                    <tr align="middle">
+                      <td>類型</td>
+                      <td>說明</td>
+                      <td>範圍</td>
+                    </tr>
+                    <tr align="middle" bgcolor="#ffffff">
+                      <td>CHAR(M)</td>
+                      <td>固定長度字元</td>
+                      <td>1~255字元</td>
+                    </tr>
+                    <tr align="middle" bgcolor="#ffffff">
+                      <td>VARCHAR(M)</td>
+                      <td>變動長度字元</td>
+                      <td>1~255字元</td>
+                    </tr>
+                    <tr align="middle" bgcolor="#ffffff">
+                      <td>TEXT</td>
+                      <td>長字串</td>
+                      <td>1~65535字元</td>
+                    </tr>
+                    <tr align="middle" bgcolor="#ffffff">
+                      <td>TINYTEXT</td>
+                      <td> </td>
+                      <td>1~255字元</td>
+                    </tr>
+                    <tr align="middle" bgcolor="#ffffff">
+                      <td>MEDIUMTEXT</td>
+                      <td> </td>
+                      <td>1~16777215字元</td>
+                    </tr>
+                    <tr align="middle" bgcolor="#ffffff">
+                      <td>LONGTEXT</td>
+                      <td> </td>
+                      <td>1~4294967295字元</td>
+                    </tr>
+                    <tr align="middle" bgcolor="#ffffff">
+                      <td>BLOB</td>
+                      <td>長字串，有分大小寫，可存二進位資料，如：圖片、音樂</td>
+                      <td>同TEXT</td>
+                    </tr>
+                    <tr align="middle" bgcolor="#ffffff">
+                      <td>TINYBLOB</td>
+                      <td> </td>
+                      <td>同TINYTEXT</td>
+                    </tr>
+                    <tr align="middle" bgcolor="#ffffff">
+                      <td>MEDIUMBLOB</td>
+                      <td> </td>
+                      <td>同MEDIUMTEXT</td>
+                    </tr>
+                    <tr align="middle" bgcolor="#ffffff">
+                      <td>LONGBLOB</td>
+                      <td> </td>
+                      <td>同LONGTEXT</td>
+                    </tr>
+                  </tbody>
+                </table></td>
+              </tr>
+            </tbody>
+          </table>
+          <p>2、日期時間型態</p>
+          <table border="0" align="center">
+            <tbody>
+              <tr>
+                <td><table border="0" cellspacing="1" bgcolor="#999966">
+                  <tbody>
+                    <tr align="middle">
+                      <td>類型</td>
+                      <td>說明</td>
+                      <td>範圍</td>
+                    </tr>
+                    <tr align="middle" bgcolor="#ffffff">
+                      <td>DATE</td>
+                      <td>格式：YYYY-MM-DD</td>
+                      <td>1000-01-01~9999-12-31</td>
+                    </tr>
+                    <tr align="middle" bgcolor="#ffffff">
+                      <td>DATETIME</td>
+                      <td>格式：YYYY-MM-DD HH:MM:SS</td>
+                      <td>1000-01-01 00:00:00~9999-12-31 23:59:59</td>
+                    </tr>
+                    <tr align="middle" bgcolor="#ffffff">
+                      <td>TIME</td>
+                      <td>格式：HH:MM:SS</td>
+                      <td>-838:59:59~838:59:59</td>
+                    </tr>
+                    <tr align="middle" bgcolor="#ffffff">
+                      <td>TIMESTAM<br />
+                        TIMESTAMP(14)<br />
+                        TIMESTAMP(12)<br />
+                        TIMESTAMP(10)<br />
+                        TIMESTAMP(8)<br />
+                        TIMESTAMP(6)<br />
+                        TIMESTAMP(4)<br />
+                        TIMESTAMP(2) </td>
+                      <td>YYYYMMDDHHMMSS<br />
+                        YYYYMMDDHHMMSS<br />
+                        YYMMDDHHMMSS<br />
+                        YYMMDDHHMM<br />
+                        YYYYMMDD<br />
+                        YYMMDD<br />
+                        YYMM<br />
+                        YY</td>
+                      <td>1970-01-01 00:00:00</td>
+                    </tr>
+                    <tr align="middle" bgcolor="#ffffff">
+                      <td>YEAR</td>
+                      <td>西元年格式：YY或YYYY</td>
+                      <td>1901~2155</td>
+                    </tr>
+                  </tbody>
+                </table></td>
+              </tr>
+            </tbody>
+          </table>
+          <p>3、特殊資料型態</p>
+          <table border="0" align="center">
+            <tbody>
+              <tr>
+                <td><table border="0" cellspacing="1" bgcolor="#999966">
+                  <tbody>
+                    <tr align="middle">
+                      <td>類型</td>
+                      <td>儲存容量(位元)</td>
+                      <td>說明</td>
+                    </tr>
+                    <tr align="middle" bgcolor="#ffffff">
+                      <td>ENUM</td>
+                      <td>1或2</td>
+                      <td>可定義1~65535個選項做單選或NULL</td>
+                    </tr>
+                    <tr align="middle" bgcolor="#ffffff">
+                      <td>SET</td>
+                      <td>1、2、3、4、8</td>
+                      <td>可定義1~64個選項做複選或NULL</td>
+                    </tr>
+                  </tbody>
+                </table></td>
+              </tr>
+            </tbody>
+          </table></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
