@@ -60,7 +60,7 @@ $totalPages_rs = ceil($totalRows_rs/$maxRows_rs)-1;
 </head>
 
 <body>
-<table border="1">
+<table border="1" style='margin:auto;'>
   <tr>
 	<td>學號</td>
         <td>姓名</td>
@@ -83,10 +83,16 @@ $totalPages_rs = ceil($totalRows_rs/$maxRows_rs)-1;
   	<td colspan="2">第 <?php echo ($startRow_rs + 1) ?> 筆至第 <?php echo min($startRow_rs + $maxRows_rs, $totalRows_rs) ?> 筆/共 <?php echo $totalRows_rs ?>  筆</td>
   </tr>
   <tr>
-  	<td colspan="4"><a href="insert.php">新增</a></td>
+  	<td colspan="4">
+    [<a href="insert.php">新增</a>]
+    [<a href="delete.php">刪除</a>]
+    <form action="update.php" method="get">
+    [請輸入要修改資料的學號： <input type="text" name="studno" id=""> <input type="submit" value="查詢">
+	]</form>
+    </td>
   </tr>
 </table>
-<h1><?php echo $_GET['mag'];?></h1>
+<h1 align="center"><?php echo $_GET['mag'];?></h1>
 </body>
 </html>
 <?php
