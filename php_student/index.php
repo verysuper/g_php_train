@@ -86,6 +86,7 @@ $totalPages_rs = ceil($totalRows_rs/$maxRows_rs)-1;
   	<td colspan="4"><a href="insert.php">新增</a></td>
   </tr>
 </table>
+<h1><?php echo $_GET['mag'];?></h1>
 </body>
 </html>
 <?php

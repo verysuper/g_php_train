@@ -46,7 +46,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1") && ($_POST[
   mysql_select_db($database_studentdb, $studentdb);
   $Result1 = mysql_query($insertSQL, $studentdb) or die(mysql_error());
 
-  $insertGoTo = "index.php";
+  $insertGoTo = "index.php?mag=資料已新增";
   if (isset($_SERVER['QUERY_STRING'])) {
     $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
     $insertGoTo .= $_SERVER['QUERY_STRING'];

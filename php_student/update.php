@@ -46,7 +46,7 @@ if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "form1") && ($_POST[
   mysql_select_db($database_studentdb, $studentdb);
   $Result1 = mysql_query($updateSQL, $studentdb) or die(mysql_error());
 
-  $updateGoTo = "index.php";
+  $updateGoTo = "index.php?mag=資料已更新";
   if (isset($_SERVER['QUERY_STRING'])) {
     $updateGoTo .= (strpos($updateGoTo, '?')) ? "&" : "?";
     $updateGoTo .= $_SERVER['QUERY_STRING'];
