@@ -31,26 +31,30 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
-$maxRows_Recordset1 = 5;
-$pageNum_Recordset1 = 0;
-if (isset($_GET['pageNum_Recordset1'])) {
-  $pageNum_Recordset1 = $_GET['pageNum_Recordset1'];
+$editFormAction = $_SERVER['PHP_SELF'];
+if (isset($_SERVER['QUERY_STRING'])) {
+  $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
 }
-$startRow_Recordset1 = $pageNum_Recordset1 * $maxRows_Recordset1;
 
-mysql_select_db($database_shop, $shop);
-$query_Recordset1 = "SELECT * FROM guestbook ORDER BY `date` ASC";
-$query_limit_Recordset1 = sprintf("%s LIMIT %d, %d", $query_Recordset1, $startRow_Recordset1, $maxRows_Recordset1);
-$Recordset1 = mysql_query($query_limit_Recordset1, $shop) or die(mysql_error());
-$row_Recordset1 = mysql_fetch_assoc($Recordset1);
+if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
+  $insertSQL = sprintf("INSERT INTO guestbook (serial, name, email, subject, memo, `date`) VALUES (%s, %s, %s, %s, %s, %s)",
+                       GetSQLValueString($_POST['name'], "text"),
+                       GetSQLValueString($_POST['name'], "text"),
+                       GetSQLValueString($_POST['email'], "text"),
+                       GetSQLValueString($_POST['subject'], "text"),
+                       GetSQLValueString($_POST['memo'], "text"),
+                       GetSQLValueString($_POST['date'], "date"));
 
-if (isset($_GET['totalRows_Recordset1'])) {
-  $totalRows_Recordset1 = $_GET['totalRows_Recordset1'];
-} else {
-  $all_Recordset1 = mysql_query($query_Recordset1);
-  $totalRows_Recordset1 = mysql_num_rows($all_Recordset1);
+  mysql_select_db($database_shop, $shop);
+  $Result1 = mysql_query($insertSQL, $shop) or die(mysql_error());
+
+  $insertGoTo = "guestBook.php";
+  if (isset($_SERVER['QUERY_STRING'])) {
+    $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
+    $insertGoTo .= $_SERVER['QUERY_STRING'];
+  }
+  header(sprintf("Location: %s", $insertGoTo));
 }
-$totalPages_Recordset1 = ceil($totalRows_Recordset1/$maxRows_Recordset1)-1;
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -145,37 +149,46 @@ $totalPages_Recordset1 = ceil($totalRows_Recordset1/$maxRows_Recordset1)-1;
 <div id="container"><!-- InstanceBeginEditable name="EditRegion1" -->
   <div id="primaryContent">
     <h2>留言板</h2>
-    <h3>底下列出了所有訪客對本網站所提出的所有意見！！</h3>
+    <h3>您可以在此提供對於本網站的任何建議、謝謝您！！</h3>
     <p>&nbsp;</p>
-    <p><a href="guestForm.php">我要留言</a></p>
+    <form method="POST" name="form1" action="<?php echo $editFormAction; ?>" id="form1">
+    <table>
+    <tr>
+    <td>姓名:</td>
+    <td><input type="text" name="name"></td>
+    </tr>
+    <tr>
+    <td>電子郵件:</td>
+    <td><input type="text" name="email"></td>
+    </tr>
+    <tr>
+    <td>主旨:</td>
+    <td><input type="text" name="subject"></td>
+    </tr>
+    <tr>
+    <td>內容:</td>
+    <td><textarea name="memo" id="memo" cols="30" rows="10"></textarea></td>
+    </tr>
+    <tr>
+    <input type="hidden" name="date" value="<?php echo date("Y-m-d H:i:s"); ?>">
+    <td colspan="2"><input type="submit" value="新增留言"></td>
+    </tr>
+    </table>
+    <input type="hidden" name="MM_insert" value="form1" />
+    </form> 
     <p>&nbsp;</p>
-    <?php do { ?>
-      <table border='1' width="100%">
-        <tr>
-          <td>作者：<?php echo $row_Recordset1['name']; ?></td>
-          <td>電子郵件：<?php echo $row_Recordset1['email']; ?></td>
-          </tr>
-        <tr>
-          <td colspan="2">留言主題：<?php echo $row_Recordset1['subject']; ?></td> 
-          </tr>
-        <tr>
-          <td colspan="2">留言內容：<?php echo nl2br($row_Recordset1['memo']); ?></td>
-          </tr>
-        <tr>
-          <td colspan="2">留言時間：<?php echo $row_Recordset1['date']; ?></td>
-        </tr>
-      </table>
-        <p>&nbsp;</p>
-        <hr>
-        <p>&nbsp;</p>
-      <?php } while ($row_Recordset1 = mysql_fetch_assoc($Recordset1)); ?>
-        [<a href="<?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, 0, $queryString_Recordset1); ?>">第一頁</a>]
-        [<a href="<?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, max(0, $pageNum_Recordset1 - 1), $queryString_Recordset1); ?>">上一頁</a>]
-        [<a href="<?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, min($totalPages_Recordset1, $pageNum_Recordset1 + 1), $queryString_Recordset1); ?>">下一頁</a>]
-        [<a href="<?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, $totalPages_Recordset1, $queryString_Recordset1); ?>">最後一頁</a>]
-        
-        <p>第 <?php echo ($startRow_Recordset1 + 1) ?> 筆至第 <?php echo min($startRow_Recordset1 + $maxRows_Recordset1, $totalRows_Recordset1) ?> 筆/共 <?php echo $totalRows_Recordset1 ?>  筆</p>
-<!-- /comments -->
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <!-- /comments -->
   </div>
 <!-- InstanceEndEditable -->
   <!-- /primaryContent -->
@@ -222,6 +235,3 @@ $totalPages_Recordset1 = ceil($totalRows_Recordset1/$maxRows_Recordset1)-1;
     </div><!-- /footer -->
 </body>
 <!-- InstanceEnd --></html>
-<?php
-mysql_free_result($Recordset1);
-?>
