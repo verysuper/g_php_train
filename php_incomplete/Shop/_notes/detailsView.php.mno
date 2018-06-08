@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_RecordsetTitles" value="name:titleid;datatype:int,name:email;datatype:string,name:name;datatype:string,name:subject;datatype:string,name:memo;datatype:blob,name:createDate;datatype:datetime,name:lastNewsDate;datatype:datetime,name:count;datatype:int" />
+	<infoitem key="UD_RecordsetDetails" value="name:titleid;datatype:int,name:detailsid;datatype:int,name:email;datatype:string,name:name;datatype:string,name:subject;datatype:string,name:memo;datatype:blob,name:newsDate;datatype:datetime" />
+</info>

@@ -31,26 +31,25 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
-$maxRows_Recordset1 = 3;
-$pageNum_Recordset1 = 0;
-if (isset($_GET['pageNum_Recordset1'])) {
-  $pageNum_Recordset1 = $_GET['pageNum_Recordset1'];
+$colname_RecordsetTitles = "-1";
+if (isset($_GET['titleid'])) {
+  $colname_RecordsetTitles = $_GET['titleid'];
 }
-$startRow_Recordset1 = $pageNum_Recordset1 * $maxRows_Recordset1;
-
 mysql_select_db($database_shop, $shop);
-$query_Recordset1 = "SELECT * FROM titles ORDER BY createDate DESC";
-$query_limit_Recordset1 = sprintf("%s LIMIT %d, %d", $query_Recordset1, $startRow_Recordset1, $maxRows_Recordset1);
-$Recordset1 = mysql_query($query_limit_Recordset1, $shop) or die(mysql_error());
-$row_Recordset1 = mysql_fetch_assoc($Recordset1);
+$query_RecordsetTitles = sprintf("SELECT * FROM titles WHERE titleid = %s", GetSQLValueString($colname_RecordsetTitles, "int"));
+$RecordsetTitles = mysql_query($query_RecordsetTitles, $shop) or die(mysql_error());
+$row_RecordsetTitles = mysql_fetch_assoc($RecordsetTitles);
+$totalRows_RecordsetTitles = mysql_num_rows($RecordsetTitles);
 
-if (isset($_GET['totalRows_Recordset1'])) {
-  $totalRows_Recordset1 = $_GET['totalRows_Recordset1'];
-} else {
-  $all_Recordset1 = mysql_query($query_Recordset1);
-  $totalRows_Recordset1 = mysql_num_rows($all_Recordset1);
+$colname_RecordsetDetails = "-1";
+if (isset($_GET['titleid'])) {
+  $colname_RecordsetDetails = $_GET['titleid'];
 }
-$totalPages_Recordset1 = ceil($totalRows_Recordset1/$maxRows_Recordset1)-1;
+mysql_select_db($database_shop, $shop);
+$query_RecordsetDetails = sprintf("SELECT * FROM details WHERE titleid = %s ORDER BY newsDate DESC", GetSQLValueString($colname_RecordsetDetails, "int"));
+$RecordsetDetails = mysql_query($query_RecordsetDetails, $shop) or die(mysql_error());
+$row_RecordsetDetails = mysql_fetch_assoc($RecordsetDetails);
+$totalRows_RecordsetDetails = mysql_num_rows($RecordsetDetails);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -144,37 +143,57 @@ $totalPages_Recordset1 = ceil($totalRows_Recordset1/$maxRows_Recordset1)-1;
   </object>
 <div id="container"><!-- InstanceBeginEditable name="EditRegion1" -->
   <div id="primaryContent">
-    <h2>討論區</h2>
-    <h3>您可以在此瀏覽您有興趣的主題並參與討論！</h3>
-    
+<h2>主題瀏覽及回應</h2>
+<h3>您可以在此觀賞其它訪客所參與討論內容！</h3>
     <p>&nbsp;</p>
-    <a href="createTitle.php">我有討論</a>
     <p>&nbsp;</p>
-    <table border="1" width="100%">
-    <tr>
-    <td>主題名稱</td>
-    <td>作者姓名</td>
-    <td>回應數量</td>
-    <td>建立日期/時間</td>
-    </tr>
-    <?php do { ?>
-  <tr>
-    <td><a href="detailsView.php"><h3><?php echo $row_Recordset1['subject']; ?></h3></a></td>
-    <td><h4><?php echo $row_Recordset1['name']; ?></h4></td>
-    <td><h5><?php echo $row_Recordset1['count']; ?></h5></td>
-    <td><h6><?php echo $row_Recordset1['createDate']; ?></h6></td>
-  </tr>
-  <?php } while ($row_Recordset1 = mysql_fetch_assoc($Recordset1)); ?>
+    <table border="1">
+    	<tr>
+    		<td>討論主題~</td>
+    	</tr>
+    	<tr>
+    		<td>主題作者：<?php echo $row_RecordsetTitles['name']; ?>建立日期：<?php echo $row_RecordsetTitles['createDate']; ?>主題：<?php echo $row_RecordsetTitles['subject']; ?>內容：<?php echo $row_RecordsetTitles['memo']; ?></td>
+    	</tr>
+    	<tr>
+    		<td>回應內容~</td>
+    	</tr>
+    	<tr>
+    		<td>回應作者：<?php echo $row_RecordsetDetails['name']; ?>回應日期：<?php echo $row_RecordsetDetails['newsDate']; ?>回應主題：<?php echo $row_RecordsetDetails['subject']; ?>回應內容：<?php echo $row_RecordsetDetails['memo']; ?></td>
+    	</tr>
+    	<tr>
+    		<td>參與討論~</td>
+    	</tr>
+    	<tr>
+    		<td>
+    			<table border="1">
+    				<tr>
+    					<td>電子郵件:</td>
+    					<td></td>
+    				</tr>
+    				<tr>
+    					<td>姓名:</td>
+    					<td></td>
+    				</tr>
+    				<tr>
+    					<td>主題:</td>
+    					<td></td>
+    				</tr>
+    				<tr>
+    					<td>內容:</td>
+    					<td></td>
+    				</tr>
+    				<tr>
+    					<td></td>
+    					<td></td>
+    				</tr>
+    			</table>
+    		</td>
+    	</tr>
     </table>
     <p>&nbsp;</p>
-    <hr>
     <p>&nbsp;</p>
-        [<a href="<?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, 0, $queryString_Recordset1); ?>">第一頁</a>]
-        [<a href="<?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, max(0, $pageNum_Recordset1 - 1), $queryString_Recordset1); ?>">上一頁</a>]
-        [<a href="<?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, min($totalPages_Recordset1, $pageNum_Recordset1 + 1), $queryString_Recordset1); ?>">下一頁</a>]
-        [<a href="<?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, $totalPages_Recordset1, $queryString_Recordset1); ?>">最後一頁</a>]
-        
-        <p>第 <?php echo ($startRow_Recordset1 + 1) ?> 筆至第 <?php echo min($startRow_Recordset1 + $maxRows_Recordset1, $totalRows_Recordset1) ?> 筆/共 <?php echo $totalRows_Recordset1 ?>  筆</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
@@ -229,5 +248,7 @@ $totalPages_Recordset1 = ceil($totalRows_Recordset1/$maxRows_Recordset1)-1;
 </body>
 <!-- InstanceEnd --></html>
 <?php
-mysql_free_result($Recordset1);
+mysql_free_result($RecordsetTitles);
+
+mysql_free_result($RecordsetDetails);
 ?>
