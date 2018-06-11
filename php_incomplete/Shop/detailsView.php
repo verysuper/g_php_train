@@ -31,6 +31,33 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
+$editFormAction = $_SERVER['PHP_SELF'];
+if (isset($_SERVER['QUERY_STRING'])) {
+  $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
+}
+
+if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
+  $insertSQL = sprintf("INSERT INTO details (titleid, email, name, subject, memo, newsDate) VALUES (%s, %s, %s, %s, %s, %s)",
+                       GetSQLValueString($_POST['titleid'], "int"),
+                       GetSQLValueString($_POST['email'], "text"),
+                       GetSQLValueString($_POST['name'], "text"),
+                       GetSQLValueString($_POST['subject'], "text"),
+                       GetSQLValueString($_POST['memo'], "text"),
+                       GetSQLValueString($_POST['newsDate'], "date"));
+
+  mysql_select_db($database_shop, $shop);
+  $Result1 = mysql_query($insertSQL, $shop) or die(mysql_error());
+//________________________________________________________________
+mysql_query("UPDATE titles SET count=count+1,lastNewsDate='".date("Y-m-d H:i:s")."' WHERE titleid=".$_POST['titleid']);
+//________________________________________________________________
+  $insertGoTo = "detailsView.php?msg=";
+  if (isset($_SERVER['QUERY_STRING'])) {
+    $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
+    $insertGoTo .= $_SERVER['QUERY_STRING'];
+  }
+  header(sprintf("Location: %s", $insertGoTo));
+}
+
 $colname_RecordsetTitles = "-1";
 if (isset($_GET['titleid'])) {
   $colname_RecordsetTitles = $_GET['titleid'];
@@ -147,50 +174,66 @@ $totalRows_RecordsetDetails = mysql_num_rows($RecordsetDetails);
 <h3>您可以在此觀賞其它訪客所參與討論內容！</h3>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
-    <table border="1">
-    	<tr>
-    		<td>討論主題~</td>
-    	</tr>
-    	<tr>
-    		<td>主題作者：<?php echo $row_RecordsetTitles['name']; ?>建立日期：<?php echo $row_RecordsetTitles['createDate']; ?>主題：<?php echo $row_RecordsetTitles['subject']; ?>內容：<?php echo $row_RecordsetTitles['memo']; ?></td>
-    	</tr>
-    	<tr>
-    		<td>回應內容~</td>
-    	</tr>
-    	<tr>
-    		<td>回應作者：<?php echo $row_RecordsetDetails['name']; ?>回應日期：<?php echo $row_RecordsetDetails['newsDate']; ?>回應主題：<?php echo $row_RecordsetDetails['subject']; ?>回應內容：<?php echo $row_RecordsetDetails['memo']; ?></td>
-    	</tr>
-    	<tr>
-    		<td>參與討論~</td>
-    	</tr>
-    	<tr>
-    		<td>
-    			<table border="1">
-    				<tr>
-    					<td>電子郵件:</td>
-    					<td></td>
-    				</tr>
-    				<tr>
-    					<td>姓名:</td>
-    					<td></td>
-    				</tr>
-    				<tr>
-    					<td>主題:</td>
-    					<td></td>
-    				</tr>
-    				<tr>
-    					<td>內容:</td>
-    					<td></td>
-    				</tr>
-    				<tr>
-    					<td></td>
-    					<td></td>
-    				</tr>
-    			</table>
-    		</td>
-    	</tr>
-    </table>
-    <p>&nbsp;</p>
+    
+  <table border="1" width=""100%>
+    <tr>
+      <td>討論主題~</td>
+    </tr>
+    <tr>
+      <td>主題作者：<?php echo $row_RecordsetTitles['name']; ?>建立日期：<?php echo $row_RecordsetTitles['createDate']; ?>主題：<?php echo $row_RecordsetTitles['subject']; ?>內容：<?php echo $row_RecordsetTitles['memo']; ?></td>
+    </tr>
+    <tr>
+      <td>回應內容~</td>
+    </tr>
+    <?php do { ?>
+    
+      <tr>
+        <td>
+        <?php if ($totalRows_RecordsetDetails > 0) { // Show if recordset not empty ?>
+        回應作者：<?php echo $row_RecordsetDetails['name']; ?>回應日期：<?php echo $row_RecordsetDetails['newsDate']; ?>回應主題：<?php echo $row_RecordsetDetails['subject']; ?>回應內容：<?php echo nl2br($row_RecordsetDetails['memo']); ?>
+        <?php } // Show if recordset not empty ?>
+        <?php if ($totalRows_RecordsetDetails == 0) { // Show if recordset empty ?>
+  <h5>尚無回應!!!</h5>
+  <?php } // Show if recordset empty ?>        </td>
+      </tr>
+      <?php } while ($row_RecordsetDetails = mysql_fetch_assoc($RecordsetDetails)); ?>
+    <tr>
+      <td>參與討論~</td>
+    </tr>
+    <tr>
+      <td>
+        <form action="<?php echo $editFormAction; ?>" method="POST" id="form1" name="form1">
+          <table border="1" width="100%">
+            <tr>
+              <td>電子<br />郵件:</td>
+              <td><input type="text" name="email" value="" size="32" /></td>
+              </tr>
+            <tr>
+              <td>姓名:</td>
+              <td><input type="text" name="name" value="" size="32" /></td>
+              </tr>
+            <tr>
+              <td>主題:</td>
+              <td><input type="text" name="subject" value="FW:<?php echo $row_RecordsetTitles['subject']; ?>" size="32" /></td>
+              </tr>
+            <tr>
+              <td>內容:</td>
+              <td><textarea name="memo" cols="40" rows="6"></textarea></td>
+              </tr>
+            <tr>
+              <td></td>
+              <td><input type="submit" value="插入記錄" /></td>
+              </tr>
+            </table>
+          <input type="hidden" name="titleid" value="<?php echo $row_RecordsetTitles['titleid']; ?>">
+          <input type="hidden" name="newsDate" value="<?php echo date("Y-m-d H:i:s"); ?>">
+          <input type="hidden" name="MM_insert" value="form1" />
+          </form>
+        </td>
+    </tr>
+  </table>
+  
+<p>&nbsp;</p>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
