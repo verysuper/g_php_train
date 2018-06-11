@@ -1,3 +1,4 @@
+<?php require("mysqlCounter.php"); ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/Shop.dwt.php" codeOutsideHTMLIsLocked="false" -->
@@ -104,6 +105,11 @@
             </tr>
             <tr>
               <td><img src="../images/main_1_04.jpg" alt="" width="233" height="175" /></td>
+            </tr>
+            <tr>
+            	<td><blockquote>
+<p>自(自行輸入日期)以來，您是第 <?php echo sqlCounter(1); ?> 位參觀訪客</p>
+</blockquote></td>
             </tr>
           </table>
     <!-- /comments -->
