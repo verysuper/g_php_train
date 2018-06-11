@@ -159,7 +159,7 @@ $totalPages_Recordset1 = ceil($totalRows_Recordset1/$maxRows_Recordset1)-1;
     </tr>
     <?php do { ?>
   <tr>
-    <td><a href="detailsView.php"><h3><?php echo $row_Recordset1['subject']; ?></h3></a></td>
+    <td><a href="detailsView.php?titleid=<?php echo $row_Recordset1['titleid']; ?>"><h3><?php echo $row_Recordset1['subject']; ?></h3></a></td>
     <td><h4><?php echo $row_Recordset1['name']; ?></h4></td>
     <td><h5><?php echo $row_Recordset1['count']; ?></h5></td>
     <td><h6><?php echo $row_Recordset1['createDate']; ?></h6></td>
