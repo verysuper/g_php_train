@@ -212,16 +212,26 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
       <li><a href="http://www.soeasyedu.com.tw/">巨匠美語</a></li>  
       <li><a href="http://www.off.com.tw/weiblog">給我建議</a>
     </ul>
+    <?php if(!isset($_SESSION['MM_Username'])){?>    
     <h3>登入</h3>
-    <form action="" method="post">
+    <h5><? echo $_GET['msg']; ?></h5>
+    <form action="loginCheck.php" method="post">
       <p>
-        <input value="user" name="user" />
+        <input value="" name="user" />
       </p>
       <p>
-        <input name="password" type="password" value="password" />
+        <input name="password" type="password" value="" />
       </p>
-        <button type="submit">送出</button><button>註冊會員</button>        
-    </form>    
+        <button type="submit">送出</button>
+        <button type="button" onclick="location.href='registerUser.php'">註冊會員</button>        
+    </form>
+    <?php }else{ ?>
+<h3>會員服務</h3>
+<form action="logout.php" method="post">
+<p>歡迎 <?php echo $_SESSION['MM_Username'];?> 您光臨</p>
+<p><button type="submit">登出</button></p>
+</form>
+<?php }?>    
   </div>
   <!-- /secondaryContent -->
         <br class="clear" />    

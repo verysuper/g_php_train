@@ -31,27 +31,32 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
-$maxRows_Recordset1 = 3;
-$pageNum_Recordset1 = 0;
-if (isset($_GET['pageNum_Recordset1'])) {
-  $pageNum_Recordset1 = $_GET['pageNum_Recordset1'];
+$editFormAction = $_SERVER['PHP_SELF'];
+if (isset($_SERVER['QUERY_STRING'])) {
+  $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
 }
-$startRow_Recordset1 = $pageNum_Recordset1 * $maxRows_Recordset1;
 
-mysql_select_db($database_shop, $shop);
-$query_Recordset1 = "SELECT * FROM titles ORDER BY createDate DESC";
-$query_limit_Recordset1 = sprintf("%s LIMIT %d, %d", $query_Recordset1, $startRow_Recordset1, $maxRows_Recordset1);
-$Recordset1 = mysql_query($query_limit_Recordset1, $shop) or die(mysql_error());
-$row_Recordset1 = mysql_fetch_assoc($Recordset1);
+if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
+  $insertSQL = sprintf("INSERT INTO `user` (userid, password, sex, age, mail, address, register) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                       GetSQLValueString($_POST['userid'], "text"),
+                       GetSQLValueString($_POST['password'], "text"),
+                       GetSQLValueString($_POST['sex'], "text"),
+                       GetSQLValueString($_POST['age'], "int"),
+                       GetSQLValueString($_POST['mail'], "text"),
+                       GetSQLValueString($_POST['address'], "text"),
+                       GetSQLValueString($_POST['register'], "date"));
 
-if (isset($_GET['totalRows_Recordset1'])) {
-  $totalRows_Recordset1 = $_GET['totalRows_Recordset1'];
-} else {
-  $all_Recordset1 = mysql_query($query_Recordset1);
-  $totalRows_Recordset1 = mysql_num_rows($all_Recordset1);
+  mysql_select_db($database_shop, $shop);
+  $Result1 = mysql_query($insertSQL, $shop) or die(mysql_error());
+
+  $insertGoTo = "index.php?msg=註冊成功，記得收信";
+  if (isset($_SERVER['QUERY_STRING'])) {
+    $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
+    $insertGoTo .= $_SERVER['QUERY_STRING'];
+  }
+  header(sprintf("Location: %s", $insertGoTo));
 }
-$totalPages_Recordset1 = ceil($totalRows_Recordset1/$maxRows_Recordset1)-1;
-?>
+ session_start();?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/Shop.dwt.php" codeOutsideHTMLIsLocked="false" -->
@@ -144,37 +149,62 @@ $totalPages_Recordset1 = ceil($totalRows_Recordset1/$maxRows_Recordset1)-1;
   </object>
 <div id="container"><!-- InstanceBeginEditable name="EditRegion1" -->
   <div id="primaryContent">
-    <h2>討論區</h2>
-    <h3>您可以在此瀏覽您有興趣的主題並參與討論！</h3>
-    
-    <p>&nbsp;</p>
-    <a href="createTitle.php">我有討論</a>
-    <p>&nbsp;</p>
-    <table border="1" width="100%">
+<h2>會員註冊</h2>
+<h3>提供會員進行註冊，註冊後別忘了透過電子郵件回覆啟用會員功能。</h3>
+<p>&nbsp;</p>
+<form name="form1" action="<?php echo $editFormAction; ?>" method="POST" id="form1">
+<table width="100%">
+<tr>
+<td width="20" align="right">帳號:</td>
+<td><input type="text" name="userid" value="" size="32" /></td>
+</tr>
+<tr valign="baseline">
+<td align="right">密碼:</td>
+<td><input name="password" type="password" id="password" value="" size="32" /></td>
+</tr>
+<tr valign="baseline2">
     <tr>
-    <td>主題名稱</td>
-    <td>作者姓名</td>
-    <td>回應數量</td>
-    <td>建立日期/時間</td>
+    <td align="right">確認密碼:</td>
+    <td><input name="password2" type="password" id="password2" value="" size="32" onblur="passwordCheck()" />
+    <div id="message"></div> 
+    </td>
     </tr>
-    <?php do { ?>
-  <tr>
-    <td><a href="detailsView.php?titleid=<?php echo $row_Recordset1['titleid']; ?>"><h3><?php echo $row_Recordset1['subject']; ?></h3></a></td>
-    <td><h4><?php echo $row_Recordset1['name']; ?></h4></td>
-    <td><h5><?php echo $row_Recordset1['count']; ?></h5></td>
-    <td><h6><?php echo $row_Recordset1['createDate']; ?></h6></td>
-  </tr>
-  <?php } while ($row_Recordset1 = mysql_fetch_assoc($Recordset1)); ?>
-    </table>
+</tr>
+<tr>
+<td align="right">性別:</td>
+<td>
+<select name="sex">
+<option value="M">男</option>
+<option value="F">女</option>
+</select>
+</td>
+</tr>
+<tr>
+<td align="right">年齡:</td>
+<td><input type="text" name="age" value="" size="32" /></td>
+</tr>
+<tr>
+<td align="right">電子郵件:</td>
+<td><input type="text" name="mail" value="" size="32" /></td>
+</tr>
+<tr>
+<td align="right">聯絡地址:</td>
+<td><input type="text" name="address" value="" size="32" /></td>
+</tr>
+<tr> 
+<td colspan="2" width="100%" align="center"><input type="submit" value="註冊會員" /></td>
+</tr>
+</table>
+<input type="hidden" name="register" value="<?php echo date("Y-m-d H:i:s"); ?>">
+<input type="hidden" name="MM_insert" value="form1" />
+</form>
     <p>&nbsp;</p>
-    <hr>
     <p>&nbsp;</p>
-        [<a href="<?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, 0, $queryString_Recordset1); ?>">第一頁</a>]
-        [<a href="<?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, max(0, $pageNum_Recordset1 - 1), $queryString_Recordset1); ?>">上一頁</a>]
-        [<a href="<?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, min($totalPages_Recordset1, $pageNum_Recordset1 + 1), $queryString_Recordset1); ?>">下一頁</a>]
-        [<a href="<?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, $totalPages_Recordset1, $queryString_Recordset1); ?>">最後一頁</a>]
-        
-        <p>第 <?php echo ($startRow_Recordset1 + 1) ?> 筆至第 <?php echo min($startRow_Recordset1 + $maxRows_Recordset1, $totalRows_Recordset1) ?> 筆/共 <?php echo $totalRows_Recordset1 ?>  筆</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
@@ -238,6 +268,20 @@ $totalPages_Recordset1 = ceil($totalRows_Recordset1/$maxRows_Recordset1)-1;
     </div><!-- /footer -->
 </body>
 <!-- InstanceEnd --></html>
-<?php
-mysql_free_result($Recordset1);
-?>
+
+<script language="javascript" type="text/javascript">
+function passwordCheck(){
+//先尋找message Div標籤
+var msg=document.getElementById('message');
+//判斷密碼欄位與確認密碼欄位是否相同
+if(form1.password.value!=form1.password2.value){
+//在Div欄位上顯示提示文字
+msg.innerHTML="<font color=red>密碼與確認密碼不符！</font>";
+form1.password.value=""; //文字欄位清空
+form1.password2.value=""; //文字欄位清空
+form1.password.focus();	//取得焦點，將游標停留在 密碼欄位 中
+}else{
+msg.innerHTML="密碼欄位與確認密碼欄位相同";
+}
+}
+</script>
