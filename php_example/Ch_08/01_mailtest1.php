@@ -7,11 +7,11 @@
 
 <body>
 <?php
-$to      = 'XXX@XXX.xxx';  //改為收件者地址
+$to      = 'zivtso@gmail.com';  //改為收件者地址
 $subject = "=?UTF-8?B?".base64_encode("中文標題信件測試1")."?=";  //郵件主旨(中文編碼問題)
 $message = "這是使用PHP發送郵件測試 1\r\nUsing mail()";  //郵件本文
-$headers = 'From: XXX@XXX.xxx' . "\r\n" .  //改為發信者地址
-    'Reply-To: XXX@XXX.xxx' . "\r\n" .
+$headers = 'From: service@pcschool.com.tw' . "\r\n" .  //改為發信者地址
+    'Reply-To: service2@pcschool.com.tw' . "\r\n" .
     'X-Mailer: PHP/' . phpversion();
 
 if(mail($to, $subject, $message, $headers)){  //系統畫面

@@ -43,15 +43,17 @@ if (isset($_POST[$MM_flag])) {
 
   //if there is a row in the database, the username was found - can not add the requested username
   if($loginFoundUser){
-    $MM_qsChar = "?";
+  /*  $MM_qsChar = "?";
     //append the username to the redirect page
     if (substr_count($MM_dupKeyRedirect,"?") >=1) $MM_qsChar = "&";
     $MM_dupKeyRedirect = $MM_dupKeyRedirect . $MM_qsChar ."requsername=".$loginUsername;
-    header ("Location: $MM_dupKeyRedirect");
+    header ("Location: $MM_dupKeyRedirect");*/
 		/*$error['username'] = "帳號已使用、請重新挑選一個！";
 echo $error['username']."<br>";
 echo "<a href=registerUser.php>重新註冊會員</a>";*/
-    exit;
+$errorGoTo = "registerError.php";
+header(sprintf("Location: %s", $errorGoTo));
+    //exit;
 
   }
 }
