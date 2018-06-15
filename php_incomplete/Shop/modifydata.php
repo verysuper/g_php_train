@@ -31,58 +31,40 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
-// *** Redirect if username exists
-$MM_flag="MM_insert";
-if (isset($_POST[$MM_flag])) {
-  $MM_dupKeyRedirect="registerUser.php?msg1=帳號已存在";
-  $loginUsername = $_POST['userid'];
-  $LoginRS__query = sprintf("SELECT userid FROM `user` WHERE userid=%s", GetSQLValueString($loginUsername, "text"));
-  mysql_select_db($database_shop, $shop);
-  $LoginRS=mysql_query($LoginRS__query, $shop) or die(mysql_error());
-  $loginFoundUser = mysql_num_rows($LoginRS);
-
-  //if there is a row in the database, the username was found - can not add the requested username
-  if($loginFoundUser){
-  /*  $MM_qsChar = "?";
-    //append the username to the redirect page
-    if (substr_count($MM_dupKeyRedirect,"?") >=1) $MM_qsChar = "&";
-    $MM_dupKeyRedirect = $MM_dupKeyRedirect . $MM_qsChar ."requsername=".$loginUsername;
-    header ("Location: $MM_dupKeyRedirect");*/
-		/*$error['username'] = "帳號已使用、請重新挑選一個！";
-echo $error['username']."<br>";
-echo "<a href=registerUser.php>重新註冊會員</a>";*/
-$errorGoTo = "registerError.php";
-header(sprintf("Location: %s", $errorGoTo));
-    //exit;
-
-  }
-}
-
 $editFormAction = $_SERVER['PHP_SELF'];
 if (isset($_SERVER['QUERY_STRING'])) {
   $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
 }
 
-if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
-  $insertSQL = sprintf("INSERT INTO `user` (userid, password, sex, age, mail, address, register) VALUES (%s, %s, %s, %s, %s, %s, %s)",
-                       GetSQLValueString($_POST['userid'], "text"),
+if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "form1")) {
+  $updateSQL = sprintf("UPDATE ``user`` SET password=%s, sex=%s, age=%s, mail=%s, address=%s WHERE userid=%s",
                        GetSQLValueString($_POST['password'], "text"),
                        GetSQLValueString($_POST['sex'], "text"),
                        GetSQLValueString($_POST['age'], "int"),
                        GetSQLValueString($_POST['mail'], "text"),
                        GetSQLValueString($_POST['address'], "text"),
-                       GetSQLValueString($_POST['register'], "date"));
+                       GetSQLValueString($_POST['userid'], "text"));
 
   mysql_select_db($database_shop, $shop);
-  $Result1 = mysql_query($insertSQL, $shop) or die(mysql_error());
-sendmail($_POST['userid'],$_POST['mail']);
-  $insertGoTo = "index.php?msg=註冊成功，記得收信";
+  $Result1 = mysql_query($updateSQL, $shop) or die(mysql_error());
+
+  $updateGoTo = "modifydata.php";
   if (isset($_SERVER['QUERY_STRING'])) {
-    $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
-    $insertGoTo .= $_SERVER['QUERY_STRING'];
+    $updateGoTo .= (strpos($updateGoTo, '?')) ? "&" : "?";
+    $updateGoTo .= $_SERVER['QUERY_STRING'];
   }
-  header(sprintf("Location: %s", $insertGoTo));
+  header(sprintf("Location: %s", $updateGoTo));
 }
+
+$colname_Recordset1 = "-1";
+if (isset($_GET['MM_Username'])) {
+  $colname_Recordset1 = $_GET['MM_Username'];
+}
+mysql_select_db($database_shop, $shop);
+$query_Recordset1 = sprintf("SELECT userid, password, sex, age, mail, address FROM `user` WHERE userid = %s", GetSQLValueString($colname_Recordset1, "text"));
+$Recordset1 = mysql_query($query_Recordset1, $shop) or die(mysql_error());
+$row_Recordset1 = mysql_fetch_assoc($Recordset1);
+$totalRows_Recordset1 = mysql_num_rows($Recordset1);
  session_start();?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -173,60 +155,49 @@ sendmail($_POST['userid'],$_POST['mail']);
       <!--[if !IE]>-->
     </object>
     <!--<![endif]-->
-  </object>
+</object>
 <div id="container"><!-- InstanceBeginEditable name="EditRegion1" -->
   <div id="primaryContent">
-<h2>會員註冊</h2>
-<h3>提供會員進行註冊，註冊後別忘了透過電子郵件回覆啟用會員功能。</h3>
-<p>&nbsp;</p>
-<form name="form1" action="<?php echo $editFormAction; ?>" method="POST" id="form1">
-<table width="100%">
+    <h2>&nbsp;</h2>
+    <h3>&nbsp;</h3>
+    <p>&nbsp;</p>
+<form name="form1" id="form1" method="POST" action="<?php echo $editFormAction; ?>">
+<table width="100%" border="0">
 <tr>
-<td width="20" align="right">帳號:</td>
-<td><input type="text" name="userid" value="" size="32" /><h5><?php echo $_GET['msg1']; ?></h5></td>
-</tr>
-<tr valign="baseline">
-<td align="right">密碼:</td>
-<td><input name="password" type="password" id="password" value="" size="32" /></td>
-</tr>
-<tr valign="baseline2">
-    <tr>
-    <td align="right">確認密碼:</td>
-    <td><input name="password2" type="password" id="password2" value="" size="32" onblur="passwordCheck()" />
-    <div id="message"></div> 
-    </td>
-    </tr>
+<th width="25%" align="right" scope="col">密碼：</th>
+<th align="left" scope="col"><label>
+<input name="password" type="password" id="password" value="<?php echo $row_Recordset1['password']; ?>" />
+</label></th>
 </tr>
 <tr>
-<td align="right">性別:</td>
-<td>
-<select name="sex">
+<th width="25%" align="right" scope="row">性別：</th>
+<td align="left"><label>
+<select name="sex" id="sex">
 <option value="M">男</option>
 <option value="F">女</option>
 </select>
-</td>
+</label></td>
 </tr>
 <tr>
-<td align="right">年齡:</td>
-<td><input type="text" name="age" value="" size="32" /></td>
+<th width="25%" align="right" scope="row">年齡：</th>
+<td align="left"><input name="age" type="number" id="age" value="<?php echo $row_Recordset1['sex']; ?>" /></td>
 </tr>
 <tr>
-<td align="right">電子郵件:</td>
-<td><input type="text" name="mail" value="" size="32" /></td>
+<th width="25%" align="right" scope="row">電子郵件：</th>
+<td align="left"><input name="mail" type="text" id="mail" value="<?php echo $row_Recordset1['mail']; ?>" /></td>
 </tr>
 <tr>
-<td align="right">聯絡地址:</td>
-<td><input type="text" name="address" value="" size="32" /></td>
+<th width="25%" align="right" scope="row">通訊地址：</th>
+<td align="left"><input name="address" cols="32" rows="2" id="address"></td>
 </tr>
-<tr> 
-<td colspan="2" width="100%" align="center"><input type="submit" value="註冊會員" /></td>
+<tr>
+<th colspan="2" align="center" scope="row"><button type="submit" name="button" id="button" value="送出" >送出</button>
+</th>
 </tr>
 </table>
-<input type="hidden" name="register" value="<?php echo date("Y-m-d H:i:s"); ?>">
-<input type="hidden" name="MM_insert" value="form1" />
+<input type="hidden" name="userid" value="<?php echo $row_Recordset1['userid']; ?>">
+<input type="hidden" name="MM_update" value="form1" />
 </form>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
@@ -295,44 +266,6 @@ sendmail($_POST['userid'],$_POST['mail']);
     </div><!-- /footer -->
 </body>
 <!-- InstanceEnd --></html>
-
-<script language="javascript" type="text/javascript">
-function passwordCheck(){
-//先尋找message Div標籤
-var msg=document.getElementById('message');
-//判斷密碼欄位與確認密碼欄位是否相同
-if(form1.password.value!=form1.password2.value){
-//在Div欄位上顯示提示文字
-msg.innerHTML="<font color=red>密碼與確認密碼不符！</font>";
-form1.password.value=""; //文字欄位清空
-form1.password2.value=""; //文字欄位清空
-form1.password.focus();	//取得焦點，將游標停留在 密碼欄位 中
-}else{
-msg.innerHTML="密碼欄位與確認密碼欄位相同";
-}
-}
-</script>
-
 <?php
-//接收會員帳號與郵件地址進行郵件發送
-function sendmail($uid,$mail){
-$to = $mail;
-
-$subject = "=?UTF-8?B?".base64_encode("會員功能啟用通知")."?=";
-
-//$message = " md5('$uid') 好，啟用會員功能通知<br/>";
-
-/*$message = "啟用會員功能通知：<br/>"."<a href=\"http://localhost/web_incomplete/Shop/auth_user.php?uid=".md5($uid)."\">點此超連結啟用會員功能</a><br/>";*/
-
-$message = '啟用會員功能方法一：'."\r\n".'<a href=\"http://localhost/php_incomplete/Shop/auth_user.php?uid=".md5($uid)."\">點此超連結啟用會員功能</a>'."\r\n".'啟用會員功能方法二：'."\r\n".'將下列網址複製到瀏覽器的網址列中，按下ENTER按鍵進行啟用會員功能'."\r\n".'http://localhost/php_incomplete/Shop/auth_user.php?uid='.md5($uid);
-$headers = 'From: services@pcschool.com.tw' . "\r\n".'Reply-To:services@pcschool.com.tw'."\r\n".'X-Mailer: PHP/'.phpversion();
-
-$headers = "MIME-Version: 1.0\r\n";
-$headers .= "Content-type: text/html; charset=utf-8\r\n";
-$headers .= "From: services@pcschool.com.tw \r\n";
-$headers .= "Reply-To: services@pcschool.com.tw \r\n";
-$headers .= "X-Mailer: PHP/" . phpversion();	
-
-@mail($to, $subject, $message, $headers);
-}
+mysql_free_result($Recordset1);
 ?>
