@@ -34,7 +34,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 // *** Redirect if username exists
 $MM_flag="MM_insert";
 if (isset($_POST[$MM_flag])) {
-  $MM_dupKeyRedirect="registerUser.php?msg=帳號已存在";
+  $MM_dupKeyRedirect="registerUser.php?msg1=帳號已存在";
   $loginUsername = $_POST['userid'];
   $LoginRS__query = sprintf("SELECT userid FROM `user` WHERE userid=%s", GetSQLValueString($loginUsername, "text"));
   mysql_select_db($database_shop, $shop);
@@ -48,7 +48,11 @@ if (isset($_POST[$MM_flag])) {
     if (substr_count($MM_dupKeyRedirect,"?") >=1) $MM_qsChar = "&";
     $MM_dupKeyRedirect = $MM_dupKeyRedirect . $MM_qsChar ."requsername=".$loginUsername;
     header ("Location: $MM_dupKeyRedirect");
+		/*$error['username'] = "帳號已使用、請重新挑選一個！";
+echo $error['username']."<br>";
+echo "<a href=registerUser.php>重新註冊會員</a>";*/
     exit;
+
   }
 }
 
@@ -177,7 +181,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
 <table width="100%">
 <tr>
 <td width="20" align="right">帳號:</td>
-<td><input type="text" name="userid" value="" size="32" /></td>
+<td><input type="text" name="userid" value="" size="32" /><h5><?php echo $_GET['msg1']; ?></h5></td>
 </tr>
 <tr valign="baseline">
 <td align="right">密碼:</td>
