@@ -7,7 +7,7 @@
 
 <body>
 <?php
-$to      = 'zivtso@gmail.com';  //改為收件者地址
+$to      = 'vom43957@sawoe.com';  //改為收件者地址
 $subject = "=?UTF-8?B?".base64_encode("中文標題信件測試1")."?=";  //郵件主旨(中文編碼問題)
 $message = "這是使用PHP發送郵件測試 1\r\nUsing mail()";  //郵件本文
 $headers = 'From: service@pcschool.com.tw' . "\r\n" .  //改為發信者地址

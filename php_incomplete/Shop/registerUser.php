@@ -75,7 +75,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
 
   mysql_select_db($database_shop, $shop);
   $Result1 = mysql_query($insertSQL, $shop) or die(mysql_error());
-
+sendmail($_POST['userid'],$_POST['mail']);
   $insertGoTo = "index.php?msg=註冊成功，記得收信";
   if (isset($_SERVER['QUERY_STRING'])) {
     $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
@@ -312,3 +312,22 @@ msg.innerHTML="密碼欄位與確認密碼欄位相同";
 }
 }
 </script>
+
+<?php
+//接收會員帳號與郵件地址進行郵件發送
+function sendmail($uid,$mail){
+$to = $mail;
+
+$subject = "=?UTF-8?B?".base64_encode("會員功能啟用通知")."?=";
+
+$message = " $uid 好，啟用會員功能通知<br/>";
+
+$headers = "MIME-Version: 1.0\r\n";
+$headers .= "Content-type: text/html; charset=utf-8\r\n";
+$headers .= "From: services@pcschool.com.tw \r\n";
+$headers .= "Reply-To: services@pcschool.com.tw \r\n";
+$headers .= "X-Mailer: PHP/" . phpversion();	
+
+@mail($to, $subject, $message, $headers);
+}
+?>
